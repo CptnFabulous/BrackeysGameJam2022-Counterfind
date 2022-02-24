@@ -42,6 +42,7 @@ public class Timer : MonoBehaviour
     }
 
     public TimeValue timeLimit = new TimeValue(1, 0, 0);
+    public bool goIntoNegatives = false;
     public UnityEvent onTimerStart;
     public UnityEvent onTimeUp;
     public UnityEngine.UI.Text visualTimer;
@@ -83,6 +84,11 @@ public class Timer : MonoBehaviour
         {
             timeIsUp = true;
             onTimeUp.Invoke();
+            if (goIntoNegatives == false)
+            {
+                remainingTimeInSeconds = 0;
+                Pause();
+            }
         }
     }
     private void LateUpdate()
