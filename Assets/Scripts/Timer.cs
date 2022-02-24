@@ -60,7 +60,7 @@ public class Timer : MonoBehaviour
     public void StartTimer()
     {
         remainingTimeInSeconds = timeLimit.InSeconds;
-        timeIsUp = remainingTimeInSeconds > 0;
+        timeIsUp = false;
         onTimerStart.Invoke();
         Resume();
     }
