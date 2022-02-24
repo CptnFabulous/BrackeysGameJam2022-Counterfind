@@ -45,9 +45,12 @@ public class LevelManager : MonoBehaviour
     void GenerateNewLevel()
     {
         // Purge existing notes (code could probably be done better to prevent garbage collection but whatever it's a game jam)
-        for (int i = 0; i < allNotes.Length; i++)
+        if (allNotes != null)
         {
-            Destroy(allNotes[i].gameObject);
+            for (int i = 0; i < allNotes.Length; i++)
+            {
+                Destroy(allNotes[i].gameObject);
+            }
         }
         
         List<Banknote> newNotes = new List<Banknote>();
