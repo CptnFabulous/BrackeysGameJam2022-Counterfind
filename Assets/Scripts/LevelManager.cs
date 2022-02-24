@@ -22,9 +22,9 @@ public class LevelManager : MonoBehaviour
     public float exitTime = 0.5f;
     public AnimationCurve exitAnimationCurve = AnimationCurve.EaseInOut(0, 0, 1, 1);
     
-    Banknote[] allNotes;
-    bool[] playerVerdicts;
-    int currentlyChecking;
+    public Banknote[] allNotes { get; private set; }
+    public bool[] playerVerdicts { get; private set; }
+    public int currentlyChecking { get; private set; }
     IEnumerator transition;
 
     private void Awake()
