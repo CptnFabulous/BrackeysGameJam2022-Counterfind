@@ -48,6 +48,13 @@ public class Timer : MonoBehaviour
 
     float remainingTimeInSeconds;
     bool timeIsUp;
+    public TimeValue remaining
+    {
+        get
+        {
+            return new TimeValue(remainingTimeInSeconds);
+        }
+    }
 
     public void StartTimer()
     {
@@ -78,13 +85,11 @@ public class Timer : MonoBehaviour
             onTimeUp.Invoke();
         }
     }
-
     private void LateUpdate()
     {
         if (visualTimer != null)
         {
-            TimeValue values = new TimeValue(remainingTimeInSeconds);
-            visualTimer.text = values.hours + ":" + values.minutes + ":" + values.seconds;
+            visualTimer.text = remaining.ToString();
         }
     }
 
