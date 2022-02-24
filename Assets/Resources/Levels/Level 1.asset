@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   numberOfItems: 10
   numberOfCounterfeits: 5
+  numberOfErrorsForFailure: 3
   timeLimit:
     hours: 0
     minutes: 10
