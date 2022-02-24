@@ -10,6 +10,9 @@ public class LevelManager : MonoBehaviour
     [Header("Game elements")]
     public Banknote prefab;
     public ObjectViewer viewControls;
+    public GameStateHandler stateHandler;
+    public EndScreen endScreen;
+
     [Header("HUD elements")]
     public Timer levelTimer;
     public Text remainingNotes;
@@ -31,6 +34,7 @@ public class LevelManager : MonoBehaviour
     {
         acceptButton.onClick.AddListener(() => JudgeItem(false));
         rejectButton.onClick.AddListener(() => JudgeItem(true));
+        levelTimer.onTimeUp.AddListener(EndLevel);
     }
     private void Start()
     {
@@ -83,6 +87,11 @@ public class LevelManager : MonoBehaviour
     
     IEnumerator TransitionToNextItem()
     {
+        if (currentlyChecking >= allNotes.Length - 1)
+        {
+            levelTimer.Pause();
+        }
+
         Banknote previousItem = (currentlyChecking < 0) ? null : allNotes[currentlyChecking];
         if (previousItem != null)
         {
@@ -97,6 +106,10 @@ public class LevelManager : MonoBehaviour
         {
             IEnumerator getNew = DeployNewItem(newItem);
             yield return StartCoroutine(getNew);
+        }
+        else
+        {
+            EndLevel();
         }
     }
     IEnumerator PutAwayOldItem(Banknote oldNote)
@@ -135,6 +148,13 @@ public class LevelManager : MonoBehaviour
 
         transition = TransitionToNextItem();
         StartCoroutine(transition);
+    }
+
+    void EndLevel()
+    {
+        levelTimer.Pause();
+        stateHandler.EndLevel();
+        endScreen.ShowLevelEnd(this);
     }
 }
 

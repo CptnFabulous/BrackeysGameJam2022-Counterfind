@@ -31,6 +31,11 @@ public class GameStateHandler : MonoBehaviour
         SwitchCanvas(headsUpDisplay);
         Time.timeScale = 1;
     }
+    public void EndLevel()
+    {
+        Time.timeScale = 1;
+        SwitchCanvas(endScreen);
+    }
 
     void SwitchCanvas(Canvas desired)
     {
