@@ -46,14 +46,18 @@ public class Timer : MonoBehaviour
 
     public void StartTimer()
     {
-        enabled = true;
         remainingTimeInSeconds = timeLimit.InSeconds;
         timeIsUp = remainingTimeInSeconds > 0;
         onTimerStart.Invoke();
+        Resume();
     }
-    public void SetPauseState(bool paused)
+    public void Pause()
     {
-        enabled = paused;
+        enabled = false;
+    }
+    public void Resume()
+    {
+        enabled = true;
     }
 
     void Start()
