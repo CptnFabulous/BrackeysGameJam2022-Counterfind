@@ -34,6 +34,11 @@ public class Timer : MonoBehaviour
             remaining = remaining % 60;
             seconds = remaining;
         }
+
+        public override string ToString()
+        {
+            return hours + ":" + minutes + ":" + seconds;
+        }
     }
 
     public TimeValue timeLimit = new TimeValue(1, 0, 0);
