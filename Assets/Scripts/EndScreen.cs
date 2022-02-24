@@ -26,7 +26,7 @@ public class EndScreen : MonoBehaviour
         int amountThoughtFake = 0;
         for (int i = 0; i < manager.currentlyChecking; i++)
         {
-            if (manager.playerVerdicts[i] == manager.allNotes[i].Counterfeit)
+            if (manager.judgedFakeByPlayer[i] == manager.allNotes[i].Counterfeit)
             {
                 finalScore++;
             }

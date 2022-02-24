@@ -23,14 +23,14 @@ public class LevelManager : MonoBehaviour
     public AnimationCurve exitAnimationCurve = AnimationCurve.EaseInOut(0, 0, 1, 1);
     
     public Banknote[] allNotes { get; private set; }
-    public bool[] playerVerdicts { get; private set; }
+    public bool[] judgedFakeByPlayer { get; private set; }
     public int currentlyChecking { get; private set; }
     IEnumerator transition;
 
     private void Awake()
     {
-        acceptButton.onClick.AddListener(() => JudgeItem(true));
-        rejectButton.onClick.AddListener(() => JudgeItem(false));
+        acceptButton.onClick.AddListener(() => JudgeItem(false));
+        rejectButton.onClick.AddListener(() => JudgeItem(true));
     }
     private void Start()
     {
@@ -69,7 +69,7 @@ public class LevelManager : MonoBehaviour
             newNotes.Insert(Random.Range(0, newNotes.Count), note);
         }
         allNotes = newNotes.ToArray();
-        playerVerdicts = new bool[allNotes.Length];
+        judgedFakeByPlayer = new bool[allNotes.Length];
         currentlyChecking = -1;
 
         // Reset timer
@@ -131,7 +131,7 @@ public class LevelManager : MonoBehaviour
 
     void JudgeItem(bool legitimate)
     {
-        playerVerdicts[currentlyChecking] = legitimate;
+        judgedFakeByPlayer[currentlyChecking] = legitimate;
 
         transition = TransitionToNextItem();
         StartCoroutine(transition);
