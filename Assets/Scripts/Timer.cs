@@ -83,12 +83,12 @@ public class Timer : MonoBehaviour
         if (remainingTimeInSeconds <= 0 && timeIsUp == false)
         {
             timeIsUp = true;
-            onTimeUp.Invoke();
             if (goIntoNegatives == false)
             {
                 remainingTimeInSeconds = 0;
                 Pause();
             }
+            onTimeUp.Invoke();
         }
     }
     private void LateUpdate()
