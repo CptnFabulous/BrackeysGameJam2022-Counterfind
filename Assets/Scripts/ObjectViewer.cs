@@ -41,6 +41,11 @@ public class ObjectViewer : MonoBehaviour
     }
     public void OnMove(InputValue input)
     {
+        if (isResettingLook)
+        {
+            return;
+        }
+        
         Vector2 value = input.Get<Vector2>();
 
         if (isPanning)
@@ -57,9 +62,13 @@ public class ObjectViewer : MonoBehaviour
             viewedObject.localRotation = Quaternion.LookRotation(direction, Vector3.up);
         }
     }
-
     public void OnZoom(InputValue input)
     {
+        if (isResettingLook)
+        {
+            return;
+        }
+        
         Vector2 value = input.Get<Vector2>();
         Vector3 values = value.y * Time.deltaTime * Vector3.back;
         viewedObject.localPosition = viewedObject.localPosition + values;
@@ -112,5 +121,4 @@ public class ObjectViewer : MonoBehaviour
         original.z = Mathf.Clamp(original.z, min.z, max.z);
         return original;
     }
-
 }
