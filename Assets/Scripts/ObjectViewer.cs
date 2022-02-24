@@ -83,6 +83,13 @@ public class ObjectViewer : MonoBehaviour
         resetInProgress = ResetLook();
         StartCoroutine(resetInProgress);
     }
+
+    public void AddObject(Transform newObject)
+    {
+        viewedObject = newObject;
+        newObject.parent = transform;
+    }
+
     IEnumerator ResetLook()
     {
         Vector3 oldPosition = viewedObject.localPosition;
