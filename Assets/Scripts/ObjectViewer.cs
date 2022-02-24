@@ -28,6 +28,11 @@ public class ObjectViewer : MonoBehaviour
         resetButton.onClick.AddListener(OnReset);
         OnReset();
     }
+    private void OnDrawGizmos()
+    {
+        Gizmos.matrix = transform.localToWorldMatrix;
+        Gizmos.DrawWireCube(positionBounds.center, positionBounds.size);
+    }
 
     public void OnPanControl(InputValue input)
     {
