@@ -16,6 +16,7 @@ public class ObjectViewer : MonoBehaviour
 
     [Header("Rotation")]
     public float rotationSensitivity = 30;
+    public Vector3 defaultEulerAngles;
 
     [Header("Reset")]
     public UnityEngine.UI.Button resetButton;
@@ -77,12 +78,13 @@ public class ObjectViewer : MonoBehaviour
     {
         Vector3 oldPosition = viewedObject.localPosition;
         Quaternion oldRotation = viewedObject.localRotation;
+        Quaternion newRotation = Quaternion.Euler(defaultEulerAngles);
 
         for (float timer = 0; timer < 1; timer = Mathf.Clamp01(timer + Time.deltaTime / resetTime))
         {
             float t = resetCurve.Evaluate(timer);
             viewedObject.localPosition = Vector3.Lerp(oldPosition, positionBounds.center, t);
-            viewedObject.localRotation = Quaternion.Lerp(oldRotation, Quaternion.identity, t);
+            viewedObject.localRotation = Quaternion.Lerp(oldRotation, newRotation, t);
             yield return null;
         }
 
