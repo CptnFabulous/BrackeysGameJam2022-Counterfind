@@ -67,7 +67,7 @@ public class ObjectViewer : MonoBehaviour
     }
     public void OnReset()
     {
-        if (resetInProgress != null)
+        if (isResettingLook)
         {
             return;
         }
@@ -93,8 +93,14 @@ public class ObjectViewer : MonoBehaviour
     IEnumerator resetInProgress;
     bool isPanning;
     bool isRotating;
-
-    public void ClampPosition()
+    public bool isResettingLook
+    {
+        get
+        {
+            return resetInProgress != null;
+        }
+    }
+    void ClampPosition()
     {
         viewedObject.transform.localPosition = Vector3Clamp(viewedObject.transform.localPosition, positionBounds.min, positionBounds.max);
     }
