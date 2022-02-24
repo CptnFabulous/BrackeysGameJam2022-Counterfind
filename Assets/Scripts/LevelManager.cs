@@ -7,19 +7,20 @@ public class LevelManager : MonoBehaviour
 {
     public Level current;
 
-    [Header("Setup")]
-    public Timer levelTimer;
+    [Header("Game elements")]
     public Banknote prefab;
+    public ObjectViewer viewControls;
+    [Header("HUD elements")]
+    public Timer levelTimer;
+    public Text remainingNotes;
     public Button acceptButton;
     public Button rejectButton;
-    public Text remainingNotes;
-    public ObjectViewer viewControls;
 
     [Header("Transitioning to next note")]
-    public Transform entryPosition;
-    public Transform exitPosition;
-    public float exitTime = 1;
-    public AnimationCurve exitCurve = AnimationCurve.EaseInOut(0, 0, 1, 1);
+    public Transform entryPilePosition;
+    public Transform exitPilePosition;
+    public float exitTime = 0.5f;
+    public AnimationCurve exitAnimationCurve = AnimationCurve.EaseInOut(0, 0, 1, 1);
     
     Banknote[] allNotes;
     bool[] playerVerdicts;
@@ -53,7 +54,7 @@ public class LevelManager : MonoBehaviour
         for (int i = 0; i < current.numberOfItems; i++)
         {
             // Spawn note object
-            Banknote note = Instantiate(prefab, entryPosition);
+            Banknote note = Instantiate(prefab, entryPilePosition);
             note.transform.localPosition = Vector3.zero;
             note.transform.localRotation = Quaternion.identity;
             // For a certain amount of new notes, mark as defective
@@ -73,14 +74,6 @@ public class LevelManager : MonoBehaviour
         levelTimer.StartTimer();
 
         // Start transition to next item
-        transition = TransitionToNextItem();
-        StartCoroutine(transition);
-    }
-
-    void JudgeItem(bool legitimate)
-    {
-        playerVerdicts[currentlyChecking] = legitimate;
-        
         transition = TransitionToNextItem();
         StartCoroutine(transition);
     }
@@ -115,9 +108,9 @@ public class LevelManager : MonoBehaviour
 
         for (float timer = 0; timer < 1; timer = Mathf.Clamp01(timer + Time.deltaTime / exitTime))
         {
-            float t = exitCurve.Evaluate(timer);
-            oldNote.transform.position = Vector3.Lerp(oldPosition, exitPosition.position, t);
-            oldNote.transform.rotation = Quaternion.Lerp(oldRotation, exitPosition.rotation, t);
+            float t = exitAnimationCurve.Evaluate(timer);
+            oldNote.transform.position = Vector3.Lerp(oldPosition, exitPilePosition.position, t);
+            oldNote.transform.rotation = Quaternion.Lerp(oldRotation, exitPilePosition.rotation, t);
             yield return null;
         }
     }
@@ -129,6 +122,16 @@ public class LevelManager : MonoBehaviour
 
         acceptButton.interactable = true;
         rejectButton.interactable = true;
+    }
+
+
+
+    void JudgeItem(bool legitimate)
+    {
+        playerVerdicts[currentlyChecking] = legitimate;
+
+        transition = TransitionToNextItem();
+        StartCoroutine(transition);
     }
 }
 
