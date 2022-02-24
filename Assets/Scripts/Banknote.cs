@@ -27,8 +27,16 @@ public class Banknote : MonoBehaviour
     public Material nonFluorescentMaterial;
     public Material fluorescentMaterial;
 
-    private void Awake()
+    public void GenerateDefects()
     {
-        
+        fake = true;
+    }
+    bool fake = false;
+    public bool Counterfeit
+    {
+        get
+        {
+            return fake;
+        }
     }
 }
