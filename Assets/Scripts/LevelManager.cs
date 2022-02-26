@@ -133,7 +133,6 @@ public class LevelManager : MonoBehaviour
     IEnumerator DeployNewItem(Banknote newNote)
     {
         viewControls.AddObject(newNote.transform);
-        viewControls.OnReset();
         yield return new WaitWhile(() => viewControls.isResettingLook);
 
         acceptButton.interactable = true;

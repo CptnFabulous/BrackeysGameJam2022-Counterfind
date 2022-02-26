@@ -23,10 +23,9 @@ public class ObjectViewer : MonoBehaviour
     public float resetTime = 0.5f;
     public AnimationCurve resetCurve = AnimationCurve.EaseInOut(0, 0, 1, 1);
 
-    private void Start()
+    private void Awake()
     {
         resetButton.onClick.AddListener(OnReset);
-        OnReset();
     }
     private void OnDrawGizmos()
     {
@@ -93,6 +92,7 @@ public class ObjectViewer : MonoBehaviour
     {
         viewedObject = newObject;
         newObject.parent = transform;
+        OnReset();
     }
 
     IEnumerator ResetLook()
