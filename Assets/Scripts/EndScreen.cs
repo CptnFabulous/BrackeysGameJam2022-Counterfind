@@ -41,13 +41,14 @@ public class EndScreen : MonoBehaviour
         }
 
         int errors = amountThoughtReal + amountThoughtFake;
+
         // Checks first that all were checked within the time limit
-        if (manager.currentlyChecking < manager.current.numberOfItems)
+        if (manager.currentlyChecking < manager.currentLevel.numberOfItems)
         {
             nextLevelButton.interactable = false;
             onTimeRanOut.Invoke();
         }
-        else if (errors < manager.current.numberOfErrorsForFailure) // Checks how many were completed
+        else if (errors < manager.currentLevel.numberOfErrorsForFailure) // Checks how many were completed
         {
             if (errors <= 0)
             {
@@ -64,7 +65,7 @@ public class EndScreen : MonoBehaviour
             onTooFewCheckedAccurately.Invoke();
         }
 
-        requiredRightForSuccess.text = (manager.current.numberOfItems - manager.current.numberOfErrorsForFailure).ToString();
+        requiredRightForSuccess.text = (manager.currentLevel.numberOfItems - manager.currentLevel.numberOfErrorsForFailure).ToString();
         successful.text = finalScore.ToString();
         thoughtWasReal.text = amountThoughtReal.ToString();
         thoughtWasFake.text = amountThoughtFake.ToString();

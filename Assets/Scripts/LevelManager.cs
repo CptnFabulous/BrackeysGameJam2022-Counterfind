@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class LevelManager : MonoBehaviour
 {
-    public Level current;
+    public Level currentLevel;
 
     [Header("Game elements")]
     public Banknote prefab;
@@ -58,7 +58,7 @@ public class LevelManager : MonoBehaviour
         }
         
         List<Banknote> newNotes = new List<Banknote>();
-        for (int i = 0; i < current.numberOfItems; i++)
+        for (int i = 0; i < currentLevel.numberOfItems; i++)
         {
             // Spawn note object
             Banknote note = Instantiate(prefab, entryPilePosition);
