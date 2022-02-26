@@ -18,6 +18,7 @@ public class LevelManager : MonoBehaviour
     public Text remainingNotes;
     public Button acceptButton;
     public Button rejectButton;
+    public ReferenceWindow referenceWindow;
 
     [Header("Transitioning to next note")]
     public Transform entryPilePosition;
@@ -75,6 +76,8 @@ public class LevelManager : MonoBehaviour
         allNotes = newNotes.ToArray();
         judgedFakeByPlayer = new bool[allNotes.Length];
         currentlyChecking = -1;
+
+        referenceWindow.Setup(currentLevel);
 
         // Reset timer
         levelTimer.timeLimit = currentLevel.timeLimit;
