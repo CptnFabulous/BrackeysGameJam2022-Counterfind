@@ -141,9 +141,11 @@ public class LevelManager : MonoBehaviour
 
 
 
-    void JudgeItem(bool legitimate)
+    void JudgeItem(bool counterfeit)
     {
-        judgedFakeByPlayer[currentlyChecking] = legitimate;
+        judgedFakeByPlayer[currentlyChecking] = counterfeit;
+
+        Debug.Log((currentlyChecking + 1) + ": " + allNotes[currentlyChecking].Counterfeit + ", " + counterfeit);
 
         transition = TransitionToNextItem();
         StartCoroutine(transition);
