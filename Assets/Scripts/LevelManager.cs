@@ -51,10 +51,6 @@ public class LevelManager : MonoBehaviour
 
         ExitGameplay();
     }
-    private void Start()
-    {
-        GenerateNewLevel();
-    }
     private void LateUpdate()
     {
         if (currentLevel == null)
