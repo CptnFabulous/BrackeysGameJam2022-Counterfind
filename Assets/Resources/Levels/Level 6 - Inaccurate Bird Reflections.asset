@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ca58b7bf882562a45ad6989a6f54382c, type: 3}
-  m_Name: Level 3 - Dodgy Serial Number
+  m_Name: Level 6 - Inaccurate Bird Reflections
   m_EditorClassIdentifier: 
   numberOfItems: 30
   numberOfCounterfeits: 15
@@ -19,4 +19,4 @@ MonoBehaviour:
     hours: 0
     minutes: 5
     seconds: 0
-  defects: 4
+  defects: 8
