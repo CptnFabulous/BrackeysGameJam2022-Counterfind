@@ -77,7 +77,7 @@ public class LevelManager : MonoBehaviour
         currentlyChecking = -1;
 
         // Reset timer
-        levelTimer.timeLimit = current.timeLimit;
+        levelTimer.timeLimit = currentLevel.timeLimit;
         levelTimer.StartTimer();
 
         // Start transition to next item
