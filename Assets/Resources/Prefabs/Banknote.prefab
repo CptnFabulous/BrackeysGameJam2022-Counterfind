@@ -166,7 +166,7 @@ GameObject:
   - component: {fileID: 1233795205436498504}
   - component: {fileID: 6280251093743169885}
   m_Layer: 5
-  m_Name: Animated Image
+  m_Name: Reflective Image
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
