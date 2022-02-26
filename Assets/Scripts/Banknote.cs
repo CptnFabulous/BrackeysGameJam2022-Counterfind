@@ -22,12 +22,15 @@ public class Banknote : MonoBehaviour
     public Image microprint;
     public Text serialNumber;
     public Image animatedGraphic;
+    public Image clearCornerPatch;
 
     [Header("Variant effects")]
     public Material nonFluorescentMaterial;
     public Material fluorescentMaterial;
     public Sprite correctMicroprint;
     public Sprite[] faultyMicroprint;
+    public Sprite correctClearPatch;
+    public Sprite[] wrongClearPatches;
 
     bool fake = false;
     public bool Counterfeit
@@ -64,11 +67,16 @@ public class Banknote : MonoBehaviour
                 int printIndex = Random.Range(0, faultyMicroprint.Length - 1);
                 microprint.sprite = faultyMicroprint[printIndex];
                 break;
+            case Defect.imageNotPresentInClearPatch:
+                int patchIndex = Random.Range(0, wrongClearPatches.Length - 1);
+                clearCornerPatch.sprite = wrongClearPatches[patchIndex];
+                break;
         }
     }
     void ResetToLegitimate()
     {
         microprint.sprite = correctMicroprint;
+        clearCornerPatch.sprite = correctClearPatch;
     }
     [System.Flags]
     public enum Defect
