@@ -26,6 +26,8 @@ public class Banknote : MonoBehaviour
     [Header("Variant effects")]
     public Material nonFluorescentMaterial;
     public Material fluorescentMaterial;
+    public Sprite correctMicroprint;
+    public Sprite[] faultyMicroprint;
 
     bool fake = false;
     public bool Counterfeit
@@ -45,9 +47,28 @@ public class Banknote : MonoBehaviour
             return;
         }
 
+        List<Defect> possibleDefects = FromFlags(currentLevel.defects);
+        // Randomly select an option from available defects as specified by the 
+        if (possibleDefects.Count > 0)
+        {
+            int index = Random.Range(0, possibleDefects.Count);
+            ApplyDefect(possibleDefects[index]);
+        }
+    }
+    void ApplyDefect(Defect value)
+    {
+        //Debug.Log("Applying defect " + value + " to " + name);
+        switch(value)
+        {
+            case Defect.microprintIsIncorrect:
+                int printIndex = Random.Range(0, faultyMicroprint.Length - 1);
+                microprint.sprite = faultyMicroprint[printIndex];
+                break;
+        }
     }
     void ResetToLegitimate()
     {
+        microprint.sprite = correctMicroprint;
     }
     [System.Flags]
     public enum Defect
@@ -57,5 +78,19 @@ public class Banknote : MonoBehaviour
         serialNumberIncorrectlyFormatted = 4,
         //holographicImagesDoNotAnimate = 8,
         //serialNumberDoesNotFluoresce = 16,
+    }
+
+    public static List<Defect> FromFlags(Defect flags)
+    {
+        List<Defect> list = new List<Defect>();
+        // Fill a list with defects obtained from the list of flags for the current level
+        foreach (Defect defect in System.Enum.GetValues(typeof(Defect)))
+        {
+            if (flags.HasFlag(defect))
+            {
+                list.Add(defect);
+            }
+        }
+        return list;
     }
 }
