@@ -5,7 +5,19 @@ using UnityEngine.UI;
 
 public class LevelManager : MonoBehaviour
 {
-    public Level currentLevel;
+    Level current;
+    public Level currentLevel
+    {
+        get
+        {
+            return current;
+        }
+        set
+        {
+            current = value;
+            GenerateNewLevel();
+        }
+    }
 
     [Header("Game elements")]
     public Banknote prefab;
