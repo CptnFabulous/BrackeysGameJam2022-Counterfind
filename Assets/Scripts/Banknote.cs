@@ -31,6 +31,7 @@ public class Banknote : MonoBehaviour
     public Sprite[] faultyMicroprint;
     public Sprite correctClearPatch;
     public Sprite[] wrongClearPatches;
+    //public string identicalSerialNumber = "SN1138538045";
 
     bool fake = false;
     public bool Counterfeit
@@ -71,13 +72,33 @@ public class Banknote : MonoBehaviour
                 int patchIndex = Random.Range(0, wrongClearPatches.Length - 1);
                 clearCornerPatch.sprite = wrongClearPatches[patchIndex];
                 break;
+            case Defect.serialNumberIncorrectlyFormatted:
+                serialNumber.text = NumberString(12);
+                break;
         }
     }
     void ResetToLegitimate()
     {
         microprint.sprite = correctMicroprint;
         clearCornerPatch.sprite = correctClearPatch;
+        serialNumber.text = CorrectSerialNumber();
     }
+
+
+    string CorrectSerialNumber()
+    {
+        return "SN" + NumberString(10);
+    }
+    string NumberString(int length)
+    {
+        string serialNumber = "";
+        for (int i = 0; i < length; i++)
+        {
+            serialNumber += Random.Range(0, 10);
+        }
+        return serialNumber;
+    }
+
     [System.Flags]
     public enum Defect
     {
