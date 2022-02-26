@@ -80,6 +80,7 @@ public class ReferenceWindow : MonoBehaviour
                 if (defects[d].ToString() == defectWarnings[w].name)
                 {
                     listOfThingsToWatchOutFor += "\n";
+                    listOfThingsToWatchOutFor += "\n";
                     listOfThingsToWatchOutFor += defectWarnings[w].description;
                 }
             }
