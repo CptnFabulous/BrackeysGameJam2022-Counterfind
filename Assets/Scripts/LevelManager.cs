@@ -5,7 +5,6 @@ using UnityEngine.UI;
 
 public class LevelManager : MonoBehaviour
 {
-    Level current;
     public Level currentLevel
     {
         get
@@ -18,6 +17,7 @@ public class LevelManager : MonoBehaviour
             GenerateNewLevel();
         }
     }
+    Level current;
 
     [Header("Game elements")]
     public Banknote prefab;
@@ -48,6 +48,8 @@ public class LevelManager : MonoBehaviour
         acceptButton.onClick.AddListener(() => JudgeItem(false));
         rejectButton.onClick.AddListener(() => JudgeItem(true));
         levelTimer.onTimeUp.AddListener(EndLevel);
+
+        ExitGameplay();
     }
     private void Start()
     {
@@ -55,12 +57,19 @@ public class LevelManager : MonoBehaviour
     }
     private void LateUpdate()
     {
+        if (currentLevel == null)
+        {
+            return;
+        }
         remainingNotes.text = (allNotes.Length - currentlyChecking - 1).ToString();
     }
 
-
-    void GenerateNewLevel()
+    public void GenerateNewLevel()
     {
+        gameObject.SetActive(true);
+        viewControls.enabled = true;
+        stateHandler.enabled = true;
+
         // Purge existing notes (code could probably be done better to prevent garbage collection but whatever it's a game jam)
         if (allNotes != null)
         {
@@ -69,7 +78,7 @@ public class LevelManager : MonoBehaviour
                 Destroy(allNotes[i].gameObject);
             }
         }
-        
+
         List<Banknote> newNotes = new List<Banknote>();
         for (int i = 0; i < currentLevel.numberOfItems; i++)
         {
@@ -95,11 +104,12 @@ public class LevelManager : MonoBehaviour
         levelTimer.timeLimit = currentLevel.timeLimit;
         levelTimer.StartTimer();
 
+        stateHandler.ResumeGame();
+
         // Start transition to next item
         transition = TransitionToNextItem();
         StartCoroutine(transition);
     }
-    
     IEnumerator TransitionToNextItem()
     {
         if (currentlyChecking >= allNotes.Length - 1)
@@ -153,9 +163,6 @@ public class LevelManager : MonoBehaviour
         acceptButton.interactable = true;
         rejectButton.interactable = true;
     }
-
-
-
     void JudgeItem(bool counterfeit)
     {
         judgedFakeByPlayer[currentlyChecking] = counterfeit;
@@ -165,12 +172,26 @@ public class LevelManager : MonoBehaviour
         transition = TransitionToNextItem();
         StartCoroutine(transition);
     }
-
     void EndLevel()
     {
         levelTimer.Pause();
+        viewControls.enabled = false;
         stateHandler.EndLevel();
         endScreen.ShowLevelEnd(this);
+    }
+    public void ExitGameplay()
+    {
+        gameObject.SetActive(false);
+        viewControls.enabled = false;
+        stateHandler.enabled = false;
+        // Disable existing notes
+        if (allNotes != null)
+        {
+            for (int i = 0; i < allNotes.Length; i++)
+            {
+                allNotes[i].gameObject.SetActive(false);
+            }
+        }
     }
 }
 
