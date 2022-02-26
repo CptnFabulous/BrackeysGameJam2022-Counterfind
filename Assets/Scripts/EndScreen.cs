@@ -13,11 +13,19 @@ public class EndScreen : MonoBehaviour
     public Text remainingTime;
     public Button retryLevelButton;
     public Button nextLevelButton;
+    public Button quitButton;
 
     public UnityEvent onPerfectWin;
     public UnityEvent onWin;
     public UnityEvent onTooFewCheckedAccurately;
     public UnityEvent onTimeRanOut;
+
+    private void Awake()
+    {
+        retryLevelButton.onClick.AddListener(()=> LevelProgressionHandler.Current.LoadLevel());
+        nextLevelButton.onClick.AddListener(()=> LevelProgressionHandler.Current.ProceedToNextLevel());
+        quitButton.onClick.AddListener(()=> LevelProgressionHandler.Current.ReturnToMenu());
+    }
 
     public void ShowLevelEnd(LevelManager manager)
     {
@@ -45,11 +53,12 @@ public class EndScreen : MonoBehaviour
         // Checks first that all were checked within the time limit
         if (manager.currentlyChecking < manager.currentLevel.numberOfItems)
         {
-            nextLevelButton.interactable = false;
+            nextLevelButton.interactable = LevelProgressionHandler.Current.noMoreLevels;
             onTimeRanOut.Invoke();
         }
         else if (errors < manager.currentLevel.numberOfErrorsForFailure) // Checks how many were completed
         {
+            nextLevelButton.interactable = true;
             if (errors <= 0)
             {
                 onPerfectWin.Invoke();
