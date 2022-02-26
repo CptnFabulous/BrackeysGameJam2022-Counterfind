@@ -7,8 +7,6 @@ public class ObjectViewer : MonoBehaviour
 {
     public Transform viewedObject;
 
-
-
     [Header("Positioning")]
     public float panSensitivity = 2;
     public float zoomSensitivity = 1;
@@ -32,6 +30,14 @@ public class ObjectViewer : MonoBehaviour
         Gizmos.matrix = transform.localToWorldMatrix;
         Gizmos.DrawWireCube(positionBounds.center, positionBounds.size);
     }
+    private void OnEnable()
+    {
+        
+    }
+    private void OnDisable()
+    {
+        
+    }
 
     public void OnPanControl(InputValue input)
     {
@@ -45,7 +51,7 @@ public class ObjectViewer : MonoBehaviour
     }
     public void OnMove(InputValue input)
     {
-        if (isResettingLook)
+        if (controlDenied)
         {
             return;
         }
@@ -68,7 +74,7 @@ public class ObjectViewer : MonoBehaviour
     }
     public void OnZoom(InputValue input)
     {
-        if (isResettingLook)
+        if (controlDenied)
         {
             return;
         }
@@ -80,7 +86,7 @@ public class ObjectViewer : MonoBehaviour
     }
     public void OnReset()
     {
-        if (isResettingLook)
+        if (controlDenied)
         {
             return;
         }
@@ -114,7 +120,14 @@ public class ObjectViewer : MonoBehaviour
     IEnumerator resetInProgress;
     bool isPanning;
     bool isRotating;
-    public bool isResettingLook
+    public bool controlDenied
+    {
+        get
+        {
+            return enabled == false || isResetting;
+        }
+    }
+    public bool isResetting
     {
         get
         {

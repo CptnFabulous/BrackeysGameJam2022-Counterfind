@@ -158,7 +158,7 @@ public class LevelManager : MonoBehaviour
     IEnumerator DeployNewItem(Banknote newNote)
     {
         viewControls.AddObject(newNote.transform);
-        yield return new WaitWhile(() => viewControls.isResettingLook);
+        yield return new WaitWhile(() => viewControls.controlDenied);
 
         acceptButton.interactable = true;
         rejectButton.interactable = true;
