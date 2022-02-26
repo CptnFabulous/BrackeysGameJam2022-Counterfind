@@ -10,11 +10,13 @@ public class GameStateHandler : MonoBehaviour
     public Canvas endScreen;
     public Button pauseButton;
     public Button resumeButton;
+    public Button quitToMainMenuButton;
 
     private void Awake()
     {
         pauseButton.onClick.AddListener(PauseGame);
         resumeButton.onClick.AddListener(ResumeGame);
+        quitToMainMenuButton.onClick.AddListener(LevelProgressionHandler.Current.ReturnToMenu);
     }
     private void Start()
     {
