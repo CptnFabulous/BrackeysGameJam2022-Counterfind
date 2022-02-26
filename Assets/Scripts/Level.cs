@@ -9,5 +9,5 @@ public class Level : ScriptableObject
     public int numberOfCounterfeits = 10;
     public int numberOfErrorsForFailure = 3;
     public Timer.TimeValue timeLimit = new Timer.TimeValue(0, 10, 0);
-    // Defects
+    public Banknote.Defect defects;
 }

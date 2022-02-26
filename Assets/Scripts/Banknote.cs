@@ -39,4 +39,13 @@ public class Banknote : MonoBehaviour
             return fake;
         }
     }
+    [System.Flags]
+    public enum Defect
+    {
+        microprintIsIncorrect = 1,
+        imageNotPresentInClearPatch = 2,
+        serialNumberIncorrectlyFormatted = 4,
+        //holographicImagesDoNotAnimate = 8,
+        //serialNumberDoesNotFluoresce = 16,
+    }
 }
