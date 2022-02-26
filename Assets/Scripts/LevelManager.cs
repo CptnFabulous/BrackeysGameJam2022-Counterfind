@@ -64,11 +64,11 @@ public class LevelManager : MonoBehaviour
             Banknote note = Instantiate(prefab, entryPilePosition);
             note.transform.localPosition = Vector3.zero;
             note.transform.localRotation = Quaternion.identity;
-            // For a certain amount of new notes, mark as defective
-            if (i < current.numberOfCounterfeits)
-            {
-                note.GenerateDefects();
-            }
+
+            // If index is less than number of counterfeits, mark as counterfeit
+            // To ensure the correct amount
+            note.GenerateNote((i < currentLevel.numberOfCounterfeits), currentLevel);
+
             // Insert at a random point to shuffle the array
             newNotes.Insert(Random.Range(0, newNotes.Count), note);
         }

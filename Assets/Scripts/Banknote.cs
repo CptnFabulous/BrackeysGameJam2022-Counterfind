@@ -27,10 +27,6 @@ public class Banknote : MonoBehaviour
     public Material nonFluorescentMaterial;
     public Material fluorescentMaterial;
 
-    public void GenerateDefects()
-    {
-        fake = true;
-    }
     bool fake = false;
     public bool Counterfeit
     {
@@ -38,6 +34,20 @@ public class Banknote : MonoBehaviour
         {
             return fake;
         }
+    }
+    public void GenerateNote(bool counterfeit, Level currentLevel)
+    {
+        fake = counterfeit;
+        if (counterfeit == false)
+        {
+            //Debug.Log(name + " is legitimate");
+            ResetToLegitimate();
+            return;
+        }
+
+    }
+    void ResetToLegitimate()
+    {
     }
     [System.Flags]
     public enum Defect
