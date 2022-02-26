@@ -43,11 +43,11 @@ public class Banknote : MonoBehaviour
     }
     public void GenerateNote(bool counterfeit, Level currentLevel)
     {
-        fake = counterfeit;
+        ResetToLegitimate(); // Reset values to defaults before defects are applied
+
+        fake = counterfeit; // Assigns value
         if (counterfeit == false)
         {
-            //Debug.Log(name + " is legitimate");
-            ResetToLegitimate();
             return;
         }
 
