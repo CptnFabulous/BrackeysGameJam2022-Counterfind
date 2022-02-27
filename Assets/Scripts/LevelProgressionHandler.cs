@@ -21,11 +21,12 @@ public class LevelProgressionHandler : MonoBehaviour
     [Header("Level data")]
     public Level[] allLevels;
     public int currentLevelIndex;
-    public bool noMoreLevels
+    public bool onLastLevel
     {
         get
         {
-            return currentLevelIndex >= allLevels.Length;
+            //Debug.Log(allLevels.Length + ", " + currentLevelIndex);
+            return currentLevelIndex + 1 >= allLevels.Length;
         }
     }
 

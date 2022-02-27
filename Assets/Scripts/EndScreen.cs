@@ -15,8 +15,10 @@ public class EndScreen : MonoBehaviour
     public Button nextLevelButton;
     public Button quitButton;
 
-    public UnityEvent onPerfectWin;
+    public UnityEvent onResetEndScreenElements;
     public UnityEvent onWin;
+    public UnityEvent onPerfectWin;
+    public UnityEvent onAllLevelsCompleted;
     public UnityEvent onTooFewCheckedAccurately;
     public UnityEvent onTimeRanOut;
 
@@ -29,6 +31,8 @@ public class EndScreen : MonoBehaviour
 
     public void ShowLevelEnd(LevelManager manager)
     {
+        onResetEndScreenElements.Invoke();
+
         int finalScore = 0;
         int amountThoughtReal = 0;
         int amountThoughtFake = 0;
@@ -50,15 +54,20 @@ public class EndScreen : MonoBehaviour
 
         int errors = amountThoughtReal + amountThoughtFake;
 
-        // Checks first that all were checked within the time limit
-        if (manager.currentlyChecking < manager.currentLevel.numberOfItems)
+        // Checks if the items were processed within the correct time
+        // Checks if the amount of errors was less than the maximum acceptable
+        bool allCompleted = manager.currentlyChecking >= manager.currentLevel.numberOfItems;
+        bool notTooManyErrors = errors < manager.currentLevel.numberOfErrorsForFailure;
+        if (allCompleted && notTooManyErrors) // If so, the level is a success
         {
-            nextLevelButton.interactable = LevelProgressionHandler.Current.noMoreLevels;
-            onTimeRanOut.Invoke();
-        }
-        else if (errors < manager.currentLevel.numberOfErrorsForFailure) // Checks how many were completed
-        {
-            nextLevelButton.interactable = true;
+            bool complete = LevelProgressionHandler.Current.onLastLevel;
+            //Debug.Log("Are there any more levels? " + !complete);
+            nextLevelButton.interactable = !complete;
+            if (complete)
+            {
+                onAllLevelsCompleted.Invoke();
+            }
+
             if (errors <= 0)
             {
                 onPerfectWin.Invoke();
@@ -68,7 +77,12 @@ public class EndScreen : MonoBehaviour
                 onWin.Invoke();
             }
         }
-        else // If neither previous statement was true, player failed due to getting too many wrong
+        else if (!allCompleted) // if the first bool is false, the player ran out of time
+        {
+            nextLevelButton.interactable = false;
+            onTimeRanOut.Invoke();
+        }
+        else // Otherwise, the player completed them all but got some wrong
         {
             nextLevelButton.interactable = false;
             onTooFewCheckedAccurately.Invoke();
