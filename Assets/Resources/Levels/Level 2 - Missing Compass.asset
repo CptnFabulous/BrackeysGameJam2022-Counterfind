@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ca58b7bf882562a45ad6989a6f54382c, type: 3}
   m_Name: Level 2 - Missing Compass
   m_EditorClassIdentifier: 
-  numberOfItems: 20
-  numberOfCounterfeits: 10
+  numberOfItems: 10
+  numberOfCounterfeits: 5
   numberOfErrorsForFailure: 3
   timeLimit:
     hours: 0
-    minutes: 3
+    minutes: 2
     seconds: 0
   defects: 2

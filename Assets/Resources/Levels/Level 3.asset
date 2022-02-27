@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ca58b7bf882562a45ad6989a6f54382c, type: 3}
   m_Name: Level 3
   m_EditorClassIdentifier: 
-  numberOfItems: 25
-  numberOfCounterfeits: 13
+  numberOfItems: 15
+  numberOfCounterfeits: 8
   numberOfErrorsForFailure: 3
   timeLimit:
     hours: 0
-    minutes: 3
-    seconds: 0
+    minutes: 2
+    seconds: 30
   defects: 3

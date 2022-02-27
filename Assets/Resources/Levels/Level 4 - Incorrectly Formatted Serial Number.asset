@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ca58b7bf882562a45ad6989a6f54382c, type: 3}
   m_Name: Level 4 - Incorrectly Formatted Serial Number
   m_EditorClassIdentifier: 
-  numberOfItems: 25
-  numberOfCounterfeits: 13
+  numberOfItems: 15
+  numberOfCounterfeits: 8
   numberOfErrorsForFailure: 5
   timeLimit:
     hours: 0
