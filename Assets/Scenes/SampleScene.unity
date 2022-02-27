@@ -996,17 +996,6 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_IsOn: 1
---- !u!114 &544011521 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5772216211379301504, guid: 0f82ca15576f8e240a80ef8922a0ff3a, type: 3}
-  m_PrefabInstance: {fileID: 3972028986343173504}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &545019099
 GameObject:
   m_ObjectHideFlags: 0
@@ -1481,11 +1470,6 @@ PrefabInstance:
 Transform:
   m_CorrespondingSourceObject: {fileID: 5378429623370710284, guid: 4055f1d96b8874a429ccd2c6be10fc09, type: 3}
   m_PrefabInstance: {fileID: 725650426}
-  m_PrefabAsset: {fileID: 0}
---- !u!224 &739607575 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 4967910769015312, guid: 0f82ca15576f8e240a80ef8922a0ff3a, type: 3}
-  m_PrefabInstance: {fileID: 3972028986343173504}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &812702949
 GameObject:
@@ -2211,7 +2195,6 @@ GameObject:
   m_Component:
   - component: {fileID: 963194228}
   - component: {fileID: 963194230}
-  - component: {fileID: 963194231}
   - component: {fileID: 963194232}
   - component: {fileID: 963194227}
   - component: {fileID: 963194226}
@@ -2367,40 +2350,6 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &963194231
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 963194225}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ffb55712cf270b14992be4b01238b0d1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  listTextBox: {fileID: 2116485222}
-  regularInputs: {fileID: 1985035811}
-  window: {fileID: 739607575}
-  switchTo: {fileID: 544011521}
-  switchFrom: {fileID: 2054230255}
-  titleOfList: 'How the note should look:'
-  lineBreak: '
-
-
-    * '
-  defectWarnings:
-  - name: microprintIsIncorrect
-    description: The microprint text should be clearly legible, but with each line
-      offset from the one above it.
-  - name: imageNotPresentInClearPatch
-    description: An image of a compass should be faintly visible in the clear corner
-      patch.
-  - name: serialNumberIncorrectlyFormatted
-    description: The serial number should consist of the letters 'SN' followed by
-      a string of ten digits.
-  - name: graphicBadlyProportioned
-    description: 
 --- !u!114 &963194232
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4135,7 +4084,7 @@ MonoBehaviour:
   remainingNotes: {fileID: 301494097}
   acceptButton: {fileID: 1859550886}
   rejectButton: {fileID: 487769454}
-  referenceWindow: {fileID: 963194231}
+  referenceWindow: {fileID: 3972028986343173505}
   entryPilePosition: {fileID: 823770716}
   exitPilePosition: {fileID: 466714301}
   exitTime: 0.5
@@ -5577,11 +5526,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1976537934}
   m_CullTransparentMesh: 1
---- !u!224 &1985035811 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 8382532587061261745, guid: 0f82ca15576f8e240a80ef8922a0ff3a, type: 3}
-  m_PrefabInstance: {fileID: 3972028986343173504}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2002174933
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5889,17 +5833,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2054230255 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 2587355627295488876, guid: 0f82ca15576f8e240a80ef8922a0ff3a, type: 3}
-  m_PrefabInstance: {fileID: 3972028986343173504}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &2055518662
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6043,17 +5976,6 @@ Transform:
   m_Father: {fileID: 554851777}
   m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2116485222 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 3572845652571366464, guid: 0f82ca15576f8e240a80ef8922a0ff3a, type: 3}
-  m_PrefabInstance: {fileID: 3972028986343173504}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &919307440647726495
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6423,3 +6345,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0f82ca15576f8e240a80ef8922a0ff3a, type: 3}
+--- !u!114 &3972028986343173505 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7219097680441321313, guid: 0f82ca15576f8e240a80ef8922a0ff3a, type: 3}
+  m_PrefabInstance: {fileID: 3972028986343173504}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ffb55712cf270b14992be4b01238b0d1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

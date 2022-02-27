@@ -251,6 +251,7 @@ GameObject:
   - component: {fileID: 3972028987053325462}
   - component: {fileID: 3972028987053325461}
   - component: {fileID: 3972028987053325460}
+  - component: {fileID: 7219097680441321313}
   m_Layer: 5
   m_Name: HUD
   m_TagString: Untagged
@@ -344,6 +345,40 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &7219097680441321313
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3972028987053325459}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ffb55712cf270b14992be4b01238b0d1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  listTextBox: {fileID: 3572845652571366464}
+  regularInputs: {fileID: 8382532587061261745}
+  window: {fileID: 4967910769015312}
+  switchTo: {fileID: 5772216211379301504}
+  switchFrom: {fileID: 2587355627295488876}
+  titleOfList: 'How the note should look:'
+  lineBreak: '
+
+
+    * '
+  defectWarnings:
+  - name: microprintIsIncorrect
+    description: The microprint text should be clearly legible, but with each line
+      offset from the one above it.
+  - name: imageNotPresentInClearPatch
+    description: An image of a compass should be faintly visible in the clear corner
+      patch.
+  - name: serialNumberIncorrectlyFormatted
+    description: The serial number should consist of the letters 'SN' followed by
+      a string of ten digits.
+  - name: graphicBadlyProportioned
+    description: 
 --- !u!1 &3972028987769112943
 GameObject:
   m_ObjectHideFlags: 0
@@ -882,6 +917,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e474de32efa31ec4e8ba1cbaee1d4eaa, type: 3}
+--- !u!114 &5772216211379301504 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5425856253136770496, guid: e474de32efa31ec4e8ba1cbaee1d4eaa, type: 3}
+  m_PrefabInstance: {fileID: 1970196795486058816}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!224 &5772216211379301505 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 5425856253136770497, guid: e474de32efa31ec4e8ba1cbaee1d4eaa, type: 3}
@@ -1568,6 +1614,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e474de32efa31ec4e8ba1cbaee1d4eaa, type: 3}
+--- !u!114 &2587355627295488876 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5425856253136770496, guid: e474de32efa31ec4e8ba1cbaee1d4eaa, type: 3}
+  m_PrefabInstance: {fileID: 7540329521493487276}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!224 &2587355627295488877 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 5425856253136770497, guid: e474de32efa31ec4e8ba1cbaee1d4eaa, type: 3}
