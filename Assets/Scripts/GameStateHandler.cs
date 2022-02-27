@@ -12,6 +12,22 @@ public class GameStateHandler : MonoBehaviour
     public Button resumeButton;
     public Button quitToMainMenuButton;
 
+    Canvas currentlyOpen;
+
+
+    private void OnEnable()
+    {
+        if (currentlyOpen != null)
+        {
+            SwitchCanvas(currentlyOpen);
+        }
+    }
+    private void OnDisable()
+    {
+        headsUpDisplay.gameObject.SetActive(false);
+        pauseMenu.gameObject.SetActive(false);
+        endScreen.gameObject.SetActive(false);
+    }
     private void Awake()
     {
         pauseButton.onClick.AddListener(PauseGame);
@@ -45,6 +61,7 @@ public class GameStateHandler : MonoBehaviour
         pauseMenu.gameObject.SetActive(false);
         endScreen.gameObject.SetActive(false);
         desired.gameObject.SetActive(true);
+        currentlyOpen = desired;
 
     }
 }
