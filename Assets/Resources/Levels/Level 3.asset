@@ -17,6 +17,6 @@ MonoBehaviour:
   numberOfErrorsForFailure: 3
   timeLimit:
     hours: 0
-    minutes: 5
+    minutes: 3
     seconds: 0
   defects: 3
