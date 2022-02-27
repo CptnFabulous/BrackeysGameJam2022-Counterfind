@@ -6,14 +6,7 @@ using UnityEngine.UI;
 public class Banknote : MonoBehaviour
 {
     //[Header("Checks")]
-    // Image is an appropriate material that doesn't crumple up
-    // Image is embossed
-    // Line printing is consistent
     // Microprint is present and readable
-    // Bird image animates when tilted
-    // Bird image changes colour when tilted
-    // Note as a whole does not fluoresce
-    // Serial number does fluoresce
 
 
     [Header("Graphic elements")]
@@ -21,17 +14,22 @@ public class Banknote : MonoBehaviour
     public Image printedLines;
     public Image microprint;
     public Text serialNumber;
-    public Image animatedGraphic;
+    public Image reflectiveGraphic;
+    public Image preciselyProportionedGraphic;
     public Image clearCornerPatch;
 
     [Header("Variant effects")]
-    public Material nonFluorescentMaterial;
-    public Material fluorescentMaterial;
+    //public Material nonFluorescentMaterial;
+    //public Material fluorescentMaterial;
     public Sprite correctMicroprint;
     public Sprite[] faultyMicroprint;
     public Sprite correctClearPatch;
     public Sprite[] wrongClearPatches;
     //public string identicalSerialNumber = "SN1138538045";
+    public Material reflectiveMaterial;
+    public Material wrongReflectiveMaterial;
+    //public Material iridescentMaterial;
+    //public Material nonIridescentMaterial;
 
     bool fake = false;
     public bool Counterfeit
@@ -75,6 +73,16 @@ public class Banknote : MonoBehaviour
             case Defect.serialNumberIncorrectlyFormatted:
                 serialNumber.text = NumberString(12);
                 break;
+                /*
+            case Defect.graphicBadlyProportioned:
+                preciselyProportionedGraphic.preserveAspect = false;
+                break;
+                */
+                /*
+            case Defect.cornerImageNotReflective:
+                reflectiveGraphic.material = wrongReflectiveMaterial;
+                break;
+                */
         }
     }
     void ResetToLegitimate()
@@ -82,6 +90,8 @@ public class Banknote : MonoBehaviour
         microprint.sprite = correctMicroprint;
         clearCornerPatch.sprite = correctClearPatch;
         serialNumber.text = CorrectSerialNumber();
+        //preciselyProportionedGraphic.preserveAspect = true;
+        //reflectiveGraphic.material = reflectiveMaterial;
     }
 
 
@@ -105,8 +115,17 @@ public class Banknote : MonoBehaviour
         microprintIsIncorrect = 1,
         imageNotPresentInClearPatch = 2,
         serialNumberIncorrectlyFormatted = 4,
-        //holographicImagesDoNotAnimate = 8,
-        //serialNumberDoesNotFluoresce = 16,
+        graphicBadlyProportioned = 8
+        //cornerImageNotReflective = 8,
+        //holographicImagesDoNotAnimate
+        //serialNumberDoesNotFluoresce
+        // Image is an appropriate material that doesn't crumple up
+        // Image is embossed
+        // Line printing is consistent
+        // Bird image animates when tilted
+        // Bird image changes colour when tilted
+        // Note as a whole does not fluoresce
+        // Serial number does fluoresce
     }
 
     public static List<Defect> FromFlags(Defect flags)
