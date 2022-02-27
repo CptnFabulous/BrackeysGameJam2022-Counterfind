@@ -47,28 +47,12 @@ public class ReferenceWindow : MonoBehaviour
             }
         }
     }
-
     private void Awake()
     {
-        switchTo.onClick.AddListener(() =>
-        {
-            regularInputs.gameObject.SetActive(false);
-            window.gameObject.SetActive(true);
-        });
-        switchFrom.onClick.AddListener(() =>
-        {
-            window.gameObject.SetActive(false);
-            regularInputs.gameObject.SetActive(true);
-        });
+        switchTo.onClick.AddListener(() => SetWindowActiveState(true));
+        switchFrom.onClick.AddListener(() => SetWindowActiveState(false));
     }
-
-
     public void Setup(Level currentLevel)
-    {
-        ShowPossibleDefects(currentLevel);
-        switchFrom.onClick.Invoke();
-    }
-    public void ShowPossibleDefects(Level currentLevel)
     {
         string listOfThingsToWatchOutFor = titleOfList;
 
@@ -87,5 +71,10 @@ public class ReferenceWindow : MonoBehaviour
         }
 
         listTextBox.text = listOfThingsToWatchOutFor;
+    }
+    public void SetWindowActiveState(bool active)
+    {
+        regularInputs.gameObject.SetActive(!active);
+        window.gameObject.SetActive(active);
     }
 }

@@ -95,6 +95,7 @@ public class LevelManager : MonoBehaviour
         currentlyChecking = -1;
 
         referenceWindow.Setup(currentLevel);
+        referenceWindow.SetWindowActiveState(false);
 
         // Reset timer
         levelTimer.timeLimit = currentLevel.timeLimit;
