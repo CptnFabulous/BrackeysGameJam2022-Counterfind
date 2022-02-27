@@ -25,6 +25,7 @@ public class ReferenceWindow : MonoBehaviour
     public Button switchFrom;
 
     public string titleOfList = "Defects to check for:";
+    [TextArea] public string lineBreak = "\n\n* ";
     public DefectWarning[] defectWarnings;
 
     public void OnValidate()
@@ -79,8 +80,7 @@ public class ReferenceWindow : MonoBehaviour
             {
                 if (defects[d].ToString() == defectWarnings[w].name)
                 {
-                    listOfThingsToWatchOutFor += "\n";
-                    listOfThingsToWatchOutFor += "\n";
+                    listOfThingsToWatchOutFor += lineBreak;
                     listOfThingsToWatchOutFor += defectWarnings[w].description;
                 }
             }

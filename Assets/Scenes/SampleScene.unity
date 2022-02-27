@@ -2212,10 +2212,10 @@ GameObject:
   - component: {fileID: 963194228}
   - component: {fileID: 963194230}
   - component: {fileID: 963194231}
+  - component: {fileID: 963194232}
   - component: {fileID: 963194227}
   - component: {fileID: 963194226}
   - component: {fileID: 963194229}
-  - component: {fileID: 963194232}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -2384,7 +2384,11 @@ MonoBehaviour:
   window: {fileID: 739607575}
   switchTo: {fileID: 544011521}
   switchFrom: {fileID: 2054230255}
-  titleOfList: 'Defects to check for:'
+  titleOfList: 'How the note should look:'
+  lineBreak: '
+
+
+    * '
   defectWarnings:
   - name: microprintIsIncorrect
     description: The microprint text should be clearly legible, but with each line
