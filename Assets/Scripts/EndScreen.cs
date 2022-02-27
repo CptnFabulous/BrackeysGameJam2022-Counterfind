@@ -88,7 +88,8 @@ public class EndScreen : MonoBehaviour
             onTooFewCheckedAccurately.Invoke();
         }
 
-        requiredRightForSuccess.text = (manager.currentLevel.numberOfItems - manager.currentLevel.numberOfErrorsForFailure).ToString();
+        int minCorrectForSuccess = manager.currentLevel.numberOfItems - manager.currentLevel.numberOfErrorsForFailure + 1;
+        requiredRightForSuccess.text = minCorrectForSuccess.ToString();
         successful.text = finalScore.ToString();
         thoughtWasReal.text = amountThoughtReal.ToString();
         thoughtWasFake.text = amountThoughtFake.ToString();
