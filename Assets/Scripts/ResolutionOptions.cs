@@ -36,14 +36,26 @@ public class ResolutionOptions : MonoBehaviour
     }
     public static void SetupResolutionDropdown(Dropdown dropdown)
     {
+        int currentValue = 0;
         List<string> resolutionNames = new List<string>();
         for (int i = 0; i < availableResolutions.Count; i++)
         {
-            resolutionNames.Add(availableResolutions[i].width + " X " + availableResolutions[i].height);
+            int width = availableResolutions[i].width;
+            int height = availableResolutions[i].height;
+
+            if (Screen.currentResolution.width == width && Screen.currentResolution.height == height)
+            {
+                currentValue = i;
+            }
+
+            resolutionNames.Add(width + " X " + height);
         }
 
         dropdown.ClearOptions();
         dropdown.AddOptions(resolutionNames);
+
+        dropdown.value = currentValue;
+
         dropdown.onValueChanged.AddListener(ChangeResolution);
     }
 }
