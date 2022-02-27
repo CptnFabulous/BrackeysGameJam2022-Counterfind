@@ -2396,12 +2396,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   viewedObject: {fileID: 0}
-  panSensitivity: 0.05
+  panSensitivity: 0.02
   zoomSensitivity: 0.2
   positionBounds:
     m_Center: {x: 0, y: 0, z: 0.25}
     m_Extent: {x: 0.1, y: 0.1, z: 0.1}
-  rotationSensitivity: 30
+  rotationSensitivity: 15
   defaultEulerAngles: {x: 0, y: 180, z: 0}
   resetButton: {fileID: 73350471}
   resetTime: 0.5
