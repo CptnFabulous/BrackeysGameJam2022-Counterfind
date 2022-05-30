@@ -19,6 +19,7 @@ public class EndScreen : MonoBehaviour
     public UnityEvent onWin;
     public UnityEvent onPerfectWin;
     public UnityEvent onAllLevelsCompleted;
+    public UnityEvent onFailGeneric;
     public UnityEvent onTooFewCheckedAccurately;
     public UnityEvent onTimeRanOut;
 
@@ -80,11 +81,13 @@ public class EndScreen : MonoBehaviour
         else if (!allCompleted) // if the first bool is false, the player ran out of time
         {
             nextLevelButton.interactable = false;
+            onFailGeneric.Invoke();
             onTimeRanOut.Invoke();
         }
         else // Otherwise, the player completed them all but got some wrong
         {
             nextLevelButton.interactable = false;
+            onFailGeneric.Invoke();
             onTooFewCheckedAccurately.Invoke();
         }
 
