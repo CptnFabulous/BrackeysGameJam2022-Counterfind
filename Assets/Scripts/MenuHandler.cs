@@ -10,6 +10,9 @@ public class MenuHandler : MonoBehaviour
     List<Canvas> childWindows;
     Canvas ownCanvas;
 
+    public AudioSource soundEffectPlayer { get; private set; }
+
+
     private void Awake()
     {
         ownCanvas = GetComponent<Canvas>();
@@ -20,6 +23,10 @@ public class MenuHandler : MonoBehaviour
         {
             rootWindow = childWindows[0];
         }
+
+        soundEffectPlayer = GetComponent<AudioSource>();
+        soundEffectPlayer.clip = null;
+        soundEffectPlayer.loop = false;
     }
     private void Start()
     {
