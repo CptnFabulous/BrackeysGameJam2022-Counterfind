@@ -95,4 +95,10 @@ public class EndScreen : MonoBehaviour
         thoughtWasFake.text = amountThoughtFake.ToString();
         remainingTime.text = manager.levelTimer.remaining.ToString();
     }
+
+    /// <summary>
+    /// References the current MusicHandler to switch the music state.
+    /// </summary>
+    /// <param name="stateName"></param>
+    public void SetMusicState(string stateName) => MusicHandler.Current.SwitchStateFromString(stateName);
 }
