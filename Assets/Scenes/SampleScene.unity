@@ -6044,7 +6044,8 @@ MonoBehaviour:
     tracks: []
     looping: 1
   - name: Active
-    tracks: []
+    tracks:
+    - {fileID: 8300000, guid: c5b51c68d0c90f743b2061d4dd789aff, type: 3}
     looping: 1
   - name: Win
     tracks:
