@@ -19,9 +19,19 @@ public class MenuHandler : MonoBehaviour
         childWindows = new List<Canvas>(GetComponentsInChildren<Canvas>(true));
         childWindows.Remove(ownCanvas);
 
+
+
+        // If a root window is null, or is assigned to something that isn't actually part of the menu hierarchy
         if (rootWindow == null || childWindows.Contains(rootWindow) == false)
         {
-            rootWindow = childWindows[0];
+            if (childWindows.Count > 0)
+            {
+                rootWindow = childWindows[0];
+            }
+            else
+            {
+                rootWindow = ownCanvas;
+            }
         }
 
         soundEffectPlayer = GetComponent<AudioSource>();
