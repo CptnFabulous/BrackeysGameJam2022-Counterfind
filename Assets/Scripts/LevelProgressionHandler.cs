@@ -76,6 +76,7 @@ public class LevelProgressionHandler : MonoBehaviour
         menuObject.gameObject.SetActive(false);
         Debug.Log(currentLevelIndex + ", " + allLevels.Length);
         levelSetter.currentLevel = allLevels[currentLevelIndex];
+        onEnterLevel.Invoke();
     }
     public void ProceedToNextLevel()
     {
