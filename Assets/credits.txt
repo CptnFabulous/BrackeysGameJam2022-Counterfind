@@ -10,3 +10,8 @@ License: https://filmmusic.io/standard-license
 One-eyed Maestro by Kevin MacLeod
 Link: https://incompetech.filmmusic.io/song/4170-one-eyed-maestro
 License: https://filmmusic.io/standard-license
+
+SOUNDS:
+Cash register 'ka-ching': modified from a downloaded sound
+Link: https://freesound.org/people/kiddpark/sounds/201159/
+
