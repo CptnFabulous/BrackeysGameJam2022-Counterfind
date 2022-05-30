@@ -24,6 +24,9 @@ public class AdvancedSelectable : MonoBehaviour, IPointerEnterHandler, IPointerC
 
 
 
-
-    public void PlaySoundEffect(AudioClip effect) => hierarchyContaining.soundEffectPlayer.PlayOneShot(effect);
+    /// <summary>
+    /// Plays a sound effect through the current menu hierarchy's AudioSource.
+    /// </summary>
+    /// <param name="effect"></param>
+    public void PlaySoundEffect(AudioClip effect) => hierarchyContaining?.soundEffectPlayer?.PlayOneShot(effect);
 }
