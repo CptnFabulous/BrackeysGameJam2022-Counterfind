@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Events;
 
 public class LevelProgressionHandler : MonoBehaviour
 {
@@ -21,6 +22,7 @@ public class LevelProgressionHandler : MonoBehaviour
     [Header("Level data")]
     public Level[] allLevels;
     public int currentLevelIndex;
+
     public bool onLastLevel
     {
         get
@@ -39,12 +41,12 @@ public class LevelProgressionHandler : MonoBehaviour
 
     [Header("Loading levels")]
     public LevelManager levelSetter;
+    public UnityEvent onEnterLevel;
 
 
     private void Awake()
     {
         levelButtonPrefab.gameObject.SetActive(false);
-        Debug.Log("Assinging buttons");
         levelButtons = new Button[allLevels.Length];
         for (int i = 0; i < allLevels.Length; i++)
         {
