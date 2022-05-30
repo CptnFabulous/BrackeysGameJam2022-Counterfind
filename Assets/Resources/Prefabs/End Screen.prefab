@@ -477,21 +477,21 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
-  onPerfectWin:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1429896822171957639}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
+      - m_Target: {fileID: 1429896820388453300}
+        m_TargetAssemblyTypeName: EndScreen, Assembly-CSharp
+        m_MethodName: SetMusicState
+        m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: 
+          m_StringArgument: Win
           m_BoolArgument: 1
         m_CallState: 2
+  onPerfectWin:
+    m_PersistentCalls:
+      m_Calls: []
   onAllLevelsCompleted:
     m_PersistentCalls:
       m_Calls:
@@ -520,6 +520,18 @@ MonoBehaviour:
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 1429896820388453300}
+        m_TargetAssemblyTypeName: EndScreen, Assembly-CSharp
+        m_MethodName: SetMusicState
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Fail
           m_BoolArgument: 1
         m_CallState: 2
   onTooFewCheckedAccurately:
