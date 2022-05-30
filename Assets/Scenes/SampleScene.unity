@@ -5290,6 +5290,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1807956486}
+  - component: {fileID: 1807956487}
   m_Layer: 0
   m_Name: Menu Object
   m_TagString: Untagged
@@ -5313,6 +5314,36 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1807956487
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1807956485}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: be1a93e12f33165478188745b8ad6162, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onEnable:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1968788265}
+        m_TargetAssemblyTypeName: MusicHandler, Assembly-CSharp
+        m_MethodName: SwitchStateFromString
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Title
+          m_BoolArgument: 0
+        m_CallState: 2
+  onDisable:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &1809336365
 GameObject:
   m_ObjectHideFlags: 0
