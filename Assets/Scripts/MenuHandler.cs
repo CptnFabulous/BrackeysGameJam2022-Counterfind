@@ -37,6 +37,7 @@ public class MenuHandler : MonoBehaviour
         soundEffectPlayer = GetComponent<AudioSource>();
         soundEffectPlayer.clip = null;
         soundEffectPlayer.loop = false;
+        soundEffectPlayer.playOnAwake = false;
     }
     private void Start()
     {
