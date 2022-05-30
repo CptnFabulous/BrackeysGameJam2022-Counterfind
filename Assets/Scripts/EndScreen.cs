@@ -73,10 +73,7 @@ public class EndScreen : MonoBehaviour
             {
                 onPerfectWin.Invoke();
             }
-            else
-            {
-                onWin.Invoke();
-            }
+            onWin.Invoke();
         }
         else if (!allCompleted) // if the first bool is false, the player ran out of time
         {
