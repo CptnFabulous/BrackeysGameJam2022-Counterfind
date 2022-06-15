@@ -27,6 +27,7 @@ public class ObjectViewer : MonoBehaviour
     public bool controlDenied => enabled == false || isResetting;
     public bool isResetting => resetInProgress != null;
 
+    #region Built-in Unity-functions
     private void Awake()
     {
         resetButton.onClick.AddListener(OnReset);
@@ -44,7 +45,9 @@ public class ObjectViewer : MonoBehaviour
     {
         
     }
+    #endregion
 
+    #region Mouse+KB controls
     public void OnPanControl(InputValue input)
     {
         isPanning = input.isPressed;
@@ -83,16 +86,7 @@ public class ObjectViewer : MonoBehaviour
         Vector2 value = input.Get<Vector2>().normalized;
         Zoom(value.y);
     }
-    public void OnReset()
-    {
-        if (controlDenied)
-        {
-            return;
-        }
-        resetInProgress = ResetLook();
-        StartCoroutine(resetInProgress);
-    }
-
+    #endregion
 
     public void Pan(Vector2 input)
     {
@@ -113,8 +107,16 @@ public class ObjectViewer : MonoBehaviour
         viewedObject.localPosition = viewedObject.localPosition + values;
         ClampPosition();
     }
+    public void OnReset()
+    {
+        if (controlDenied)
+        {
+            return;
+        }
 
-
+        resetInProgress = ResetLook();
+        StartCoroutine(resetInProgress);
+    }
     public void AddObject(Transform newObject)
     {
         viewedObject = newObject;
@@ -142,7 +144,6 @@ public class ObjectViewer : MonoBehaviour
     {
         viewedObject.transform.localPosition = Vector3Clamp(viewedObject.transform.localPosition, positionBounds.min, positionBounds.max);
     }
-
     public static Vector3 Vector3Clamp(Vector3 original, Vector3 min, Vector3 max)
     {
         original.x = Mathf.Clamp(original.x, min.x, max.x);
