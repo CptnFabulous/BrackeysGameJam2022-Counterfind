@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Events;
 
 public class LevelManager : MonoBehaviour
 {
@@ -37,6 +38,8 @@ public class LevelManager : MonoBehaviour
     public Transform exitPilePosition;
     public float exitTime = 0.5f;
     public AnimationCurve exitAnimationCurve = AnimationCurve.EaseInOut(0, 0, 1, 1);
+    public UnityEvent onBringOut;
+    public UnityEvent onPutAway;
     
     public Banknote[] allNotes { get; private set; }
     public bool[] judgedFakeByPlayer { get; private set; }
@@ -136,6 +139,8 @@ public class LevelManager : MonoBehaviour
     }
     IEnumerator PutAwayOldItem(Banknote oldNote)
     {
+        onPutAway.Invoke();
+        
         acceptButton.interactable = false;
         rejectButton.interactable = false;
 
@@ -154,6 +159,8 @@ public class LevelManager : MonoBehaviour
     }
     IEnumerator DeployNewItem(Banknote newNote)
     {
+        onBringOut.Invoke();
+        
         viewControls.AddObject(newNote.transform);
         yield return new WaitWhile(() => viewControls.controlDenied);
 
@@ -164,7 +171,7 @@ public class LevelManager : MonoBehaviour
     {
         judgedFakeByPlayer[currentlyChecking] = counterfeit;
 
-        Debug.Log((currentlyChecking + 1) + ": " + allNotes[currentlyChecking].Counterfeit + ", " + counterfeit);
+        //Debug.Log((currentlyChecking + 1) + ": " + allNotes[currentlyChecking].Counterfeit + ", " + counterfeit);
 
         transition = TransitionToNextItem();
         StartCoroutine(transition);
