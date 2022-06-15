@@ -66,16 +66,11 @@ public class ObjectViewer : MonoBehaviour
 
         if (isPanning)
         {
-            Vector3 values = panSensitivity * Time.deltaTime * value;
-            viewedObject.localPosition = viewedObject.localPosition + values;
-            ClampPosition();
+            Pan(value);
         }
         if (isRotating)
         {
-            value = new Vector2(value.y, value.x);
-            viewedObject.Rotate(rotationSensitivity * Time.deltaTime * value, Space.Self);
-            Vector3 direction = viewedObject.localRotation * Vector3.forward;
-            viewedObject.localRotation = Quaternion.LookRotation(direction, Vector3.up);
+            Rotate(value);
         }
     }
     public void OnZoom(InputValue input)
@@ -86,9 +81,7 @@ public class ObjectViewer : MonoBehaviour
         }
         
         Vector2 value = input.Get<Vector2>().normalized;
-        Vector3 values = value.y * zoomSensitivity * Time.deltaTime * Vector3.back;
-        viewedObject.localPosition = viewedObject.localPosition + values;
-        ClampPosition();
+        Zoom(value.y);
     }
     public void OnReset()
     {
@@ -99,6 +92,28 @@ public class ObjectViewer : MonoBehaviour
         resetInProgress = ResetLook();
         StartCoroutine(resetInProgress);
     }
+
+
+    public void Pan(Vector2 input)
+    {
+        Vector3 values = panSensitivity * Time.deltaTime * input;
+        viewedObject.localPosition = viewedObject.localPosition + values;
+        ClampPosition();
+    }
+    public void Rotate(Vector2 input)
+    {
+        input = new Vector2(input.y, input.x);
+        viewedObject.Rotate(rotationSensitivity * Time.deltaTime * input, Space.Self);
+        Vector3 direction = viewedObject.localRotation * Vector3.forward;
+        viewedObject.localRotation = Quaternion.LookRotation(direction, Vector3.up);
+    }
+    public void Zoom(float input)
+    {
+        Vector3 values = input * zoomSensitivity * Time.deltaTime * Vector3.back;
+        viewedObject.localPosition = viewedObject.localPosition + values;
+        ClampPosition();
+    }
+
 
     public void AddObject(Transform newObject)
     {
