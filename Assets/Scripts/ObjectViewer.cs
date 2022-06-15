@@ -21,6 +21,12 @@ public class ObjectViewer : MonoBehaviour
     public float resetTime = 0.5f;
     public AnimationCurve resetCurve = AnimationCurve.EaseInOut(0, 0, 1, 1);
 
+    IEnumerator resetInProgress;
+    bool isPanning;
+    bool isRotating;
+    public bool controlDenied => enabled == false || isResetting;
+    public bool isResetting => resetInProgress != null;
+
     private void Awake()
     {
         resetButton.onClick.AddListener(OnReset);
@@ -116,23 +122,6 @@ public class ObjectViewer : MonoBehaviour
         }
 
         resetInProgress = null;
-    }
-    IEnumerator resetInProgress;
-    bool isPanning;
-    bool isRotating;
-    public bool controlDenied
-    {
-        get
-        {
-            return enabled == false || isResetting;
-        }
-    }
-    public bool isResetting
-    {
-        get
-        {
-            return resetInProgress != null;
-        }
     }
     void ClampPosition()
     {
