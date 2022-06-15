@@ -86,7 +86,7 @@ public class ObjectViewer : MonoBehaviour
         }
         
         Vector2 value = input.Get<Vector2>().normalized;
-        Vector3 values = value.y * Time.deltaTime * Vector3.back;
+        Vector3 values = value.y * zoomSensitivity * Time.deltaTime * Vector3.back;
         viewedObject.localPosition = viewedObject.localPosition + values;
         ClampPosition();
     }

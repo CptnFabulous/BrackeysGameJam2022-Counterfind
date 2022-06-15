@@ -2397,7 +2397,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   viewedObject: {fileID: 0}
   panSensitivity: 0.005
-  zoomSensitivity: 0.2
+  zoomSensitivity: 1
   positionBounds:
     m_Center: {x: 0, y: 0, z: 0.25}
     m_Extent: {x: 0.1, y: 0.1, z: 0.1}
