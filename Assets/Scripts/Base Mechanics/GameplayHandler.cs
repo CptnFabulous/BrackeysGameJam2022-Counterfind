@@ -4,22 +4,19 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Events;
 
-public class LevelManager : MonoBehaviour
+public class GameplayHandler : MonoBehaviour
 {
-    public Level currentLevel
+    public Gamemode currentMode
     {
-        get
-        {
-            return current;
-        }
+        get => mode;
         set
         {
-            current = value;
-            GenerateNewLevel();
+            mode = value;
+            GenerateGame();
         }
     }
-    Level current;
-
+    Gamemode mode;
+    
     [Header("Game elements")]
     public Banknote prefab;
     public ObjectViewer viewControls;
@@ -41,9 +38,6 @@ public class LevelManager : MonoBehaviour
     public UnityEvent onBringOut;
     public UnityEvent onPutAway;
     
-    public Banknote[] allNotes { get; private set; }
-    public bool[] judgedFakeByPlayer { get; private set; }
-    public int currentlyChecking { get; private set; }
     IEnumerator transition;
 
     private void Awake()
@@ -51,82 +45,46 @@ public class LevelManager : MonoBehaviour
         acceptButton.onClick.AddListener(() => JudgeItem(false));
         rejectButton.onClick.AddListener(() => JudgeItem(true));
         levelTimer.onTimeUp.AddListener(EndLevel);
-
         ExitGameplay();
     }
-    private void LateUpdate()
-    {
-        if (currentLevel == null)
-        {
-            return;
-        }
-        remainingNotes.text = (allNotes.Length - currentlyChecking - 1).ToString();
-    }
+    
 
-    public void GenerateNewLevel()
+    
+    void GenerateGame()
     {
         gameObject.SetActive(true);
         viewControls.enabled = true;
         stateHandler.enabled = true;
 
-        // Purge existing notes (code could probably be done better to prevent garbage collection but whatever it's a game jam)
-        if (allNotes != null)
-        {
-            for (int i = 0; i < allNotes.Length; i++)
-            {
-                Destroy(allNotes[i].gameObject);
-            }
-        }
+        mode.GenerateGamemodeElements();
 
-        List<Banknote> newNotes = new List<Banknote>();
-        for (int i = 0; i < currentLevel.numberOfItems; i++)
-        {
-            // Spawn note object
-            Banknote note = Instantiate(prefab, entryPilePosition);
-            note.transform.localPosition = Vector3.zero;
-            note.transform.localRotation = Quaternion.identity;
-
-            // If index is less than number of counterfeits, mark as counterfeit
-            // To ensure the correct amount
-            note.GenerateNote((i < currentLevel.numberOfCounterfeits), currentLevel);
-
-            // Insert at a random point to shuffle the array
-            newNotes.Insert(Random.Range(0, newNotes.Count), note);
-        }
-        allNotes = newNotes.ToArray();
-        judgedFakeByPlayer = new bool[allNotes.Length];
-        currentlyChecking = -1;
-
-        referenceWindow.Setup(currentLevel);
+        referenceWindow.Setup(mode.Defects());
         referenceWindow.SetWindowActiveState(false);
 
-        // Reset timer
-        levelTimer.timeLimit = currentLevel.timeLimit;
         levelTimer.StartTimer();
 
         stateHandler.ResumeGame();
+        GoToNextItem();
+    }
 
-        // Start transition to next item
+
+    void GoToNextItem()
+    {
         transition = TransitionToNextItem();
         StartCoroutine(transition);
     }
     IEnumerator TransitionToNextItem()
     {
-        if (currentlyChecking >= allNotes.Length - 1)
-        {
-            levelTimer.Pause();
-        }
-
-        Banknote previousItem = (currentlyChecking < 0) ? null : allNotes[currentlyChecking];
+        Banknote previousItem = mode.CurrentItem();
         if (previousItem != null)
         {
             IEnumerator putAway = PutAwayOldItem(previousItem);
             yield return StartCoroutine(putAway);
         }
 
-        currentlyChecking++;
+        mode.PrepareNextItem();
 
-        Banknote newItem = (currentlyChecking >= allNotes.Length) ? null : allNotes[currentlyChecking];
+        Banknote newItem = mode.CurrentItem();
         if (newItem != null)
         {
             IEnumerator getNew = DeployNewItem(newItem);
@@ -134,7 +92,7 @@ public class LevelManager : MonoBehaviour
         }
         else
         {
-            EndLevel();
+            //EndLevel();
         }
     }
     IEnumerator PutAwayOldItem(Banknote oldNote)
@@ -167,35 +125,36 @@ public class LevelManager : MonoBehaviour
         acceptButton.interactable = true;
         rejectButton.interactable = true;
     }
-    void JudgeItem(bool counterfeit)
-    {
-        judgedFakeByPlayer[currentlyChecking] = counterfeit;
-
-        //Debug.Log((currentlyChecking + 1) + ": " + allNotes[currentlyChecking].Counterfeit + ", " + counterfeit);
-
-        transition = TransitionToNextItem();
-        StartCoroutine(transition);
-    }
-    void EndLevel()
+    
+    public void EndLevel()
     {
         levelTimer.Pause();
         viewControls.enabled = false;
         stateHandler.EndLevel();
-        endScreen.ShowLevelEnd(this);
     }
     public void ExitGameplay()
     {
         gameObject.SetActive(false);
         viewControls.enabled = false;
         stateHandler.enabled = false;
+
+        if (mode == null) return;
+
         // Disable existing notes
-        if (allNotes != null)
+        if (mode.allItems != null)
         {
-            for (int i = 0; i < allNotes.Length; i++)
+            for (int i = 0; i < mode.allItems.Length; i++)
             {
-                allNotes[i].gameObject.SetActive(false);
+                mode.allItems[i].gameObject.SetActive(false);
             }
         }
+    }
+
+    void JudgeItem(bool counterfeit)
+    {
+        mode.OnJudgementMade(counterfeit);
+        //Debug.Log((currentlyChecking + 1) + ": " + allNotes[currentlyChecking].Counterfeit + ", " + counterfeit);
+        GoToNextItem();
     }
 }
 
