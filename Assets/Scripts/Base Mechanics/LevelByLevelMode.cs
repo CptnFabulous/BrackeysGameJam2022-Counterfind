@@ -85,7 +85,7 @@ public class LevelByLevelMode : Gamemode
     }
     public override void EndGameplay()
     {
-        gameElements.EndLevel();
+        gameElements.SuspendGameplay();
         endScreen.ShowLevelEnd(this);
     }
 

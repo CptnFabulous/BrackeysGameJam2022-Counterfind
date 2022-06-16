@@ -125,7 +125,7 @@ public class GameplayHandler : MonoBehaviour
         rejectButton.interactable = true;
     }
     
-    public void EndLevel()
+    public void SuspendGameplay()
     {
         levelTimer.Pause();
         viewControls.enabled = false;
