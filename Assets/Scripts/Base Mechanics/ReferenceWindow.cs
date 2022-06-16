@@ -52,11 +52,9 @@ public class ReferenceWindow : MonoBehaviour
         switchTo.onClick.AddListener(() => SetWindowActiveState(true));
         switchFrom.onClick.AddListener(() => SetWindowActiveState(false));
     }
-    public void Setup(Level currentLevel)
+    public void Setup(List<Banknote.Defect> defects)
     {
         string listOfThingsToWatchOutFor = titleOfList;
-
-        List<Banknote.Defect> defects = Banknote.FromFlags(currentLevel.defects);
 
         for (int d = 0; d < defects.Count; d++)
         {
