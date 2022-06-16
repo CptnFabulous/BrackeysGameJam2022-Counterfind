@@ -3097,8 +3097,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1223250253}
   - component: {fileID: 1223250252}
+  - component: {fileID: 1223250254}
   m_Layer: 0
-  m_Name: Game Handler
+  m_Name: Level Handler
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3126,7 +3127,7 @@ MonoBehaviour:
   menuObject: {fileID: 1807956485}
   levelButtonPrefab: {fileID: 1417337847}
   levelButtonParent: {fileID: 573199514}
-  levelSetter: {fileID: 1458382962}
+  levelSetter: {fileID: 1223250254}
   onEnterLevel:
     m_PersistentCalls:
       m_Calls:
@@ -3156,6 +3157,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1223250254
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1223250251}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 594eb39dc1d241e4a9d9a87ab5fcd46a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameElements: {fileID: 1458382962}
 --- !u!1 &1223632956
 GameObject:
   m_ObjectHideFlags: 0
@@ -4309,7 +4323,7 @@ GameObject:
   - component: {fileID: 1458382962}
   - component: {fileID: 1458382960}
   m_Layer: 0
-  m_Name: Level Handler
+  m_Name: Gameplay Handler
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5540,7 +5554,7 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
-  m_PresetInfoIsWorld: 1
+  m_PresetInfoIsWorld: 0
 --- !u!224 &1837428326 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 1629917655033381319, guid: 0145dc0af30aa8d4cbb041e9eeb0bf2a, type: 3}
