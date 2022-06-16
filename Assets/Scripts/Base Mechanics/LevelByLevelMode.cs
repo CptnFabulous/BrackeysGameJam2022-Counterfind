@@ -10,7 +10,7 @@ public class LevelByLevelMode : Gamemode
     public bool[] judgedFakeByPlayer { get; private set; }
     public int currentlyChecking { get; private set; }
 
-    public bool allNotesChecked => currentlyChecking >= allItems.Length - 1;
+    public bool onLastNote => currentlyChecking >= allItems.Length - 1;
 
     public void SetLevel(Level newLevel)
     {
@@ -27,7 +27,7 @@ public class LevelByLevelMode : Gamemode
     public override Banknote NextItem()
     {
         // Determine if notes are available, and if some have not yet been checked
-        return (notesExist && allNotesChecked == false) ? allItems[currentlyChecking + 1] : null;
+        return (notesExist && onLastNote == false) ? allItems[currentlyChecking + 1] : null;
     }
 
     public override void GenerateGamemodeElements()
@@ -51,7 +51,7 @@ public class LevelByLevelMode : Gamemode
 
             // If index is less than number of counterfeits, mark as counterfeit
             // To ensure the correct amount
-            note.GenerateNote((i < currentLevel.numberOfCounterfeits), currentLevel);
+            note.GenerateNote(i < currentLevel.numberOfCounterfeits, currentLevel);
 
             // Insert at a random point to shuffle the array
             newNotes.Insert(Random.Range(0, newNotes.Count), note);
@@ -67,7 +67,7 @@ public class LevelByLevelMode : Gamemode
     {
         judgedFakeByPlayer[currentlyChecking] = deemedCounterfeit;
 
-        if (allNotesChecked)
+        if (onLastNote)
         {
             gameElements.levelTimer.Pause();
         }
