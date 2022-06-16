@@ -23,14 +23,7 @@ public class LevelProgressionHandler : MonoBehaviour
     public Level[] allLevels;
     public int currentLevelIndex;
 
-    public bool onLastLevel
-    {
-        get
-        {
-            //Debug.Log(allLevels.Length + ", " + currentLevelIndex);
-            return currentLevelIndex + 1 >= allLevels.Length;
-        }
-    }
+    public bool onLastLevel => currentLevelIndex + 1 >= allLevels.Length;
 
     [Header("UI - Level Select Screen")]
     public GameObject menuObject;
@@ -70,11 +63,9 @@ public class LevelProgressionHandler : MonoBehaviour
         }
     }
 
-
     public void LoadLevel()
     {
         menuObject.gameObject.SetActive(false);
-        Debug.Log(currentLevelIndex + ", " + allLevels.Length);
         levelSetter.SetLevel(allLevels[currentLevelIndex]);
         onEnterLevel.Invoke();
     }
