@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Events;
 
-public class EndScreen : MonoBehaviour
+public class LevelEndScreen : MonoBehaviour
 {
     public Text requiredRightForSuccess;
     public Text successful;
@@ -30,7 +30,7 @@ public class EndScreen : MonoBehaviour
         quitButton.onClick.AddListener(()=> LevelProgressionHandler.Current.ReturnToMenu());
     }
 
-    public void ShowLevelEnd(LevelManager manager)
+    public void ShowLevelEnd(LevelByLevelMode manager)
     {
         onResetEndScreenElements.Invoke();
 
@@ -39,11 +39,11 @@ public class EndScreen : MonoBehaviour
         int amountThoughtFake = 0;
         for (int i = 0; i < manager.currentlyChecking; i++)
         {
-            if (manager.judgedFakeByPlayer[i] == manager.allNotes[i].Counterfeit)
+            if (manager.judgedFakeByPlayer[i] == manager.allItems[i].Counterfeit)
             {
                 finalScore++;
             }
-            else if (manager.allNotes[i].Counterfeit)
+            else if (manager.allItems[i].Counterfeit)
             {
                 amountThoughtReal++;
             }
@@ -93,7 +93,7 @@ public class EndScreen : MonoBehaviour
         successful.text = finalScore.ToString();
         thoughtWasReal.text = amountThoughtReal.ToString();
         thoughtWasFake.text = amountThoughtFake.ToString();
-        remainingTime.text = manager.levelTimer.remaining.ToString();
+        remainingTime.text = manager.gameElements.levelTimer.remaining.ToString();
     }
 
     /// <summary>
