@@ -11,19 +11,14 @@ public class Timer : MonoBehaviour
         public int hours;
         public int minutes;
         public float seconds;
-        public float InSeconds
-        {
-            get
-            {
-                return (hours * 3600) + (minutes * 60) + seconds;
-            }
-        }
+        public float InSeconds => (hours * 3600) + (minutes * 60) + seconds;
+        public override string ToString() => hours + ":" + minutes + ":" + seconds;
 
-        public TimeValue(int h, int m, float s)
+        public TimeValue(int hours, int minutes, float seconds)
         {
-            hours = h;
-            minutes = m;
-            seconds = s;
+            this.hours = hours;
+            this.minutes = minutes;
+            this.seconds = seconds;
         }
         public TimeValue(float totalTimeInSeconds)
         {
@@ -34,28 +29,18 @@ public class Timer : MonoBehaviour
             remaining = remaining % 60;
             seconds = remaining;
         }
-
-        public override string ToString()
-        {
-            return hours + ":" + minutes + ":" + seconds;
-        }
     }
 
     public TimeValue timeLimit = new TimeValue(1, 0, 0);
     public bool goIntoNegatives = false;
     public UnityEvent onTimerStart;
     public UnityEvent onTimeUp;
+
     public UnityEngine.UI.Text visualTimer;
 
     float remainingTimeInSeconds;
     bool timeIsUp;
-    public TimeValue remaining
-    {
-        get
-        {
-            return new TimeValue(remainingTimeInSeconds);
-        }
-    }
+    public TimeValue remaining => new TimeValue(remainingTimeInSeconds);
 
     public void StartTimer()
     {
@@ -64,14 +49,8 @@ public class Timer : MonoBehaviour
         onTimerStart.Invoke();
         Resume();
     }
-    public void Pause()
-    {
-        enabled = false;
-    }
-    public void Resume()
-    {
-        enabled = true;
-    }
+    public void Pause() => enabled = false;
+    public void Resume() => enabled = true;
 
     void Start()
     {
