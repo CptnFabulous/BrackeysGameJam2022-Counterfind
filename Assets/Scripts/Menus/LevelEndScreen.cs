@@ -30,20 +30,20 @@ public class LevelEndScreen : MonoBehaviour
         quitButton.onClick.AddListener(()=> LevelProgressionHandler.Current.ReturnToMenu());
     }
 
-    public void ShowLevelEnd(LevelByLevelMode manager)
+    public void ShowLevelEnd(LevelByLevelMode levelData)
     {
         onResetEndScreenElements.Invoke();
 
         int finalScore = 0;
         int amountThoughtReal = 0;
         int amountThoughtFake = 0;
-        for (int i = 0; i < manager.currentlyChecking; i++)
+        for (int i = 0; i < levelData.currentlyChecking + 1; i++)
         {
-            if (manager.judgedFakeByPlayer[i] == manager.allItems[i].Counterfeit)
+            if (levelData.judgedFakeByPlayer[i] == levelData.allItems[i].Counterfeit)
             {
                 finalScore++;
             }
-            else if (manager.allItems[i].Counterfeit)
+            else if (levelData.allItems[i].Counterfeit)
             {
                 amountThoughtReal++;
             }
@@ -57,8 +57,8 @@ public class LevelEndScreen : MonoBehaviour
 
         // Checks if the items were processed within the correct time
         // Checks if the amount of errors was less than the maximum acceptable
-        bool allCompleted = manager.currentlyChecking >= manager.currentLevel.numberOfItems;
-        bool notTooManyErrors = errors < manager.currentLevel.numberOfErrorsForFailure;
+        bool allCompleted = levelData.onLastNote;// levelData.currentlyChecking >= levelData.currentLevel.numberOfItems;
+        bool notTooManyErrors = errors < levelData.currentLevel.numberOfErrorsForFailure;
         if (allCompleted && notTooManyErrors) // If so, the level is a success
         {
             bool complete = LevelProgressionHandler.Current.onLastLevel;
@@ -88,12 +88,12 @@ public class LevelEndScreen : MonoBehaviour
             onTooFewCheckedAccurately.Invoke();
         }
 
-        int minCorrectForSuccess = manager.currentLevel.numberOfItems - manager.currentLevel.numberOfErrorsForFailure + 1;
+        int minCorrectForSuccess = levelData.currentLevel.numberOfItems - levelData.currentLevel.numberOfErrorsForFailure + 1;
         requiredRightForSuccess.text = minCorrectForSuccess.ToString();
         successful.text = finalScore.ToString();
         thoughtWasReal.text = amountThoughtReal.ToString();
         thoughtWasFake.text = amountThoughtFake.ToString();
-        remainingTime.text = manager.gameElements.levelTimer.remaining.ToString();
+        remainingTime.text = levelData.gameElements.levelTimer.remaining.ToString();
     }
 
     /// <summary>
