@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class LevelByLevelMode : Gamemode
 {
+    public LevelEndScreen endScreen;
+    
     public Level currentLevel { get; private set; }
     public bool[] judgedFakeByPlayer { get; private set; }
     public int currentlyChecking { get; private set; }
@@ -84,6 +86,7 @@ public class LevelByLevelMode : Gamemode
     public override void EndGameplay()
     {
         gameElements.EndLevel();
+        endScreen.ShowLevelEnd(this);
     }
 
 

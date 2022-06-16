@@ -21,7 +21,6 @@ public class GameplayHandler : MonoBehaviour
     public Banknote prefab;
     public ObjectViewer viewControls;
     public GameStateHandler stateHandler;
-    public LevelEndScreen endScreen;
 
     [Header("HUD elements")]
     public Timer levelTimer;
