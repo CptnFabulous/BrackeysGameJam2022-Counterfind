@@ -40,7 +40,7 @@ public class LevelProgressionHandler : MonoBehaviour
     Button[] levelButtons;
 
     [Header("Loading levels")]
-    public LevelManager levelSetter;
+    public LevelByLevelMode levelSetter;
     public UnityEvent onEnterLevel;
 
 
@@ -75,7 +75,7 @@ public class LevelProgressionHandler : MonoBehaviour
     {
         menuObject.gameObject.SetActive(false);
         Debug.Log(currentLevelIndex + ", " + allLevels.Length);
-        levelSetter.currentLevel = allLevels[currentLevelIndex];
+        levelSetter.SetLevel(allLevels[currentLevelIndex]);
         onEnterLevel.Invoke();
     }
     public void ProceedToNextLevel()
@@ -85,7 +85,7 @@ public class LevelProgressionHandler : MonoBehaviour
     }
     public void ReturnToMenu()
     {
-        levelSetter.ExitGameplay();
+        levelSetter.gameElements.ExitGameplay();
         menuObject.gameObject.SetActive(true);
     }
 }
