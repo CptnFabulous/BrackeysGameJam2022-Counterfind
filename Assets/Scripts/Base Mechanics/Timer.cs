@@ -12,7 +12,29 @@ public class Timer : MonoBehaviour
         public int minutes;
         public float seconds;
         public float InSeconds => (hours * 3600) + (minutes * 60) + seconds;
-        public override string ToString() => hours + ":" + minutes + ":" + seconds;
+        //public override string ToString() => hours + ":" + minutes + ":" + seconds;
+
+        public override string ToString()
+        {
+            string text = "";
+            if (hours < 10)
+            {
+                text += "0";
+            }
+            text += hours + ":";
+            if (minutes < 10)
+            {
+                text += "0";
+            }
+            text += minutes + ":";
+            if (seconds < 10)
+            {
+                text += "0";
+            }
+            text += seconds;
+
+            return text;
+        }
 
         public TimeValue(int hours, int minutes, float seconds)
         {
