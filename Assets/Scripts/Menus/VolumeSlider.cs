@@ -4,6 +4,8 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Audio;
 
+// Used this tutorial as reference: https://johnleonardfrench.com/the-right-way-to-make-a-volume-slider-in-unity-using-logarithmic-conversion/
+
 [RequireComponent(typeof(Slider))]
 public class VolumeSlider : MonoBehaviour
 {
