@@ -57,7 +57,7 @@ public class GameplayHandler : MonoBehaviour
 
         mode.GenerateGamemodeElements();
 
-        referenceWindow.Setup(mode.Defects());
+        referenceWindow.Setup(mode.CurrentDefects);
         referenceWindow.SetWindowActiveState(false);
 
         levelTimer.StartTimer();

@@ -39,7 +39,7 @@ public class Banknote : MonoBehaviour
             return fake;
         }
     }
-    public void GenerateNote(bool counterfeit, Level currentLevel)
+    public void GenerateNote(bool counterfeit, Defect defects/*Level currentLevel*/)
     {
         ResetToLegitimate(); // Reset values to defaults before defects are applied
 
@@ -49,7 +49,7 @@ public class Banknote : MonoBehaviour
             return;
         }
 
-        List<Defect> possibleDefects = FromFlags(currentLevel.defects);
+        List<Defect> possibleDefects = FromFlags(defects);
         // Randomly select an option from available defects as specified by the 
         if (possibleDefects.Count > 0)
         {

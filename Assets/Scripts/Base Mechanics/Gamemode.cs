@@ -9,7 +9,7 @@ public abstract class Gamemode : MonoBehaviour
     public Banknote[] allItems { get; set; }
     public bool notesExist => allItems.Length > 0;
 
-    public abstract List<Banknote.Defect> Defects();
+    public abstract Banknote.Defect CurrentDefects { get; }
     public abstract Banknote CurrentItem();
     public abstract Banknote NextItem();
 

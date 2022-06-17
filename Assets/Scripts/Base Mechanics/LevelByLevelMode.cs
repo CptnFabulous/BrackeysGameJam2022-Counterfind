@@ -18,7 +18,7 @@ public class LevelByLevelMode : Gamemode
         gameElements.currentMode = this;
     }
 
-    public override List<Banknote.Defect> Defects() => Banknote.FromFlags(currentLevel.defects);
+    public override Banknote.Defect CurrentDefects => currentLevel.defects;
     public override Banknote CurrentItem()
     {
         bool indexIsInArray = currentlyChecking >= 0;
@@ -51,7 +51,7 @@ public class LevelByLevelMode : Gamemode
 
             // If index is less than number of counterfeits, mark as counterfeit
             // To ensure the correct amount
-            note.GenerateNote(i < currentLevel.numberOfCounterfeits, currentLevel);
+            note.GenerateNote(i < currentLevel.numberOfCounterfeits, CurrentDefects);
 
             // Insert at a random point to shuffle the array
             newNotes.Insert(Random.Range(0, newNotes.Count), note);
