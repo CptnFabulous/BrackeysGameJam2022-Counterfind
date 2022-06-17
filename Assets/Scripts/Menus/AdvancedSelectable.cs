@@ -8,7 +8,7 @@ using UnityEngine.Events;
 public class AdvancedSelectable : MonoBehaviour, IPointerEnterHandler, IPointerClickHandler
 {
     [Multiline] public string flavourText;
-    public Sprite icon;
+    public Sprite flavourGraphic;
     public UnityEvent onHover;
     public UnityEvent onClick;
 
