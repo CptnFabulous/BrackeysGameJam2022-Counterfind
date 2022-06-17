@@ -13,6 +13,8 @@ public class AdvancedSelectable : MonoBehaviour, IPointerEnterHandler, IPointerC
     public UnityEvent onClick;
 
     MenuHandler hierarchyContaining;
+    Selectable attachedSelectable;
+
     [SerializeField] bool autoSetVisibleName = true;
     Text visibleName;
 
@@ -28,10 +30,21 @@ public class AdvancedSelectable : MonoBehaviour, IPointerEnterHandler, IPointerC
     void Awake()
     {
         hierarchyContaining = GetComponentInParent<MenuHandler>();
+        attachedSelectable = GetComponent<Selectable>();
     }
 
-    public void OnPointerEnter(PointerEventData eventData) => onHover.Invoke();
-    public void OnPointerClick(PointerEventData eventData) => onClick.Invoke();
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        if (attachedSelectable.interactable == false) return;
+        // Update icon
+        // Update flavour text
+        onHover.Invoke();
+    }
+    public void OnPointerClick(PointerEventData eventData)
+    {
+        if (attachedSelectable.interactable == false) return;
+        onClick.Invoke();
+    }
 
 
 
