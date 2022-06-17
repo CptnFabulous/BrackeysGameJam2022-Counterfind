@@ -134,8 +134,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a3f8b0d11fd9c094cacd1847e16ba3b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  flavourText: 
-  icon: {fileID: 0}
+  flavourText: A generic button used to click on things. It's a prefab in order to
+    keep a consistent game aesthetic
+  flavourIcon: {fileID: 0}
   onHover:
     m_PersistentCalls:
       m_Calls:
@@ -166,6 +167,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  autoSetVisibleName: 1
 --- !u!1 &5425856253859878424
 GameObject:
   m_ObjectHideFlags: 0
@@ -244,4 +246,4 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Button
+  m_Text: Menu Button
