@@ -13,6 +13,17 @@ public class AdvancedSelectable : MonoBehaviour, IPointerEnterHandler, IPointerC
     public UnityEvent onClick;
 
     MenuHandler hierarchyContaining;
+    [SerializeField] bool autoSetVisibleName = true;
+    Text visibleName;
+
+    private void OnValidate()
+    {
+        if (autoSetVisibleName)
+        {
+            if (visibleName == null) visibleName = GetComponentInChildren<Text>();
+            if (visibleName != null) visibleName.text = name;
+        }
+    }
 
     void Awake()
     {
