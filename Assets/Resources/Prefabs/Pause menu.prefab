@@ -461,7 +461,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5425856253136770498, guid: e474de32efa31ec4e8ba1cbaee1d4eaa, type: 3}
       propertyPath: m_Name
-      value: Resume Button
+      value: Resume
       objectReference: {fileID: 0}
     - target: {fileID: 5425856253859878422, guid: e474de32efa31ec4e8ba1cbaee1d4eaa, type: 3}
       propertyPath: m_Text
@@ -567,11 +567,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5425856253136770498, guid: e474de32efa31ec4e8ba1cbaee1d4eaa, type: 3}
       propertyPath: m_Name
-      value: Quit Button
+      value: Quit
       objectReference: {fileID: 0}
     - target: {fileID: 5425856253859878422, guid: e474de32efa31ec4e8ba1cbaee1d4eaa, type: 3}
       propertyPath: m_Text
-      value: Quit to menu
+      value: Quit
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e474de32efa31ec4e8ba1cbaee1d4eaa, type: 3}
