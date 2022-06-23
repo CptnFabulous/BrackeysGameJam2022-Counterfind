@@ -12,12 +12,6 @@ public class LevelByLevelMode : Gamemode
 
     public bool onLastNote => currentlyChecking >= allItems.Length - 1;
 
-    public void SetLevel(Level newLevel)
-    {
-        currentLevel = newLevel;
-        gameElements.currentMode = this;
-    }
-
     public override Banknote.Defect CurrentDefects => currentLevel.defects;
     public override Banknote CurrentItem()
     {
@@ -87,6 +81,12 @@ public class LevelByLevelMode : Gamemode
     {
         gameElements.SuspendGameplay();
         endScreen.ShowLevelEnd(this);
+    }
+
+    public void SetLevel(Level newLevel)
+    {
+        currentLevel = newLevel;
+        EnterGame();
     }
 
 

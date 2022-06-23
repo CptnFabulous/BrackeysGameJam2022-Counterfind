@@ -13,7 +13,10 @@ public abstract class Gamemode : MonoBehaviour
     public abstract Banknote CurrentItem();
     public abstract Banknote NextItem();
 
-
+    public void EnterGame()
+    {
+        gameElements.currentMode = this;
+    }
     public abstract void GenerateGamemodeElements();
     public abstract void OnJudgementMade(bool deemedCounterfeit);
     public abstract void PrepareNextItem();
