@@ -39,6 +39,11 @@ public class LevelProgressionHandler : MonoBehaviour
 
     private void Awake()
     {
+        SetupLevelSelectScreen();
+    }
+
+    void SetupLevelSelectScreen()
+    {
         levelButtonPrefab.gameObject.SetActive(false);
         levelButtons = new Button[allLevels.Length];
         for (int i = 0; i < allLevels.Length; i++)
