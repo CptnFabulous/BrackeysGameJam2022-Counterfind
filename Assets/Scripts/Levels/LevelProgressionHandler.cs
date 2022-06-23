@@ -26,7 +26,6 @@ public class LevelProgressionHandler : MonoBehaviour
     public bool onLastLevel => currentLevelIndex + 1 >= allLevels.Length;
 
     [Header("UI - Level Select Screen")]
-    public GameObject menuObject;
     //public Canvas mainMenu;
     public Button levelButtonPrefab;
     public RectTransform levelButtonParent;
@@ -70,7 +69,6 @@ public class LevelProgressionHandler : MonoBehaviour
 
     public void LoadLevel()
     {
-        menuObject.gameObject.SetActive(false);
         levelSetter.SetLevel(allLevels[currentLevelIndex]);
         onEnterLevel.Invoke();
     }
@@ -82,6 +80,5 @@ public class LevelProgressionHandler : MonoBehaviour
     public void ReturnToMenu()
     {
         levelSetter.gameElements.ExitGameplay();
-        menuObject.gameObject.SetActive(true);
     }
 }

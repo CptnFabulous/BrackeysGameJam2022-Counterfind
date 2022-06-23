@@ -36,7 +36,9 @@ public class GameplayHandler : MonoBehaviour
     public AnimationCurve exitAnimationCurve = AnimationCurve.EaseInOut(0, 0, 1, 1);
     public UnityEvent onBringOut;
     public UnityEvent onPutAway;
-    
+
+    [Header("Transitioning from menus")]
+    public GameObject menuObject;
     IEnumerator transition;
 
     private void Awake()
@@ -51,6 +53,8 @@ public class GameplayHandler : MonoBehaviour
     
     void GenerateGame()
     {
+        menuObject.SetActive(false);
+
         gameObject.SetActive(true);
         viewControls.enabled = true;
         stateHandler.enabled = true;
@@ -147,6 +151,8 @@ public class GameplayHandler : MonoBehaviour
                 mode.allItems[i].gameObject.SetActive(false);
             }
         }
+
+        menuObject.SetActive(true);
     }
 
     void JudgeItem(bool counterfeit)
