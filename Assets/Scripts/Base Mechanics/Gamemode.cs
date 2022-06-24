@@ -11,7 +11,6 @@ public abstract class Gamemode : MonoBehaviour
 
     public abstract Banknote.Defect CurrentDefects { get; }
     public abstract Banknote CurrentItem();
-    public abstract Banknote NextItem();
 
     public void EnterGame()
     {

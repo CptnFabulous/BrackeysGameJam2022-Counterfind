@@ -32,7 +32,6 @@ public class InfiniteMode : Gamemode
 
     public override Banknote.Defect CurrentDefects => defectsToInclude;
     public override Banknote CurrentItem() => note;
-    public override Banknote NextItem() => note;
     public override void GenerateGamemodeElements()
     {
         note = Instantiate(gameElements.prefab);

@@ -18,12 +18,7 @@ public class LevelByLevelMode : Gamemode
         bool indexIsInArray = currentlyChecking >= 0;
         return notesExist && indexIsInArray ? allItems[currentlyChecking] : null;
     }
-    public override Banknote NextItem()
-    {
-        // Determine if notes are available, and if some have not yet been checked
-        return (notesExist && onLastNote == false) ? allItems[currentlyChecking + 1] : null;
-    }
-
+    
     public override void GenerateGamemodeElements()
     {
         // Purge existing notes (code could probably be done better to prevent garbage collection but whatever it's a game jam)
@@ -68,8 +63,11 @@ public class LevelByLevelMode : Gamemode
     }
     public override void PrepareNextItem()
     {
-        if (NextItem() != null) // If a new item is present, increase currentlyChecking so that one is registered
+        // Determine if notes are available, and if some have not yet been checked
+        Banknote nextItem = (notesExist && onLastNote == false) ? allItems[currentlyChecking + 1] : null;
+        if (nextItem != null)
         {
+            // If a new item is present, increase currentlyChecking so that one is registered
             currentlyChecking++;
         }
         else
