@@ -49,11 +49,7 @@ public class LevelProgressionHandler : MonoBehaviour
             Button levelButton = Instantiate(levelButtonPrefab, levelButtonParent);
             levelButtons[i] = levelButton;
             int indexToAssign = i;
-            levelButton.onClick.AddListener(() =>
-            {
-                currentLevelIndex = indexToAssign;
-                LoadLevel();
-            });
+            levelButton.onClick.AddListener(() => LoadNewLevel(indexToAssign));
 
             levelButton.gameObject.SetActive(true);
             RectTransform rt = levelButton.GetComponent<RectTransform>();
@@ -66,14 +62,19 @@ public class LevelProgressionHandler : MonoBehaviour
         }
     }
 
-    public void LoadLevel()
+    public void LoadNewLevel(int index)
+    {
+        currentLevelIndex = Mathf.Clamp(index, 0, allLevels.Length - 1);
+        levelSetter.SetLevel(allLevels[currentLevelIndex]);
+    }
+    public void RetryLevel()
     {
         levelSetter.SetLevel(allLevels[currentLevelIndex]);
     }
     public void ProceedToNextLevel()
     {
         currentLevelIndex++;
-        LoadLevel();
+        levelSetter.SetLevel(allLevels[currentLevelIndex]);
     }
     public void ReturnToMenu()
     {
