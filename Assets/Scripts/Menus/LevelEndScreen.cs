@@ -25,9 +25,9 @@ public class LevelEndScreen : MonoBehaviour
 
     private void Awake()
     {
-        nextLevelButton.onClick.AddListener(()=> LevelProgressionHandler.Current.ProceedToNextLevel());
-        quitButton.onClick.AddListener(()=> LevelProgressionHandler.Current.ReturnToMenu());
         retryLevelButton.onClick.AddListener(LevelProgressionHandler.Current.RetryLevel);
+        nextLevelButton.onClick.AddListener(LevelProgressionHandler.Current.ProceedToNextLevel);
+        quitButton.onClick.AddListener(LevelProgressionHandler.Current.ReturnToMenu);
     }
 
     public void ShowLevelEnd(LevelByLevelMode levelData)
