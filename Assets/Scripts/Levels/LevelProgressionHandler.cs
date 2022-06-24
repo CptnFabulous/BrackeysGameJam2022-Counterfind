@@ -33,7 +33,6 @@ public class LevelProgressionHandler : MonoBehaviour
 
     [Header("Loading levels")]
     public LevelByLevelMode levelSetter;
-    public UnityEvent onEnterLevel;
 
 
     private void Awake()
@@ -70,7 +69,6 @@ public class LevelProgressionHandler : MonoBehaviour
     public void LoadLevel()
     {
         levelSetter.SetLevel(allLevels[currentLevelIndex]);
-        onEnterLevel.Invoke();
     }
     public void ProceedToNextLevel()
     {

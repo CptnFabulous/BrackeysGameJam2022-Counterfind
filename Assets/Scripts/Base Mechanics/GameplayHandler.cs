@@ -39,6 +39,9 @@ public class GameplayHandler : MonoBehaviour
 
     [Header("Transitioning from menus")]
     public GameObject menuObject;
+    public UnityEvent onEnterGameplay;
+
+
     IEnumerator transition;
 
     private void Awake()
@@ -68,6 +71,8 @@ public class GameplayHandler : MonoBehaviour
 
         stateHandler.ResumeGame();
         GoToNextItem();
+
+        onEnterGameplay.Invoke();
     }
 
 
