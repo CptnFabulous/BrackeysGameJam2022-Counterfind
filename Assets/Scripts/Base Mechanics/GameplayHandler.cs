@@ -64,7 +64,7 @@ public class GameplayHandler : MonoBehaviour
         mode.GenerateGamemodeElements();
 
         referenceWindow.Setup(mode.CurrentDefects);
-        referenceWindow.SetWindowActiveState(false);
+        //referenceWindow.SetWindowActiveState(false);
 
 
         stateHandler.ResumeGame();
