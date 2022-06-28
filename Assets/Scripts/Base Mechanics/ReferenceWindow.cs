@@ -18,15 +18,10 @@ public class ReferenceWindow : MonoBehaviour
         }
     }
 
-    public Text listTextBox;
-    public RectTransform regularInputs;
-    public RectTransform window;
-    public Button switchTo;
-    public Button switchFrom;
-
     public string titleOfList = "Defects to check for:";
     [TextArea] public string lineBreak = "\n\n* ";
     public DefectWarning[] defectWarnings;
+    public Text listTextBox;
 
     public void OnValidate()
     {
@@ -47,11 +42,6 @@ public class ReferenceWindow : MonoBehaviour
             }
         }
     }
-    private void Awake()
-    {
-        switchTo.onClick.AddListener(() => SetWindowActiveState(true));
-        switchFrom.onClick.AddListener(() => SetWindowActiveState(false));
-    }
     public void Setup(Banknote.Defect defects)
     {
         List<Banknote.Defect> list = Banknote.FromFlags(defects);
@@ -70,10 +60,5 @@ public class ReferenceWindow : MonoBehaviour
         }
 
         listTextBox.text = listOfThingsToWatchOutFor;
-    }
-    public void SetWindowActiveState(bool active)
-    {
-        regularInputs.gameObject.SetActive(!active);
-        window.gameObject.SetActive(active);
     }
 }
