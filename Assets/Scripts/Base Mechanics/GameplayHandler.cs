@@ -90,7 +90,7 @@ public class GameplayHandler : MonoBehaviour
 
         mode.PrepareNextItem();
 
-        Banknote newItem = mode.CurrentItem();
+        Banknote newItem = mode.currentItem;
         if (newItem != null)
         {
             IEnumerator getNew = DeployNewItem(newItem);

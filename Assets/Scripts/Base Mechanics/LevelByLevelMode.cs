@@ -14,10 +14,13 @@ public class LevelByLevelMode : Gamemode
     public bool onLastNote => currentlyChecking >= allItems.Length - 1;
 
     public override Banknote.Defect CurrentDefects => currentLevel.defects;
-    public override Banknote CurrentItem()
+    public override Banknote currentItem
     {
-        bool indexIsInArray = currentlyChecking >= 0;
-        return notesExist && indexIsInArray ? allItems[currentlyChecking] : null;
+        get
+        {
+            bool indexIsInArray = currentlyChecking >= 0;
+            return notesExist && indexIsInArray ? allItems[currentlyChecking] : null;
+        }
     }
 
     private void Awake()

@@ -10,7 +10,7 @@ public class InfiniteMode : Gamemode
     public ScoreHandler score;
 
     
-    Banknote note;
+    
     int currentNote;
 
     /*
@@ -31,14 +31,15 @@ public class InfiniteMode : Gamemode
     public UnityEvent onIncorrect;
 
     public override Banknote.Defect CurrentDefects => defectsToInclude;
-    public override Banknote CurrentItem() => note;
+    public override Banknote currentItem => allItems[0];
     public override void GenerateGamemodeElements()
     {
-        note = Instantiate(gameElements.prefab);
+        allItems = new Banknote[1];
+        allItems[0] = Instantiate(gameElements.prefab);
     }
     public override void OnJudgementMade(bool deemedCounterfeit)
     {
-        bool correct = CurrentItem().Counterfeit == deemedCounterfeit;
+        bool correct = currentItem.Counterfeit == deemedCounterfeit;
         if (correct)
         {
             onCorrect.Invoke();
@@ -52,7 +53,7 @@ public class InfiniteMode : Gamemode
     {
         // Regenerates the new item as real or fake, using a noise value to ensure not too many real or fake ones in a row.
         bool isFake = Mathf.PerlinNoise(currentNote, 0) <= 0.5f;
-        note.GenerateNote(isFake, CurrentDefects);
+        currentItem.GenerateNote(isFake, CurrentDefects);
     }
     public override void EndGameplay()
     {

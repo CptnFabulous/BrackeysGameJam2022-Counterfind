@@ -10,7 +10,7 @@ public abstract class Gamemode : MonoBehaviour
     public bool notesExist => allItems.Length > 0;
 
     public abstract Banknote.Defect CurrentDefects { get; }
-    public abstract Banknote CurrentItem();
+    public abstract Banknote currentItem { get; }
 
     public void EnterGame()
     {
