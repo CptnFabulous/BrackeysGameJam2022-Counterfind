@@ -93,7 +93,7 @@ public class LevelEndScreen : MonoBehaviour
         successful.text = finalScore.ToString();
         thoughtWasReal.text = amountThoughtReal.ToString();
         thoughtWasFake.text = amountThoughtFake.ToString();
-        remainingTime.text = levelData.gameElements.levelTimer.remaining.ToString();
+        remainingTime.text = levelData.levelTimer.remaining.ToString();
     }
 
     /// <summary>
