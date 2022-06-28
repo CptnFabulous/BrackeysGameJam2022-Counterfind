@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class LevelByLevelMode : Gamemode
 {
+    public Timer levelTimer;
     public LevelEndScreen endScreen;
     
     public Level currentLevel { get; private set; }
@@ -18,7 +19,12 @@ public class LevelByLevelMode : Gamemode
         bool indexIsInArray = currentlyChecking >= 0;
         return notesExist && indexIsInArray ? allItems[currentlyChecking] : null;
     }
-    
+
+    private void Awake()
+    {
+        levelTimer.onTimeUp.AddListener(EndGameplay);
+    }
+
     public override void GenerateGamemodeElements()
     {
         // Purge existing notes (code could probably be done better to prevent garbage collection but whatever it's a game jam)
@@ -50,7 +56,8 @@ public class LevelByLevelMode : Gamemode
         currentlyChecking = -1;
 
         // Reset timer
-        gameElements.levelTimer.timeLimit = currentLevel.timeLimit;
+        levelTimer.timeLimit = currentLevel.timeLimit;
+        levelTimer.StartTimer();
     }
     public override void OnJudgementMade(bool deemedCounterfeit)
     {
@@ -58,7 +65,7 @@ public class LevelByLevelMode : Gamemode
 
         if (onLastNote)
         {
-            gameElements.levelTimer.Pause();
+            levelTimer.Pause();
         }
     }
     public override void PrepareNextItem()
@@ -77,6 +84,8 @@ public class LevelByLevelMode : Gamemode
     }
     public override void EndGameplay()
     {
+        levelTimer.Pause();
+
         gameElements.SuspendGameplay();
         endScreen.ShowLevelEnd(this);
     }

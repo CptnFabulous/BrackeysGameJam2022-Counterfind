@@ -23,7 +23,6 @@ public class GameplayHandler : MonoBehaviour
     public GameStateHandler stateHandler;
 
     [Header("HUD elements")]
-    public Timer levelTimer;
     public Text remainingNotes;
     public Button acceptButton;
     public Button rejectButton;
@@ -48,7 +47,7 @@ public class GameplayHandler : MonoBehaviour
     {
         acceptButton.onClick.AddListener(() => JudgeItem(false));
         rejectButton.onClick.AddListener(() => JudgeItem(true));
-        levelTimer.onTimeUp.AddListener(EndLevel);
+
         ExitGameplay();
     }
     
@@ -67,7 +66,6 @@ public class GameplayHandler : MonoBehaviour
         referenceWindow.Setup(mode.CurrentDefects);
         referenceWindow.SetWindowActiveState(false);
 
-        levelTimer.StartTimer();
 
         stateHandler.ResumeGame();
         GoToNextItem();
@@ -136,7 +134,6 @@ public class GameplayHandler : MonoBehaviour
     
     public void SuspendGameplay()
     {
-        levelTimer.Pause();
         viewControls.enabled = false;
         stateHandler.EndLevel();
     }
