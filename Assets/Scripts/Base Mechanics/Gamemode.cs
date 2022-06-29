@@ -16,8 +16,18 @@ public abstract class Gamemode : MonoBehaviour
     {
         gameElements.currentMode = this;
     }
-    public abstract void GenerateGamemodeElements();
+    /// <summary>
+    /// Runs when the gameplay is loaded, almost like Start().
+    /// </summary>
+    public virtual void GenerateGamemodeElements()
+    {
+        enabled = true;
+    }
     public abstract void OnJudgementMade(bool deemedCounterfeit);
     public abstract void PrepareNextItem();
-    public abstract void EndGameplay();
+    public virtual void EndGameplay()
+    {
+        enabled = false;
+        gameElements.SuspendGameplay();
+    }
 }

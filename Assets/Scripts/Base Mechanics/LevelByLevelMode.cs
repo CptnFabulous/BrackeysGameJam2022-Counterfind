@@ -61,6 +61,8 @@ public class LevelByLevelMode : Gamemode
         // Reset timer
         levelTimer.timeLimit = currentLevel.timeLimit;
         levelTimer.StartTimer();
+
+        base.GenerateGamemodeElements();
     }
     public override void OnJudgementMade(bool deemedCounterfeit)
     {
@@ -88,9 +90,8 @@ public class LevelByLevelMode : Gamemode
     public override void EndGameplay()
     {
         levelTimer.Pause();
-
-        gameElements.SuspendGameplay();
         endScreen.ShowLevelEnd(this);
+        base.EndGameplay();
     }
 
     public void SetLevel(Level newLevel)

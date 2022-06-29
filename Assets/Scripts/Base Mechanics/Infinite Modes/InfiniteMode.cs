@@ -32,6 +32,7 @@ public class InfiniteMode : Gamemode
         allItems = new Banknote[1];
         allItems[0] = Instantiate(gameElements.prefab);
         currentNote = 0;
+        base.GenerateGamemodeElements();
     }
     public override void PrepareNextItem()
     {
@@ -52,10 +53,7 @@ public class InfiniteMode : Gamemode
             onIncorrect.Invoke();
         }
     }
-    public override void EndGameplay()
-    {
-        throw new System.NotImplementedException();
-    }
+    
 
     public void LateUpdate()
     {
