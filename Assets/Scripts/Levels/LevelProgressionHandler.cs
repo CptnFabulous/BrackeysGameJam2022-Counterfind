@@ -31,13 +31,20 @@ public class LevelProgressionHandler : MonoBehaviour
     public RectTransform levelButtonParent;
     Button[] levelButtons;
 
-    [Header("Loading levels")]
+    [Header("Loading gameplay")]
     public LevelByLevelMode levelSetter;
+
+    [Header("Infinite Mode")]
+    public InfiniteMode infiniteMode;
+    public Button infiniteModeButton;
+
 
 
     private void Awake()
     {
         SetupLevelSelectScreen();
+
+        infiniteModeButton.onClick.AddListener(infiniteMode.EnterGame);
     }
 
     void SetupLevelSelectScreen()
