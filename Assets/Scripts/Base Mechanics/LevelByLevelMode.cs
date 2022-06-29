@@ -111,7 +111,7 @@ public class LevelByLevelMode : Gamemode
         {
             return;
         }
-        gameElements.noteCounter.text = (allItems.Length - currentlyChecking - 1).ToString();
+        gameElements.noteCounter.text = (currentlyChecking + 1) + "/" + allItems.Length;
     }
 
     
