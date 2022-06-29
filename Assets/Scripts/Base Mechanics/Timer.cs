@@ -14,7 +14,8 @@ public class Timer : MonoBehaviour
         public float InSeconds => (hours * 3600) + (minutes * 60) + seconds;
         //public override string ToString() => hours + ":" + minutes + ":" + seconds;
 
-        public override string ToString()
+        public override string ToString() => ToString(false);
+        public string ToString(bool showDecimalPlaces)
         {
             string text = "";
             if (hours < 10)
@@ -31,7 +32,7 @@ public class Timer : MonoBehaviour
             {
                 text += "0";
             }
-            text += seconds;
+            text += showDecimalPlaces ? seconds : Mathf.FloorToInt(seconds);
 
             return text;
         }
