@@ -23,7 +23,7 @@ public class GameplayHandler : MonoBehaviour
     public GameStateHandler stateHandler;
 
     [Header("HUD elements")]
-    public Text remainingNotes;
+    public Text noteCounter;
     public Button acceptButton;
     public Button rejectButton;
     public ReferenceWindow referenceWindow;
