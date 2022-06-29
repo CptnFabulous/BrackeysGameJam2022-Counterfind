@@ -57,5 +57,8 @@ public class InfiniteMode : Gamemode
         throw new System.NotImplementedException();
     }
 
-
+    public void LateUpdate()
+    {
+        gameElements.noteCounter.text = currentNote.ToString();
+    }
 }
