@@ -30,4 +30,9 @@ public abstract class Gamemode : MonoBehaviour
         enabled = false;
         gameElements.SuspendGameplay();
     }
+
+    private void Awake()
+    {
+        enabled = false;
+    }
 }
