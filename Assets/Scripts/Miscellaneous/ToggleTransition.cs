@@ -8,6 +8,8 @@ public class ToggleTransition : MonoBehaviour
     public AnimationCurve transitionCurve = AnimationCurve.EaseInOut(0, 0, 1, 1);
     public UnityEngine.Events.UnityEvent<float> effect;
 
+    public bool startActive = false;
+
     bool currentlyActive;
     float currentValue;
     IEnumerator currentTransition;
@@ -29,7 +31,13 @@ public class ToggleTransition : MonoBehaviour
             }
         }
     }
-    
+
+    private void Awake()
+    {
+        effect.Invoke(startActive ? 1 : 0);
+        active = startActive;
+    }
+
 
     IEnumerator Transition()
     {
