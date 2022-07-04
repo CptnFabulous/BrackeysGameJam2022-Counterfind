@@ -123,17 +123,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!114 &73350471 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8958777665911358726, guid: 0f82ca15576f8e240a80ef8922a0ff3a, type: 3}
-  m_PrefabInstance: {fileID: 3972028986343173504}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &89344088
 GameObject:
   m_ObjectHideFlags: 0
@@ -1619,7 +1608,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0.000030517578}
+  m_AnchoredPosition: {x: 0, y: 0.000038146973}
   m_SizeDelta: {x: 0, y: 50}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!1 &823770715
@@ -2403,7 +2392,7 @@ MonoBehaviour:
     m_Extent: {x: 0.1, y: 0.1, z: 0.1}
   rotationSensitivity: 2
   defaultEulerAngles: {x: 0, y: 180, z: 0}
-  resetButton: {fileID: 73350471}
+  resetButton: {fileID: 3972028986343173505}
   resetTime: 0.5
   resetCurve:
     serializedVersion: 2
@@ -3098,6 +3087,7 @@ GameObject:
   - component: {fileID: 1223250253}
   - component: {fileID: 1223250252}
   - component: {fileID: 1223250254}
+  - component: {fileID: 1223250255}
   m_Layer: 0
   m_Name: Level Handler
   m_TagString: Untagged
@@ -3125,25 +3115,11 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 2524eb21a874ef9458256cbb12c65184, type: 2}
   - {fileID: 11400000, guid: 07db5070310ad7645bb391b095959936, type: 2}
   currentLevelIndex: 0
-  menuObject: {fileID: 1807956485}
   levelButtonPrefab: {fileID: 1417337847}
   levelButtonParent: {fileID: 573199514}
   levelSetter: {fileID: 1223250254}
-  onEnterLevel:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1968788265}
-        m_TargetAssemblyTypeName: MusicHandler, Assembly-CSharp
-        m_MethodName: SwitchStateFromString
-        m_Mode: 5
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: Active
-          m_BoolArgument: 0
-        m_CallState: 2
+  infiniteMode: {fileID: 1533547117}
+  infiniteModeButton: {fileID: 1696827136}
 --- !u!4 &1223250253
 Transform:
   m_ObjectHideFlags: 0
@@ -3171,7 +3147,32 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameElements: {fileID: 1458382962}
+  levelTimer: {fileID: 1223250255}
   endScreen: {fileID: 148623828}
+--- !u!114 &1223250255
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1223250251}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a0137a18b43334a449dcc169801f0a80, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  timeLimit:
+    hours: 1
+    minutes: 0
+    seconds: 0
+  goIntoNegatives: 0
+  onTimerStart:
+    m_PersistentCalls:
+      m_Calls: []
+  onTimeUp:
+    m_PersistentCalls:
+      m_Calls: []
+  visualTimer: {fileID: 1426220273}
 --- !u!1 &1223632956
 GameObject:
   m_ObjectHideFlags: 0
@@ -4323,7 +4324,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1458382961}
   - component: {fileID: 1458382962}
-  - component: {fileID: 1458382960}
   m_Layer: 0
   m_Name: Gameplay Handler
   m_TagString: Untagged
@@ -4331,30 +4331,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1458382960
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1458382959}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a0137a18b43334a449dcc169801f0a80, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  timeLimit:
-    hours: 1
-    minutes: 0
-    seconds: 0
-  goIntoNegatives: 0
-  onTimerStart:
-    m_PersistentCalls:
-      m_Calls: []
-  onTimeUp:
-    m_PersistentCalls:
-      m_Calls: []
-  visualTimer: {fileID: 1426220273}
 --- !u!4 &1458382961
 Transform:
   m_ObjectHideFlags: 0
@@ -4386,11 +4362,10 @@ MonoBehaviour:
   prefab: {fileID: 6832704232391849299, guid: 91b51f503d7a7a04090970156c2ce7f7, type: 3}
   viewControls: {fileID: 963194230}
   stateHandler: {fileID: 963194232}
-  levelTimer: {fileID: 1458382960}
-  remainingNotes: {fileID: 301494097}
+  noteCounter: {fileID: 301494097}
   acceptButton: {fileID: 1859550886}
   rejectButton: {fileID: 487769454}
-  referenceWindow: {fileID: 3972028986343173505}
+  referenceWindow: {fileID: 2087159117}
   entryPilePosition: {fileID: 823770716}
   exitPilePosition: {fileID: 466714301}
   exitTime: 0.5
@@ -4424,6 +4399,22 @@ MonoBehaviour:
   onPutAway:
     m_PersistentCalls:
       m_Calls: []
+  menuObject: {fileID: 1807956485}
+  onEnterGameplay:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1968788265}
+        m_TargetAssemblyTypeName: MusicHandler, Assembly-CSharp
+        m_MethodName: SwitchStateFromString
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Active
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1001 &1465350645
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4605,7 +4596,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb2d46f1e952f3b4087ea1294e9b42fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameElements: {fileID: 0}
+  gameElements: {fileID: 1458382962}
+  defectsToInclude: 7
   onCorrect:
     m_PersistentCalls:
       m_Calls: []
@@ -5100,6 +5092,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 5425856253136770497, guid: e474de32efa31ec4e8ba1cbaee1d4eaa, type: 3}
   m_PrefabInstance: {fileID: 1696827134}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1696827136 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5425856253136770496, guid: e474de32efa31ec4e8ba1cbaee1d4eaa, type: 3}
+  m_PrefabInstance: {fileID: 1696827134}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1739501326
 GameObject:
   m_ObjectHideFlags: 0
@@ -7170,6 +7173,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 5425856253136770497, guid: e474de32efa31ec4e8ba1cbaee1d4eaa, type: 3}
   m_PrefabInstance: {fileID: 2070501754}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &2087159117 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8999389207893172483, guid: 0f82ca15576f8e240a80ef8922a0ff3a, type: 3}
+  m_PrefabInstance: {fileID: 3972028986343173504}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ffb55712cf270b14992be4b01238b0d1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &919307440647726495
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7541,12 +7555,12 @@ PrefabInstance:
   m_SourcePrefab: {fileID: 100100000, guid: 0f82ca15576f8e240a80ef8922a0ff3a, type: 3}
 --- !u!114 &3972028986343173505 stripped
 MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7219097680441321313, guid: 0f82ca15576f8e240a80ef8922a0ff3a, type: 3}
+  m_CorrespondingSourceObject: {fileID: 26249266552214346, guid: 0f82ca15576f8e240a80ef8922a0ff3a, type: 3}
   m_PrefabInstance: {fileID: 3972028986343173504}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ffb55712cf270b14992be4b01238b0d1, type: 3}
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
