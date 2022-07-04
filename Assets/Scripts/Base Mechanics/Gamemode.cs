@@ -23,7 +23,14 @@ public abstract class Gamemode : MonoBehaviour
     {
         enabled = true;
     }
+    /// <summary>
+    /// Runs when the player judges an item as real or fake.
+    /// </summary>
+    /// <param name="deemedCounterfeit"></param>
     public abstract void OnJudgementMade(bool deemedCounterfeit);
+    /// <summary>
+    /// Occurs after putting away the previous item and before loading the next one
+    /// </summary>
     public abstract void PrepareNextItem();
     public virtual void EndGameplay()
     {
