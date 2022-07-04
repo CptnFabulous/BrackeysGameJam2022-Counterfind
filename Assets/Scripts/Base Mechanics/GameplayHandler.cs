@@ -63,6 +63,7 @@ public class GameplayHandler : MonoBehaviour
         stateHandler.enabled = true;
 
         mode.PurgeItems();
+        viewControls.viewedObject = null;
 
         mode.GenerateGamemodeElements();
 
