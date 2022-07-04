@@ -31,11 +31,6 @@ public class LevelByLevelMode : Gamemode
     }
     #endregion
 
-    private void Awake()
-    {
-        levelTimer.onTimeUp.AddListener(EndGameplay);
-    }
-
     #region Override functions
     public override void GenerateGamemodeElements()
     {
@@ -106,11 +101,11 @@ public class LevelByLevelMode : Gamemode
         EnterGame();
     }
 
-
-
-    
-
-
+    public override void Awake()
+    {
+        levelTimer.onTimeUp.AddListener(EndGameplay);
+        base.Awake();
+    }
     private void LateUpdate()
     {
         if (currentLevel == null)
@@ -119,7 +114,4 @@ public class LevelByLevelMode : Gamemode
         }
         gameElements.noteCounter.text = (currentlyChecking + 1) + "/" + allItems.Length;
     }
-
-    
-
 }
