@@ -87,7 +87,7 @@ MonoBehaviour:
     m_Extent: {x: 0.1, y: 0.1, z: 0.1}
   rotationSensitivity: 2
   defaultEulerAngles: {x: 0, y: 180, z: 0}
-  resetButton: {fileID: 5047046435224655758}
+  resetButton: {fileID: 4757400744242018498}
   resetTime: 0.5
   resetCurve:
     serializedVersion: 2
@@ -320,7 +320,7 @@ MonoBehaviour:
   onPutAway:
     m_PersistentCalls:
       m_Calls: []
-  menuObject: {fileID: 0}
+  menuObject: {fileID: 4757400744242018496}
   onEnterGameplay:
     m_PersistentCalls:
       m_Calls:
@@ -451,12 +451,17 @@ Canvas:
   m_CorrespondingSourceObject: {fileID: 3972028987053325462, guid: 0f82ca15576f8e240a80ef8922a0ff3a, type: 3}
   m_PrefabInstance: {fileID: 5068788666160252100}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &5047046435224655758 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 26249266552214346, guid: 0f82ca15576f8e240a80ef8922a0ff3a, type: 3}
+--- !u!1 &4757400744242018496 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 311411014035536900, guid: 0f82ca15576f8e240a80ef8922a0ff3a, type: 3}
   m_PrefabInstance: {fileID: 5068788666160252100}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+--- !u!114 &4757400744242018498 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 311411014035536902, guid: 0f82ca15576f8e240a80ef8922a0ff3a, type: 3}
+  m_PrefabInstance: {fileID: 5068788666160252100}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4757400744242018496}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
