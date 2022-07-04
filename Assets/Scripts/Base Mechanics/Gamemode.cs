@@ -6,9 +6,6 @@ public abstract class Gamemode : MonoBehaviour
 {
     public GameplayHandler gameElements;
 
-    public Banknote[] allItems { get; set; }
-    public bool notesExist => allItems.Length > 0;
-
     public abstract Banknote.Defect CurrentDefects { get; }
     public abstract Banknote currentItem { get; }
 
@@ -37,6 +34,11 @@ public abstract class Gamemode : MonoBehaviour
         enabled = false;
         gameElements.SuspendGameplay();
     }
+
+    /// <summary>
+    /// Destroys all existing items
+    /// </summary>
+    public abstract void PurgeItems();
 
     private void Awake()
     {

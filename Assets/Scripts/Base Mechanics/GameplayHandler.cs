@@ -62,6 +62,8 @@ public class GameplayHandler : MonoBehaviour
         viewControls.enabled = true;
         stateHandler.enabled = true;
 
+        mode.PurgeItems();
+
         mode.GenerateGamemodeElements();
 
         referenceWindow.Setup(mode.CurrentDefects);
@@ -143,14 +145,7 @@ public class GameplayHandler : MonoBehaviour
 
         if (mode == null) return;
 
-        // Disable existing notes
-        if (mode.allItems != null)
-        {
-            for (int i = 0; i < mode.allItems.Length; i++)
-            {
-                mode.allItems[i].gameObject.SetActive(false);
-            }
-        }
+        mode.PurgeItems();
 
         menuObject.SetActive(true);
     }

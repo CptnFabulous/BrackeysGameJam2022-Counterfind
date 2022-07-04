@@ -11,6 +11,8 @@ public class LevelByLevelMode : Gamemode
     public bool[] judgedFakeByPlayer { get; private set; }
     public int currentlyChecking { get; private set; }
 
+    public Banknote[] allItems { get; set; }
+    public bool notesExist => allItems.Length > 0;
     public bool onLastNote => currentlyChecking >= allItems.Length - 1;
 
     public override Banknote.Defect CurrentDefects => currentLevel.defects;
@@ -30,15 +32,6 @@ public class LevelByLevelMode : Gamemode
 
     public override void GenerateGamemodeElements()
     {
-        // Purge existing notes (code could probably be done better to prevent garbage collection but whatever it's a game jam)
-        if (allItems != null)
-        {
-            for (int i = 0; i < allItems.Length; i++)
-            {
-                Destroy(allItems[i].gameObject);
-            }
-        }
-
         List<Banknote> newNotes = new List<Banknote>();
         for (int i = 0; i < currentLevel.numberOfItems; i++)
         {
@@ -92,6 +85,16 @@ public class LevelByLevelMode : Gamemode
         levelTimer.Pause();
         endScreen.ShowLevelEnd(this);
         base.EndGameplay();
+    }
+    public override void PurgeItems()
+    {
+        if (allItems == null) return;
+
+        for (int i = 0; i < allItems.Length; i++)
+        {
+            if (allItems[i] == null) continue;
+            Destroy(allItems[i].gameObject);
+        }
     }
 
     public void SetLevel(Level newLevel)
