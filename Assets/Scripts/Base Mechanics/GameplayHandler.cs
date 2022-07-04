@@ -47,6 +47,7 @@ public class GameplayHandler : MonoBehaviour
     {
         acceptButton.onClick.AddListener(() => JudgeItem(false));
         rejectButton.onClick.AddListener(() => JudgeItem(true));
+        
 
         ExitGameplay();
     }
@@ -81,10 +82,9 @@ public class GameplayHandler : MonoBehaviour
     }
     IEnumerator TransitionToNextItem()
     {
-        Banknote previousItem = mode.CurrentItem();
-        if (previousItem != null)
+        if (viewControls.viewedObject != null)
         {
-            IEnumerator putAway = PutAwayOldItem(previousItem);
+            IEnumerator putAway = PutAwayOldItem();
             yield return StartCoroutine(putAway);
         }
 
@@ -96,28 +96,26 @@ public class GameplayHandler : MonoBehaviour
             IEnumerator getNew = DeployNewItem(newItem);
             yield return StartCoroutine(getNew);
         }
-        else
-        {
-            //EndLevel();
-        }
     }
-    IEnumerator PutAwayOldItem(Banknote oldNote)
+    IEnumerator PutAwayOldItem()
     {
         onPutAway.Invoke();
         
         acceptButton.interactable = false;
         rejectButton.interactable = false;
 
+        Transform oldItemTransform = viewControls.viewedObject;
+
         viewControls.viewedObject = null;
-        oldNote.transform.parent = transform;
-        Vector3 oldPosition = oldNote.transform.position;
-        Quaternion oldRotation = oldNote.transform.rotation;
+        oldItemTransform.parent = transform;
+        Vector3 oldPosition = oldItemTransform.position;
+        Quaternion oldRotation = oldItemTransform.rotation;
 
         for (float timer = 0; timer < 1; timer = Mathf.Clamp01(timer + Time.deltaTime / exitTime))
         {
             float t = exitAnimationCurve.Evaluate(timer);
-            oldNote.transform.position = Vector3.Lerp(oldPosition, exitPilePosition.position, t);
-            oldNote.transform.rotation = Quaternion.Lerp(oldRotation, exitPilePosition.rotation, t);
+            oldItemTransform.position = Vector3.Lerp(oldPosition, exitPilePosition.position, t);
+            oldItemTransform.rotation = Quaternion.Lerp(oldRotation, exitPilePosition.rotation, t);
             yield return null;
         }
     }
