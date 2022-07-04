@@ -124,7 +124,10 @@ public class GameplayHandler : MonoBehaviour
     IEnumerator DeployNewItem(Banknote newNote)
     {
         onBringOut.Invoke();
-        
+
+        newNote.transform.position = entryPilePosition.position;
+        newNote.transform.rotation = entryPilePosition.rotation;
+
         viewControls.AddObject(newNote.transform);
         yield return new WaitWhile(() => viewControls.controlDenied);
 

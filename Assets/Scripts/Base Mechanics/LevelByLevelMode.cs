@@ -36,10 +36,7 @@ public class LevelByLevelMode : Gamemode
         for (int i = 0; i < currentLevel.numberOfItems; i++)
         {
             // Spawn note object
-            Banknote note = Instantiate(gameElements.prefab, gameElements.entryPilePosition);
-            note.transform.localPosition = Vector3.zero;
-            note.transform.localRotation = Quaternion.identity;
-
+            Banknote note = Instantiate(gameElements.prefab);
             // If index is less than number of counterfeits, mark as counterfeit
             // To ensure the correct amount
             note.GenerateNote(i < currentLevel.numberOfCounterfeits, CurrentDefects);
