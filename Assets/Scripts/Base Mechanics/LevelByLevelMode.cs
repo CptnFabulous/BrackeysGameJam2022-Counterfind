@@ -6,15 +6,20 @@ public class LevelByLevelMode : Gamemode
 {
     public Timer levelTimer;
     public LevelEndScreen endScreen;
-    
+
+    #region Level progression variables
     public Level currentLevel { get; private set; }
+    public Banknote[] allItems { get; set; }
     public bool[] judgedFakeByPlayer { get; private set; }
     public int currentlyChecking { get; private set; }
+    #endregion
 
-    public Banknote[] allItems { get; set; }
+    #region Level properties
     public bool notesExist => allItems.Length > 0;
     public bool onLastNote => currentlyChecking >= allItems.Length - 1;
+    #endregion
 
+    #region Override properties
     public override Banknote.Defect CurrentDefects => currentLevel.defects;
     public override Banknote currentItem
     {
@@ -24,12 +29,14 @@ public class LevelByLevelMode : Gamemode
             return notesExist && indexIsInArray ? allItems[currentlyChecking] : null;
         }
     }
+    #endregion
 
     private void Awake()
     {
         levelTimer.onTimeUp.AddListener(EndGameplay);
     }
 
+    #region Override functions
     public override void GenerateGamemodeElements()
     {
         List<Banknote> newNotes = new List<Banknote>();
@@ -38,9 +45,7 @@ public class LevelByLevelMode : Gamemode
             // Spawn note object
             Banknote note = Instantiate(gameElements.prefab);
             // If index is less than number of counterfeits, mark as counterfeit
-            // To ensure the correct amount
             note.GenerateNote(i < currentLevel.numberOfCounterfeits, CurrentDefects);
-
             // Insert at a random point to shuffle the array
             newNotes.Insert(Random.Range(0, newNotes.Count), note);
         }
@@ -93,6 +98,7 @@ public class LevelByLevelMode : Gamemode
             Destroy(allItems[i].gameObject);
         }
     }
+    #endregion
 
     public void SetLevel(Level newLevel)
     {
