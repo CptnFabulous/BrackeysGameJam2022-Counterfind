@@ -40,7 +40,7 @@ public class ToggleTransition : MonoBehaviour
     public void SetEffectImmediately(bool nowActive)
     {
         effect.Invoke(startActive ? 1 : 0);
-        active = nowActive;
+        currentlyActive = nowActive;
     }
 
 
