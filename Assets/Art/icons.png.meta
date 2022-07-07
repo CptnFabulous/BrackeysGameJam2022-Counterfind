@@ -16,7 +16,7 @@ TextureImporter:
     second: infinity
   - first:
       213: -2696506250795634678
-    second: icons_4
+    second: heart_filled
   - first:
       213: 6621252853494989987
     second: camera
@@ -31,7 +31,7 @@ TextureImporter:
     second: question mark
   - first:
       213: 2189712646507832853
-    second: icons_9
+    second: heart_empty
   - first:
       213: 3876512272233767631
     second: tick
@@ -268,7 +268,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: icons_4
+      name: heart_filled
       rect:
         serializedVersion: 2
         x: 1200
@@ -373,7 +373,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: icons_9
+      name: heart_empty
       rect:
         serializedVersion: 2
         x: 1200
