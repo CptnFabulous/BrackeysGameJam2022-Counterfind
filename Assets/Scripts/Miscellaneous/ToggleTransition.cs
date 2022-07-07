@@ -34,8 +34,13 @@ public class ToggleTransition : MonoBehaviour
 
     private void Awake()
     {
+        SetEffectImmediately(startActive);
+    }
+
+    public void SetEffectImmediately(bool nowActive)
+    {
         effect.Invoke(startActive ? 1 : 0);
-        active = startActive;
+        active = nowActive;
     }
 
 
