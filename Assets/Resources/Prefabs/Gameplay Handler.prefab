@@ -320,7 +320,7 @@ MonoBehaviour:
   onPutAway:
     m_PersistentCalls:
       m_Calls: []
-  menuObject: {fileID: 4757400744242018496}
+  menuObject: {fileID: 0}
   onEnterGameplay:
     m_PersistentCalls:
       m_Calls:

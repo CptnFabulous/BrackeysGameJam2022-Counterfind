@@ -6972,9 +6972,5 @@ PrefabInstance:
       propertyPath: menuObject
       value: 
       objectReference: {fileID: 1807956485}
-    - target: {fileID: 8162931822777663798, guid: 21f1f5272a147ef4b97e9b3226c2a060, type: 3}
-      propertyPath: onEnterGameplay.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 1968788265}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 21f1f5272a147ef4b97e9b3226c2a060, type: 3}
