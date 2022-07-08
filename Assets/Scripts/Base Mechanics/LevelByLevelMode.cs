@@ -80,7 +80,10 @@ public class LevelByLevelMode : Gamemode
     public override void EndGameplay()
     {
         levelTimer.Pause();
-        endScreen.ShowLevelEnd(this);
+
+        endScreen.levelData = this;
+        endScreen.Generate();
+
         base.EndGameplay();
     }
     public override void PurgeItems()

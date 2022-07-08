@@ -4,36 +4,43 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Events;
 
-public class LevelEndScreen : MonoBehaviour
+public class LevelEndScreen : EndScreen
 {
+    public Button nextLevelButton;
+
+    [Header("Information to display")]
+    public GameObject winGraphic;
+    public GameObject failGraphic;
+    public string whenAllLevelsCompleted = "You completed all of the levels!";
+    public string whenTimeUp = "You ran out of time!";
+    public string whenTooInaccurate = "You made too many mistakes!";
+
+    [Header("Stats")]
     public Text requiredRightForSuccess;
     public Text successful;
     public Text thoughtWasReal;
     public Text thoughtWasFake;
     public Text remainingTime;
-    public Button retryLevelButton;
-    public Button nextLevelButton;
-    public Button quitButton;
 
-    public UnityEvent onResetEndScreenElements;
     public UnityEvent onWin;
     public UnityEvent onPerfectWin;
-    public UnityEvent onAllLevelsCompleted;
     public UnityEvent onFailGeneric;
-    public UnityEvent onTooFewCheckedAccurately;
-    public UnityEvent onTimeRanOut;
 
-    private void Awake()
+
+    public LevelByLevelMode levelData { get; set; }
+    
+
+    public override void Awake()
     {
-        retryLevelButton.onClick.AddListener(LevelProgressionHandler.Current.RetryLevel);
+        base.Awake();
         nextLevelButton.onClick.AddListener(LevelProgressionHandler.Current.ProceedToNextLevel);
-        quitButton.onClick.AddListener(LevelProgressionHandler.Current.ReturnToMenu);
     }
 
-    public void ShowLevelEnd(LevelByLevelMode levelData)
+    public override void Generate()
     {
-        onResetEndScreenElements.Invoke();
+        reason.text = "";
 
+        #region Calculate scores
         int finalScore = 0;
         int amountThoughtReal = 0;
         int amountThoughtFake = 0;
@@ -52,48 +59,50 @@ public class LevelEndScreen : MonoBehaviour
                 amountThoughtFake++;
             }
         }
+        #endregion
 
+        #region Calculate completion status
         int errors = amountThoughtReal + amountThoughtFake;
-
-        // Checks if the items were processed within the correct time
-        // Checks if the amount of errors was less than the maximum acceptable
-        bool allCompleted = levelData.onLastNote;// levelData.currentlyChecking >= levelData.currentLevel.numberOfItems;
+        bool allChecked = levelData.onLastNote;
         bool notTooManyErrors = errors < levelData.currentLevel.numberOfErrorsForFailure;
-        if (allCompleted && notTooManyErrors) // If so, the level is a success
-        {
-            bool complete = LevelProgressionHandler.Current.onLastLevel;
-            //Debug.Log("Are there any more levels? " + !complete);
-            nextLevelButton.interactable = !complete;
-            if (complete)
-            {
-                onAllLevelsCompleted.Invoke();
-            }
+        bool levelCompleted = allChecked && notTooManyErrors;
+        #endregion
 
+        #region Populate failure/success info
+        //(levelCompleted ? onWin : onFailGeneric).Invoke();
+        winGraphic.SetActive(levelCompleted);
+        failGraphic.SetActive(!levelCompleted);
+        if (levelCompleted) // If so, the level is a success
+        {
+            onWin.Invoke();
             if (errors <= 0)
             {
                 onPerfectWin.Invoke();
             }
-            onWin.Invoke();
+            if (LevelProgressionHandler.Current.onLastLevel)
+            {
+                reason.text = whenAllLevelsCompleted;
+            }
         }
-        else if (!allCompleted) // if the first bool is false, the player ran out of time
+        else
         {
-            nextLevelButton.interactable = false;
+            // If allChecked is false, the player ran out of time
+            // Otherwise, the player completed them all but got some wrong
+            reason.text = !allChecked ? whenTimeUp : whenTooInaccurate;
             onFailGeneric.Invoke();
-            onTimeRanOut.Invoke();
         }
-        else // Otherwise, the player completed them all but got some wrong
-        {
-            nextLevelButton.interactable = false;
-            onFailGeneric.Invoke();
-            onTooFewCheckedAccurately.Invoke();
-        }
+        #endregion
 
+        #region Display stats
         int minCorrectForSuccess = levelData.currentLevel.numberOfItems - levelData.currentLevel.numberOfErrorsForFailure + 1;
         requiredRightForSuccess.text = minCorrectForSuccess.ToString();
         successful.text = finalScore.ToString();
         thoughtWasReal.text = amountThoughtReal.ToString();
         thoughtWasFake.text = amountThoughtFake.ToString();
         remainingTime.text = levelData.levelTimer.remaining.ToString();
+        #endregion
+
+        nextLevelButton.interactable = levelCompleted && !LevelProgressionHandler.Current.onLastLevel;
     }
 
     /// <summary>
