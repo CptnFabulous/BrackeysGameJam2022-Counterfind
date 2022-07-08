@@ -43,6 +43,8 @@ GameObject:
   - component: {fileID: 8162931821225509948}
   - component: {fileID: 8162931821225509943}
   - component: {fileID: 8162931821225509937}
+  - component: {fileID: 150173227119939758}
+  - component: {fileID: 2020420756006042535}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -204,6 +206,50 @@ MonoBehaviour:
   m_DefaultActionMap: Object inspection
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
+--- !u!114 &150173227119939758
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8162931821225509941}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a841b7cc61825454c90dcd4b3e2874cc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onCorrect:
+    m_PersistentCalls:
+      m_Calls: []
+  onIncorrect:
+    m_PersistentCalls:
+      m_Calls: []
+  maxLives: 3
+  consecutiveSuccessesToGetNewLife: 5
+  meter: {fileID: 0}
+--- !u!114 &2020420756006042535
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8162931821225509941}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: df7de15200d579b4a950ad1c13335770, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onCorrect:
+    m_PersistentCalls:
+      m_Calls: []
+  onIncorrect:
+    m_PersistentCalls:
+      m_Calls: []
+  scorePerNote: 100
+  consecutiveMultiplierIncrease: 0.1
+  scoreHudObject: {fileID: 0}
+  scoreCounter: {fileID: 0}
+  streakCounter: {fileID: 0}
 --- !u!1 &8162931821787043832
 GameObject:
   m_ObjectHideFlags: 0
@@ -435,13 +481,12 @@ PrefabInstance:
       propertyPath: onClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgument
       value: 
       objectReference: {fileID: 8300000, guid: 2019ef691e40c944faa36fdfec4b4d6f, type: 3}
+    - target: {fileID: 7035989773884349545, guid: 0f82ca15576f8e240a80ef8922a0ff3a, type: 3}
+      propertyPath: perpendicular
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0f82ca15576f8e240a80ef8922a0ff3a, type: 3}
---- !u!224 &8162931821510408275 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 3972028987053325463, guid: 0f82ca15576f8e240a80ef8922a0ff3a, type: 3}
-  m_PrefabInstance: {fileID: 5068788666160252100}
-  m_PrefabAsset: {fileID: 0}
 --- !u!223 &8162931821510408274 stripped
 Canvas:
   m_CorrespondingSourceObject: {fileID: 3972028987053325462, guid: 0f82ca15576f8e240a80ef8922a0ff3a, type: 3}
@@ -524,6 +569,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4f564f7594e9d94c910c9394b640674, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!224 &8162931821510408275 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 3972028987053325463, guid: 0f82ca15576f8e240a80ef8922a0ff3a, type: 3}
+  m_PrefabInstance: {fileID: 5068788666160252100}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &7102331279318000420
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -736,11 +786,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0145dc0af30aa8d4cbb041e9eeb0bf2a, type: 3}
---- !u!224 &8162931822620886818 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 1629917655033381319, guid: 0145dc0af30aa8d4cbb041e9eeb0bf2a, type: 3}
-  m_PrefabInstance: {fileID: 7482218712937514725}
-  m_PrefabAsset: {fileID: 0}
 --- !u!223 &8162931822620886829 stripped
 Canvas:
   m_CorrespondingSourceObject: {fileID: 1629917655033381320, guid: 0145dc0af30aa8d4cbb041e9eeb0bf2a, type: 3}
@@ -768,3 +813,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!224 &8162931822620886818 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 1629917655033381319, guid: 0145dc0af30aa8d4cbb041e9eeb0bf2a, type: 3}
+  m_PrefabInstance: {fileID: 7482218712937514725}
+  m_PrefabAsset: {fileID: 0}

@@ -1518,7 +1518,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0.000038146973}
+  m_AnchoredPosition: {x: 0, y: 0.000034332275}
   m_SizeDelta: {x: 0, y: 50}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!1 &862174093
@@ -4174,8 +4174,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1533547118}
   - component: {fileID: 1533547117}
-  - component: {fileID: 1533547116}
-  - component: {fileID: 1533547115}
   m_Layer: 0
   m_Name: Infinite Mode Handler
   m_TagString: Untagged
@@ -4183,46 +4181,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1533547115
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1533547114}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a841b7cc61825454c90dcd4b3e2874cc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  onCorrect:
-    m_PersistentCalls:
-      m_Calls: []
-  onIncorrect:
-    m_PersistentCalls:
-      m_Calls: []
-  maxLives: 3
-  consecutiveSuccessesToGetNewLife: 5
---- !u!114 &1533547116
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1533547114}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: df7de15200d579b4a950ad1c13335770, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  onCorrect:
-    m_PersistentCalls:
-      m_Calls: []
-  onIncorrect:
-    m_PersistentCalls:
-      m_Calls: []
-  scorePerNote: 100
-  consecutiveMultiplierIncrease: 0.1
 --- !u!114 &1533547117
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4243,6 +4201,8 @@ MonoBehaviour:
   onIncorrect:
     m_PersistentCalls:
       m_Calls: []
+  lives: {fileID: 912786173}
+  score: {fileID: 912786172}
 --- !u!4 &1533547118
 Transform:
   m_ObjectHideFlags: 0
