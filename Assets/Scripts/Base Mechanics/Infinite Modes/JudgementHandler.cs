@@ -8,11 +8,23 @@ public abstract class JudgementHandler : MonoBehaviour
     public UnityEvent onCorrect;
     public UnityEvent onIncorrect;
 
-    public abstract void OnResetGame();
-    public virtual void OnCorrect() => onCorrect.Invoke();
-    public virtual void OnIncorrect() => onIncorrect.Invoke();
     public GameObject hudObject;
 
+    public virtual void OnResetGame()
+    {
+        UpdateHUD();
+    }
+    public virtual void OnCorrect()
+    {
+        UpdateHUD();
+        onCorrect.Invoke();
+    }
+    public virtual void OnIncorrect()
+    {
+        UpdateHUD();
+        onIncorrect.Invoke();
+    }
+    public virtual void UpdateHUD() { }
 
     private void OnEnable() => hudObject?.SetActive(true);
     private void OnDisable() => hudObject?.SetActive(false);

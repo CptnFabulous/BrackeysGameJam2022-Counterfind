@@ -15,6 +15,7 @@ public class LivesHandler : JudgementHandler
     public override void OnResetGame()
     {
         lives = maxLives;
+        base.OnResetGame();
     }
     public override void OnIncorrect()
     {
@@ -24,8 +25,7 @@ public class LivesHandler : JudgementHandler
     }
     public override void OnCorrect()
     {
-        base.OnCorrect();
-
+        
         if (lives < maxLives) // If player is missing lives, check criteria to get them back
         {
             consecutiveSuccesses++;
@@ -35,6 +35,9 @@ public class LivesHandler : JudgementHandler
                 consecutiveSuccesses -= consecutiveSuccessesToGetNewLife;
             }
         }
+
+        base.OnCorrect();
+    }
     }
 
 

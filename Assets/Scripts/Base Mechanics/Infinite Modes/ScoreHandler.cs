@@ -15,6 +15,7 @@ public class ScoreHandler : JudgementHandler
     {
         score = 0;
         consecutiveSuccesses = 0;
+        base.OnResetGame();
     }
 
     public override void OnCorrect()
