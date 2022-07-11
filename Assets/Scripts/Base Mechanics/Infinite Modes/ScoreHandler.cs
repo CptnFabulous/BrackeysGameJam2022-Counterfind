@@ -10,6 +10,7 @@ public class ScoreHandler : JudgementHandler
     int score; // The current score
     int consecutiveSuccesses; // How many notes has the player gotten correct in a row?
 
+    public float currentMultiplier => 1 + (consecutiveMultiplierIncrease * consecutiveSuccesses);
     public override void OnResetGame()
     {
         score = 0;
@@ -18,8 +19,7 @@ public class ScoreHandler : JudgementHandler
 
     public override void OnCorrect()
     {
-        float multiplier = 1 + (consecutiveMultiplierIncrease * consecutiveSuccesses);
-        score += Mathf.CeilToInt(scorePerNote * multiplier);
+        score += Mathf.CeilToInt(scorePerNote * currentMultiplier);
         consecutiveSuccesses++;
         base.OnCorrect();
     }
