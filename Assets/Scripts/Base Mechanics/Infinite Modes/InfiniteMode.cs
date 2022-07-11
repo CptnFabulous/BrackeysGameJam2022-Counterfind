@@ -6,8 +6,6 @@ using UnityEngine.Events;
 public class InfiniteMode : Gamemode
 {
     public Banknote.Defect defectsToInclude;
-    //public LivesHandler lives;
-    //public ScoreHandler score;
     public UnityEvent onCorrect;
     public UnityEvent onIncorrect;
 
@@ -36,13 +34,11 @@ public class InfiniteMode : Gamemode
     }
     public override void PrepareNextItem()
     {
-        
-
-        // Regenerates the new item as real or fake, using a noise value to ensure not too many real or fake ones in a row.
+        // Regenerates the new item as real or fake
+        // Uses a noise value to ensure not too many real or fake ones in a row.
         bool isFake = Mathf.PerlinNoise(currentNote, 0) <= 0.5f;
         currentItem.GenerateNote(isFake, CurrentDefects);
-        
-
+        // Increments counter
         currentNote++;
     }
     public override void OnJudgementMade(bool deemedCounterfeit)
@@ -57,9 +53,6 @@ public class InfiniteMode : Gamemode
             onIncorrect.Invoke();
         }
     }
-
-
-
     public override void PurgeItems()
     {
         if (noteToReuse != null)
