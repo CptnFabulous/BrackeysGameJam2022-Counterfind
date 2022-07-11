@@ -9,6 +9,10 @@ public class InfiniteMode : Gamemode
     public UnityEvent onCorrect;
     public UnityEvent onIncorrect;
 
+    [Header("Additional elements")]
+    public LivesHandler lives;
+    public ScoreHandler score;
+
     Banknote noteToReuse;
     int currentNote;
 
@@ -61,6 +65,17 @@ public class InfiniteMode : Gamemode
         }
     }
 
+    public override void Awake()
+    {
+        base.Awake();
+
+        lives.mode = this;
+        onCorrect.AddListener(lives.OnCorrect);
+        onIncorrect.AddListener(lives.OnIncorrect);
+
+        onCorrect.AddListener(score.OnCorrect);
+        onIncorrect.AddListener(score.OnIncorrect);
+    }
     public void LateUpdate()
     {
         gameElements.noteCounter.text = currentNote.ToString();
