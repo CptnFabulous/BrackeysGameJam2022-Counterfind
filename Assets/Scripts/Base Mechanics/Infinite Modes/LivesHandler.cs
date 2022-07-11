@@ -14,6 +14,8 @@ public class LivesHandler : JudgementHandler
     float lives; // Current number of lives (when this reaches zero you fail)
     int consecutiveSuccesses;
 
+    public InfiniteMode mode { get; set; }
+
     public override void OnResetGame()
     {
         lives = maxLives;
@@ -24,6 +26,11 @@ public class LivesHandler : JudgementHandler
         lives--;
         consecutiveSuccesses = 0;
         base.OnIncorrect();
+
+        if (lives <= 0)
+        {
+            mode.EndGameplay();
+        }
     }
     public override void OnCorrect()
     {
