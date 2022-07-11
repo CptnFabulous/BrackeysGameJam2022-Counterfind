@@ -8,8 +8,10 @@ public class LivesHandler : JudgementHandler
     public int maxLives = 3; // Starting/max number of lives
     public int consecutiveSuccessesToGetNewLife = 5;
 
+    [Header("Cosmetics")]
+    public LifeMeter meter;
 
-    int lives; // Current number of lives (when this reaches zero you fail)
+    float lives; // Current number of lives (when this reaches zero you fail)
     int consecutiveSuccesses;
 
     public override void OnResetGame()
@@ -38,6 +40,11 @@ public class LivesHandler : JudgementHandler
 
         base.OnCorrect();
     }
+
+    public override void UpdateHUD()
+    {
+        meter?.UpdateMeter(lives);
+        base.UpdateHUD();
     }
 
 
