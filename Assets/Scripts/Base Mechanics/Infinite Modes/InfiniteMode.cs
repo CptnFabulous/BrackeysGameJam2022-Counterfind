@@ -14,7 +14,7 @@ public class InfiniteMode : Gamemode
     public ScoreHandler score;
 
     Banknote noteToReuse;
-    int currentNote;
+    int currentItemIndex;
 
     /*
     Ideas for infinite mode:
@@ -33,7 +33,7 @@ public class InfiniteMode : Gamemode
     public override void GenerateGamemodeElements()
     {
         noteToReuse = Instantiate(gameElements.prefab);
-        currentNote = 0;
+        currentItemIndex = 0;
         base.GenerateGamemodeElements();
     }
     public override void PrepareNextItem()
@@ -41,9 +41,10 @@ public class InfiniteMode : Gamemode
         // Regenerates the new item as real or fake
         // Uses a noise value to ensure not too many real or fake ones in a row.
         bool isFake = Mathf.PerlinNoise(currentNote, 0) <= 0.5f;
+        Debug.Log("Index = " + currentItemIndex + ", value = " + value);
         currentItem.GenerateNote(isFake, CurrentDefects);
         // Increments counter
-        currentNote++;
+        currentItemIndex++;
     }
     public override void OnJudgementMade(bool deemedCounterfeit)
     {
@@ -78,6 +79,6 @@ public class InfiniteMode : Gamemode
     }
     public void LateUpdate()
     {
-        gameElements.noteCounter.text = currentNote.ToString();
+        gameElements.noteCounter.text = currentItemIndex.ToString();
     }
 }
