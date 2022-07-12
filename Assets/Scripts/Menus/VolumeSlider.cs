@@ -17,9 +17,7 @@ public class VolumeSlider : MonoBehaviour
     {
         // References slider and adjusts variables to set up operation
         slider = GetComponent<Slider>();
-        slider.minValue = float.Epsilon;
-        slider.maxValue = 1;
-        slider.onValueChanged.AddListener(SetValue);
+        slider.onValueChanged.AddListener((_)=> SetValue(slider.normalizedValue));
     }
     /// <summary>
     /// Logarithmically adjusts volume value using an input between 0 and 1.
