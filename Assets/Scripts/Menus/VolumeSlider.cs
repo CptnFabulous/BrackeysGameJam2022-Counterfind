@@ -23,10 +23,23 @@ public class VolumeSlider : MonoBehaviour
     /// Logarithmically adjusts volume value using an input between 0 and 1.
     /// </summary>
     /// <param name="value"></param>
-    public void SetValue(float value)
+    public void SetValue(float value) => mixerToAlter.SetFloat(parameterName, LinearToLogarithmic(value));
     {
-        value = Mathf.Clamp(value, float.Epsilon, 1); // Clamps between one and lowest non-zero value (logarithmic code is apparently weird with zero values)
-        value = Mathf.Log10(value) * 20; // Alters value to account for logarithmic sound scale
-        mixerToAlter.SetFloat(parameterName, value);
     }
+
+    #region Converting between linear and logarithmic values
+    /// <summary>
+    /// Alters value to account for logarithmic sound scale
+    /// </summary>
+    /// <param name="value"></param>
+    /// <returns></returns>
+    public static float LinearToLogarithmic(float value) => Mathf.Log10(ClampEpsilon(value)) * 20;
+    /// <summary>
+    /// <summary>
+    /// Clamps between one and lowest non-zero value (logarithmic code is apparently weird with zero values)
+    /// </summary>
+    /// <param name="value"></param>
+    /// <returns></returns>
+    public static float ClampEpsilon(float value) => Mathf.Clamp(value, float.Epsilon, 1);
+    #endregion
 }
