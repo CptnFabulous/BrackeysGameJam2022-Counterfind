@@ -18,13 +18,21 @@ public class VolumeSlider : MonoBehaviour
         // References slider and adjusts variables to set up operation
         slider = GetComponent<Slider>();
         slider.onValueChanged.AddListener((_)=> SetValue(slider.normalizedValue));
+
+        RefreshShownValue();
     }
+    private void OnEnable() => RefreshShownValue();
     /// <summary>
     /// Logarithmically adjusts volume value using an input between 0 and 1.
     /// </summary>
     /// <param name="value"></param>
     public void SetValue(float value) => mixerToAlter.SetFloat(parameterName, LinearToLogarithmic(value));
+    void RefreshShownValue()
     {
+        // Ensure a valid value can be obtained. The slider will be non-interactable if not.
+        slider.interactable = mixerToAlter.GetFloat(parameterName, out float value);
+        //if (slider.interactable == false) Debug.LogError(this + "cannot obtain a value from '" + parameterName + "'!");
+        slider.normalizedValue = LogarithmicToLinear(value); // Converts logarithmic volume value into linear slider value
     }
 
     #region Converting between linear and logarithmic values
