@@ -20,6 +20,7 @@ public class LevelByLevelMode : Gamemode
     #endregion
 
     #region Override properties
+    public override JudgementHandler[] modifiers => null;
     public override Banknote.Defect CurrentDefects => currentLevel.defects;
     public override Banknote currentItem
     {

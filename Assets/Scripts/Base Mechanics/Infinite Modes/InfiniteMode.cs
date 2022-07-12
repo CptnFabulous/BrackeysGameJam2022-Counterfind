@@ -28,6 +28,11 @@ public class InfiniteMode : Gamemode
     * This forces the player to balance rushing ahead versus playing it safe.
     */
 
+    public override JudgementHandler[] modifiers => new JudgementHandler[]
+    {
+        lives,
+        score
+    };
     public override Banknote.Defect CurrentDefects => defectsToInclude;
     public override Banknote currentItem => noteToReuse;
     public override void GenerateGamemodeElements()

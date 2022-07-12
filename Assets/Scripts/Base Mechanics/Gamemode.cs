@@ -6,12 +6,23 @@ public abstract class Gamemode : MonoBehaviour
 {
     public GameplayHandler gameElements;
 
+    public abstract JudgementHandler[] modifiers { get; }
+
     public abstract Banknote.Defect CurrentDefects { get; }
     public abstract Banknote currentItem { get; }
 
     public void EnterGame()
     {
         gameElements.currentMode = this;
+
+        JudgementHandler[] m = modifiers;
+        if (m != null)
+        {
+            for (int i = 0; i < m.Length; i++)
+            {
+                m[i].OnResetGame();
+            }
+        }
     }
     /// <summary>
     /// Runs when the gameplay is loaded, almost like Start().
