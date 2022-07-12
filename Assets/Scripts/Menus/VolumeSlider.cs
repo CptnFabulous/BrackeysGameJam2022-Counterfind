@@ -35,6 +35,11 @@ public class VolumeSlider : MonoBehaviour
     /// <returns></returns>
     public static float LinearToLogarithmic(float value) => Mathf.Log10(ClampEpsilon(value)) * 20;
     /// <summary>
+    /// Alters logarithmic volume value back into linear slider value
+    /// </summary>
+    /// <param name="value"></param>
+    /// <returns></returns>
+    public static float LogarithmicToLinear(float value) => ClampEpsilon(Mathf.Pow(10, value / 20));
     /// <summary>
     /// Clamps between one and lowest non-zero value (logarithmic code is apparently weird with zero values)
     /// </summary>
