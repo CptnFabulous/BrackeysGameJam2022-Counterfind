@@ -40,8 +40,9 @@ public class InfiniteMode : Gamemode
     {
         // Regenerates the new item as real or fake
         // Uses a noise value to ensure not too many real or fake ones in a row.
-        bool isFake = Mathf.PerlinNoise(currentNote, 0) <= 0.5f;
+        float value = Random.value;//Mathf.PerlinNoise(currentItemIndex, 0);
         Debug.Log("Index = " + currentItemIndex + ", value = " + value);
+        bool isFake = value <= 0.5f;
         currentItem.GenerateNote(isFake, CurrentDefects);
         // Increments counter
         currentItemIndex++;
