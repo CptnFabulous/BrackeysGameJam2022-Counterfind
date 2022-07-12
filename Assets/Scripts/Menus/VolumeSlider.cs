@@ -13,6 +13,7 @@ public class VolumeSlider : MonoBehaviour
     public string parameterName;
     Slider slider;
 
+    #region Built-in MonoBehaviour functions
     private void Awake()
     {
         // References slider and adjusts variables to set up operation
@@ -22,6 +23,8 @@ public class VolumeSlider : MonoBehaviour
         RefreshShownValue();
     }
     private void OnEnable() => RefreshShownValue();
+    #endregion
+
     /// <summary>
     /// Logarithmically adjusts volume value using an input between 0 and 1.
     /// </summary>
