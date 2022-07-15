@@ -31,7 +31,7 @@ public class ObjectViewer : MonoBehaviour
     #region Built-in Unity-functions
     private void Awake()
     {
-        resetButton.onClick.AddListener(OnReset);
+        resetButton?.onClick.AddListener(ResetViewOrientation);
     }
     private void OnDrawGizmos()
     {
@@ -102,7 +102,7 @@ public class ObjectViewer : MonoBehaviour
         viewedObject.localPosition = viewedObject.localPosition + values;
         ClampPosition();
     }
-    public void OnReset()
+    public void ResetViewOrientation()
     {
         if (controlDenied) return;
 
