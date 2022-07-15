@@ -5,7 +5,6 @@ using UnityEngine.InputSystem;
 
 public class ObjectViewer : MonoBehaviour
 {
-    public Transform viewedObject;
 
     [Header("Positioning")]
     public float panSensitivity = 2;
@@ -21,6 +20,7 @@ public class ObjectViewer : MonoBehaviour
     public float resetTime = 0.5f;
     public AnimationCurve resetCurve = AnimationCurve.EaseInOut(0, 0, 1, 1);
 
+    public Transform viewedObject { get; private set; }
     IEnumerator resetInProgress;
     bool isPanning;
     bool isRotating;
@@ -117,11 +117,14 @@ public class ObjectViewer : MonoBehaviour
         resetInProgress = ResetLook();
         StartCoroutine(resetInProgress);
     }
-    public void AddObject(Transform newObject)
+    public void SetObject(Transform newObject)
     {
         viewedObject = newObject;
-        newObject.parent = transform;
-        OnReset();
+        if (newObject != null)
+        {
+            newObject.parent = transform;
+            ResetViewOrientation();
+        }
     }
 
     IEnumerator ResetLook()

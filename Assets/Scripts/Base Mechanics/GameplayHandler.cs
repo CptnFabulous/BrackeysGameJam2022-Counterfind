@@ -63,7 +63,7 @@ public class GameplayHandler : MonoBehaviour
         stateHandler.enabled = true;
 
         mode.PurgeItems();
-        viewControls.viewedObject = null;
+        viewControls.SetObject(null);
 
         mode.GenerateGamemodeElements();
 
@@ -109,7 +109,7 @@ public class GameplayHandler : MonoBehaviour
 
         Transform oldItemTransform = viewControls.viewedObject;
 
-        viewControls.viewedObject = null;
+        viewControls.SetObject(null);
         oldItemTransform.parent = transform;
         Vector3 oldPosition = oldItemTransform.position;
         Quaternion oldRotation = oldItemTransform.rotation;
@@ -129,7 +129,7 @@ public class GameplayHandler : MonoBehaviour
         newNote.transform.position = entryPilePosition.position;
         newNote.transform.rotation = entryPilePosition.rotation;
 
-        viewControls.AddObject(newNote.transform);
+        viewControls.SetObject(newNote.transform);
         yield return new WaitWhile(() => viewControls.controlDenied);
 
         acceptButton.interactable = true;
