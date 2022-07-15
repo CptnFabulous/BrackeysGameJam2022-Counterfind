@@ -5,21 +5,28 @@ using UnityEngine.InputSystem;
 
 public class ObjectViewer : MonoBehaviour
 {
-
-    [Header("Positioning")]
-    public float panSensitivity = 2;
-    public float zoomSensitivity = 1;
+    
+    [Header("Setup")]
+    public Camera viewingCamera;
     public Bounds positionBounds = new Bounds(Vector3.forward * 10, Vector3.one * 10);
-
-    [Header("Rotation")]
-    public float rotationSensitivity = 30;
     public Vector3 defaultPosition;
     public Vector3 defaultEulerAngles;
 
-    [Header("Reset")]
-    public UnityEngine.UI.Button resetButton;
+    [Header("Resetting object view")]
     public float resetTime = 0.5f;
     public AnimationCurve resetCurve = AnimationCurve.EaseInOut(0, 0, 1, 1);
+
+    [Header("Mouse controls")]
+    public float mousePanSensitivity = 2;
+    public float mouseZoomSensitivity = 1;
+    public float mouseRotationSensitivity = 30;
+
+    [Header("Touch controls")]
+    public OneFingerDragInput movement;
+    public TwoFingerTouchInput rotationAndZoom;
+    public UnityEngine.UI.Button resetButton;
+    public float touchZoomSensitivity = 5;
+    public float touchRotationSensitivityXY = 30;
 
     public Transform viewedObject { get; private set; }
     IEnumerator resetInProgress;
@@ -31,6 +38,11 @@ public class ObjectViewer : MonoBehaviour
     #region Built-in Unity-functions
     private void Awake()
     {
+        // Assign listeners to mobile controls
+        movement?.onDrag.AddListener((_) => Pan(movement.oldFingerPosition, movement.newFingerPosition));
+        rotationAndZoom?.onDrag.AddListener(RotateXY);
+        rotationAndZoom?.onRotate.AddListener(RotateZ);
+        rotationAndZoom?.onPinch.AddListener((i) => Zoom(i, touchZoomSensitivity));
         resetButton?.onClick.AddListener(ResetViewOrientation);
     }
     private void OnDrawGizmos()
@@ -48,7 +60,7 @@ public class ObjectViewer : MonoBehaviour
     }
     #endregion
 
-    #region Mouse+KB controls
+    #region Mouse+KB inputs
     public void OnPanControl(InputValue input)
     {
         isPanning = input.isPressed;
@@ -65,40 +77,54 @@ public class ObjectViewer : MonoBehaviour
 
         Vector2 value = input.Get<Vector2>();
 
-        if (isPanning)
-        {
-            Pan(value);
-        }
-        if (isRotating)
-        {
-            Rotate(value);
-        }
+        if (isPanning) Pan(value, mousePanSensitivity);
+        if (isRotating) RotateXYGimbalClamped(value);
     }
     public void OnZoom(InputValue input)
     {
         if (controlDenied) return;
         
         Vector2 value = input.Get<Vector2>().normalized;
-        Zoom(value.y);
+        Zoom(value.y, mouseZoomSensitivity);
     }
     #endregion
 
-    public void Pan(Vector2 input)
+    #region Rotation functions
+    public void Pan(Vector2 input, float sensitivity)
     {
-        Vector3 values = panSensitivity * Time.deltaTime * input;
+        Vector3 values = sensitivity * Time.deltaTime * input;
         viewedObject.localPosition = viewedObject.localPosition + values;
         ClampPosition();
     }
-    public void Rotate(Vector2 input)
+    public void Pan(Vector2 oldScreenPosition, Vector2 newScreenPosition)
+    {
+        float distance = Vector3.Distance(viewingCamera.transform.position, viewedObject.transform.position);
+        Vector3 oldWorldPoint = AdvancedTouchInput.ScreenToWorldPoint(viewingCamera, oldScreenPosition, distance);
+        Vector3 newWorldPoint = AdvancedTouchInput.ScreenToWorldPoint(viewingCamera, newScreenPosition, distance);
+        viewedObject.transform.Translate(newWorldPoint - oldWorldPoint, Space.World);
+    }
+    public void RotateXYGimbalClamped(Vector2 input)
     {
         input = new Vector2(input.y, input.x);
-        viewedObject.Rotate(rotationSensitivity * Time.deltaTime * input, Space.Self);
+        viewedObject.Rotate(mouseRotationSensitivity * Time.deltaTime * input, Space.Self);
         Vector3 direction = viewedObject.localRotation * Vector3.forward;
         viewedObject.localRotation = Quaternion.LookRotation(direction, Vector3.up);
     }
-    public void Zoom(float input)
+    public void RotateXY(Vector2 input)
     {
-        Vector3 values = input * zoomSensitivity * Time.deltaTime * Vector3.back;
+        input *= touchRotationSensitivityXY;
+        Vector3 position = viewedObject.transform.position;
+        viewedObject.RotateAround(position, viewingCamera.transform.up, -input.x);
+        viewedObject.RotateAround(position, viewingCamera.transform.right, input.y);
+    }
+    public void RotateZ(float angleDelta)
+    {
+        Vector3 axis = viewedObject.position - viewingCamera.transform.position;
+        viewedObject.RotateAround(viewedObject.position, axis, angleDelta);
+    }
+    public void Zoom(float input, float sensitivity)
+    {
+        Vector3 values = input * sensitivity * Time.deltaTime * Vector3.back;
         viewedObject.localPosition = viewedObject.localPosition + values;
         ClampPosition();
     }
@@ -118,6 +144,7 @@ public class ObjectViewer : MonoBehaviour
             ResetViewOrientation();
         }
     }
+    #endregion
 
     IEnumerator ResetLook()
     {
