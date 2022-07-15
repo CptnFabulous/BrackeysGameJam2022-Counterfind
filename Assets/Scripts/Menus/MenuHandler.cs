@@ -56,15 +56,13 @@ public class MenuHandler : MonoBehaviour
         }
         newWindow.gameObject.SetActive(true);
     }
-    public void QuitGame()
-    {
-        Application.Quit();
-    }
-    public void ToggleFullscreen()
-    {
-        Screen.fullScreen = !Screen.fullScreen;
-    }
-    
+
+
+
+    #region Game functions
+    public void QuitGame() => Application.Quit();
+    public void ToggleFullscreen() => Screen.fullScreen = !Screen.fullScreen;
+    #endregion
 
     
 }
