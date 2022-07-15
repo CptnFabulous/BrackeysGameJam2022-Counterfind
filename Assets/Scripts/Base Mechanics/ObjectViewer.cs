@@ -61,11 +61,8 @@ public class ObjectViewer : MonoBehaviour
     }
     public void OnMove(InputValue input)
     {
-        if (controlDenied)
-        {
-            return;
-        }
-        
+        if (controlDenied) return;
+
         Vector2 value = input.Get<Vector2>();
 
         if (isPanning)
@@ -79,10 +76,7 @@ public class ObjectViewer : MonoBehaviour
     }
     public void OnZoom(InputValue input)
     {
-        if (controlDenied)
-        {
-            return;
-        }
+        if (controlDenied) return;
         
         Vector2 value = input.Get<Vector2>().normalized;
         Zoom(value.y);
@@ -110,10 +104,7 @@ public class ObjectViewer : MonoBehaviour
     }
     public void OnReset()
     {
-        if (controlDenied)
-        {
-            return;
-        }
+        if (controlDenied) return;
 
         resetInProgress = ResetLook();
         StartCoroutine(resetInProgress);
