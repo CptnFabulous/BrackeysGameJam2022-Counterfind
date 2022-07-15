@@ -250,7 +250,7 @@ MonoBehaviour:
   scorePerNote: 100
   consecutiveMultiplierIncrease: 0.1
   scoreCounter: {fileID: 16803647282480627}
-  multiplierCounter: {fileID: 7040103828574828405}
+  streakCounter: {fileID: 7040103828574828405}
 --- !u!1 &8162931821787043832
 GameObject:
   m_ObjectHideFlags: 0

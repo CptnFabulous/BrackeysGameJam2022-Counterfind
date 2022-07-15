@@ -9,29 +9,29 @@ public class ScoreHandler : JudgementHandler
     public int scorePerNote = 100; // Score awarded per note
     public float consecutiveMultiplierIncrease = 0.1f; // Score multiplier increase for each consecutive correct note
     int score; // The current score
-    int consecutiveSuccesses; // How many notes has the player gotten correct in a row?
 
     [Header("Cosmetics")]
     public Text scoreCounter;
-    public Text multiplierCounter;
+    public Text streakCounter;
 
-    public float currentMultiplier => 1 + (consecutiveMultiplierIncrease * consecutiveSuccesses);
+    public int successStreak { get; private set; } // How many notes has the player gotten correct in a row?
+    public float currentMultiplier => 1 + (consecutiveMultiplierIncrease * successStreak);
     public override void OnResetGame()
     {
         score = 0;
-        consecutiveSuccesses = 0;
+        successStreak = 0;
         base.OnResetGame();
     }
 
     public override void OnCorrect()
     {
         score += Mathf.CeilToInt(scorePerNote * currentMultiplier);
-        consecutiveSuccesses++;
+        successStreak++;
         base.OnCorrect();
     }
     public override void OnIncorrect()
     {
-        consecutiveSuccesses = 0;
+        successStreak = 0;
         base.OnIncorrect();
     }
 
@@ -39,7 +39,7 @@ public class ScoreHandler : JudgementHandler
     public override void UpdateHUD()
     {
         scoreCounter.text = score.ToString();
-        multiplierCounter.text = currentMultiplier.ToString();
         Debug.Log("Current score = " + score + ", multiplier = " + currentMultiplier);
+        streakCounter.text = "X" + successStreak;
     }
 }
