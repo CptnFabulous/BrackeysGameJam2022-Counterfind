@@ -1,11 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Timekeeper : MonoBehaviour
 {
     public TimeValue parTime;
     public bool stopWhenExpired;
+    public UnityEvent onTimerStart;
+    public UnityEvent onTimeUp;
     public float secondsRemaining => parTime.inSeconds - secondsElapsed;
     public bool pastParTime => secondsElapsed >= parTime.inSeconds;
 
@@ -17,6 +20,7 @@ public class Timekeeper : MonoBehaviour
         if (secondsElapsed == 0)
         {
             startTime = Time.time;
+            onTimerStart.Invoke();
         }
     }
     private void Update()
@@ -25,6 +29,7 @@ public class Timekeeper : MonoBehaviour
         if (stopWhenExpired && pastParTime)
         {
             Pause();
+            onTimeUp.Invoke();
         }
     }
 
