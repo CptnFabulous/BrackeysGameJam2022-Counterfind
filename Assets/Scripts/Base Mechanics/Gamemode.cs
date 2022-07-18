@@ -29,6 +29,7 @@ public abstract class Gamemode : MonoBehaviour
     /// </summary>
     public virtual void GenerateGamemodeElements()
     {
+        PurgeItems();
         gameElements.timer.onTimeUp.RemoveAllListeners();
         enabled = true;
     }
