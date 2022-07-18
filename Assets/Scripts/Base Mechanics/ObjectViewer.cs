@@ -49,6 +49,7 @@ public class ObjectViewer : MonoBehaviour
     {
         Gizmos.matrix = transform.localToWorldMatrix;
         Gizmos.DrawWireCube(positionBounds.center, positionBounds.size);
+        Gizmos.DrawCube(positionBounds.center + defaultPosition, positionBounds.extents.magnitude * 0.1f * Vector3.one);
     }
     private void OnEnable()
     {
