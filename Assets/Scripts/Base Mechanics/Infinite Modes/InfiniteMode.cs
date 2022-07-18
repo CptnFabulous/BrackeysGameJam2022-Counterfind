@@ -14,7 +14,8 @@ public class InfiniteMode : Gamemode
     public ScoreHandler score;
 
     Banknote noteToReuse;
-    public int currentItemIndex { get; private set; }
+
+
 
     /*
     Ideas for infinite mode:

@@ -10,6 +10,7 @@ public abstract class Gamemode : MonoBehaviour
 
     public abstract Banknote.Defect CurrentDefects { get; }
     public abstract Banknote currentItem { get; }
+    public int currentItemIndex { get; protected set; }
 
     public void EnterGame()
     {
@@ -41,7 +42,7 @@ public abstract class Gamemode : MonoBehaviour
     /// <summary>
     /// Occurs after putting away the previous item and before loading the next one
     /// </summary>
-    public abstract void PrepareNextItem();
+    public virtual void PrepareNextItem() => currentItemIndex++; // Increments counter
     public virtual void EndGameplay()
     {
         enabled = false;

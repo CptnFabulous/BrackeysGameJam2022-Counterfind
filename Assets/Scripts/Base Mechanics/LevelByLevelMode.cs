@@ -10,12 +10,11 @@ public class LevelByLevelMode : Gamemode
     public Level currentLevel { get; private set; }
     public Banknote[] allItems { get; set; }
     public bool[] judgedFakeByPlayer { get; private set; }
-    public int currentlyChecking { get; private set; }
     #endregion
 
     #region Level properties
     public bool notesExist => allItems.Length > 0;
-    public bool onLastNote => currentlyChecking >= allItems.Length - 1;
+    public bool onLastNote => currentItemIndex >= allItems.Length - 1;
     public Timer levelTimer => gameElements.timer;
     #endregion
 
@@ -26,8 +25,8 @@ public class LevelByLevelMode : Gamemode
     {
         get
         {
-            bool indexIsInArray = currentlyChecking >= 0;
-            return notesExist && indexIsInArray ? allItems[currentlyChecking] : null;
+            bool indexIsInArray = currentItemIndex >= 0;
+            return notesExist && indexIsInArray ? allItems[currentItemIndex] : null;
         }
     }
     #endregion
@@ -49,7 +48,7 @@ public class LevelByLevelMode : Gamemode
         }
         allItems = newNotes.ToArray();
         judgedFakeByPlayer = new bool[allItems.Length];
-        currentlyChecking = -1;
+        currentItemIndex = -1;
 
         // Reset timer and add appropriate listeners
         levelTimer.onTimeUp.AddListener(EndGameplay);
@@ -59,7 +58,7 @@ public class LevelByLevelMode : Gamemode
     }
     public override void OnJudgementMade(bool deemedCounterfeit)
     {
-        judgedFakeByPlayer[currentlyChecking] = deemedCounterfeit;
+        judgedFakeByPlayer[currentItemIndex] = deemedCounterfeit;
 
         if (onLastNote)
         {
@@ -69,11 +68,11 @@ public class LevelByLevelMode : Gamemode
     public override void PrepareNextItem()
     {
         // Determine if notes are available, and if some have not yet been checked
-        Banknote nextItem = (notesExist && onLastNote == false) ? allItems[currentlyChecking + 1] : null;
+        Banknote nextItem = (notesExist && onLastNote == false) ? allItems[currentItemIndex + 1] : null;
         if (nextItem != null)
         {
             // If a new item is present, increase currentlyChecking so that one is registered
-            currentlyChecking++;
+            currentItemIndex++;
         }
         else
         {
@@ -113,7 +112,7 @@ public class LevelByLevelMode : Gamemode
         {
             return;
         }
-        gameElements.noteCounter.text = (currentlyChecking + 1) + "/" + allItems.Length;
+        gameElements.noteCounter.text = (currentItemIndex + 1) + "/" + allItems.Length;
         gameElements.timerDisplay.text = levelTimer.remaining.ToString(false);
     }
 }
