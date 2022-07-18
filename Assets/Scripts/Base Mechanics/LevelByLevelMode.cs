@@ -107,11 +107,6 @@ public class LevelByLevelMode : Gamemode
         EnterGame();
     }
 
-    public override void Awake()
-    {
-        levelTimer.onTimeUp.AddListener(EndGameplay);
-        base.Awake();
-    }
     private void LateUpdate()
     {
         if (currentLevel == null)
