@@ -6,6 +6,7 @@ using UnityEngine.Events;
 
 public class GameplayHandler : MonoBehaviour
 {
+    public Timer timer;
     [Header("Controls")]
     public ObjectViewer viewControls;
     public Button acceptButton;

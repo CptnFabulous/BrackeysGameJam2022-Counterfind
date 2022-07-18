@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class LevelByLevelMode : Gamemode
 {
-    public Timer levelTimer;
     public LevelEndScreen endScreen;
 
     #region Level progression variables
@@ -17,6 +16,7 @@ public class LevelByLevelMode : Gamemode
     #region Level properties
     public bool notesExist => allItems.Length > 0;
     public bool onLastNote => currentlyChecking >= allItems.Length - 1;
+    public Timer levelTimer => gameElements.timer;
     #endregion
 
     #region Override properties
