@@ -35,6 +35,8 @@ public class LevelByLevelMode : Gamemode
     #region Override functions
     public override void GenerateGamemodeElements()
     {
+        base.GenerateGamemodeElements();
+
         List<Banknote> newNotes = new List<Banknote>();
         for (int i = 0; i < currentLevel.numberOfItems; i++)
         {
@@ -54,8 +56,6 @@ public class LevelByLevelMode : Gamemode
         levelTimer.stopWhenExpired = true;
         levelTimer.parTime = currentLevel.timeLimit;
         levelTimer.StartTimer();
-
-        base.GenerateGamemodeElements();
     }
     public override void OnJudgementMade(bool deemedCounterfeit)
     {
