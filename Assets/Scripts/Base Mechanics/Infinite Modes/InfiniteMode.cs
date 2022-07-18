@@ -37,9 +37,13 @@ public class InfiniteMode : Gamemode
     public override Banknote currentItem => noteToReuse;
     public override void GenerateGamemodeElements()
     {
+        base.GenerateGamemodeElements();
+
         noteToReuse = Instantiate(gameElements.prefab);
         currentItemIndex = 0;
-        base.GenerateGamemodeElements();
+
+        gameElements.timer.stopWhenExpired = false;
+        gameElements.timer.StartTimer();
     }
     public override void PrepareNextItem()
     {
@@ -71,6 +75,11 @@ public class InfiniteMode : Gamemode
             Destroy(noteToReuse);
         }
     }
+    public override void EndGameplay()
+    {
+        gameElements.timer.Pause();
+        base.EndGameplay();
+    }
 
     public override void Awake()
     {
@@ -86,5 +95,6 @@ public class InfiniteMode : Gamemode
     public void LateUpdate()
     {
         gameElements.noteCounter.text = currentItemIndex.ToString();
+        gameElements.timerDisplay.text = gameElements.timer.elapsed.ToString(false);
     }
 }
