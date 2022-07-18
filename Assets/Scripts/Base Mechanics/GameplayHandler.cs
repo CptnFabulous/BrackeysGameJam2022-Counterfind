@@ -27,6 +27,7 @@ public class GameplayHandler : MonoBehaviour
     public UnityEvent onEnterGameplay;
 
     [Header("HUD elements")]
+    public Text timerDisplay;
     public Text noteCounter;
 
     public Gamemode currentMode

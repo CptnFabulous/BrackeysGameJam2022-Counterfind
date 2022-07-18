@@ -11,27 +11,17 @@ public class Timer : MonoBehaviour
         public int hours;
         public int minutes;
         public float seconds;
-        public float InSeconds => (hours * 3600) + (minutes * 60) + seconds;
-        //public override string ToString() => hours + ":" + minutes + ":" + seconds;
-
-        public override string ToString() => ToString(false);
+        public float inSeconds => (hours * 3600) + (minutes * 60) + seconds;
+        public override string ToString() => ToString(true);
         public string ToString(bool showDecimalPlaces)
         {
             string text = "";
-            if (hours < 10)
-            {
-                text += "0";
-            }
+
+            if (hours < 10) text += "0";
             text += hours + ":";
-            if (minutes < 10)
-            {
-                text += "0";
-            }
+            if (minutes < 10) text += "0";
             text += minutes + ":";
-            if (seconds < 10)
-            {
-                text += "0";
-            }
+            if (seconds < 10) text += "0";
             text += showDecimalPlaces ? seconds : Mathf.FloorToInt(seconds);
 
             return text;
@@ -54,52 +44,43 @@ public class Timer : MonoBehaviour
         }
     }
 
-    public TimeValue timeLimit = new TimeValue(1, 0, 0);
-    public bool goIntoNegatives = false;
+    public TimeValue parTime;
+    public bool stopWhenExpired;
     public UnityEvent onTimerStart;
     public UnityEvent onTimeUp;
+    public float secondsRemaining => parTime.inSeconds - secondsElapsed;
+    public bool pastParTime => secondsElapsed >= parTime.inSeconds;
+    public TimeValue elapsed => new TimeValue(secondsElapsed);
+    public TimeValue remaining => new TimeValue(secondsRemaining);
+    public float secondsElapsed { get; private set; }
+    public float startTime { get; private set; }
 
-    public UnityEngine.UI.Text visualTimer;
-
-    float remainingTimeInSeconds;
-    bool timeIsUp;
-    public TimeValue remaining => new TimeValue(remainingTimeInSeconds);
-
-    public void StartTimer()
+    private void OnEnable()
     {
-        remainingTimeInSeconds = timeLimit.InSeconds;
-        timeIsUp = false;
-        onTimerStart.Invoke();
-        Resume();
-    }
-    public void Pause() => enabled = false;
-    public void Resume() => enabled = true;
-
-    void Start()
-    {
-        StartTimer();
-    }
-    void Update()
-    {
-        remainingTimeInSeconds -= Time.deltaTime;
-        if (remainingTimeInSeconds <= 0 && timeIsUp == false)
+        if (secondsElapsed == 0)
         {
-            timeIsUp = true;
-            if (goIntoNegatives == false)
-            {
-                remainingTimeInSeconds = 0;
-                Pause();
-            }
+            startTime = Time.time;
+            onTimerStart.Invoke();
+        }
+    }
+    private void Update()
+    {
+        secondsElapsed += Time.deltaTime;
+        if (stopWhenExpired && pastParTime)
+        {
+            Pause();
             onTimeUp.Invoke();
         }
     }
-    private void LateUpdate()
+
+    public void StartTimer()
     {
-        if (visualTimer != null)
-        {
-            visualTimer.text = remaining.ToString();
-        }
+        ResetTimer();
+        Play();
     }
-
-
+    public void ResetTimer() => secondsElapsed = 0;
+    public void Play() => enabled = true;
+    public void Pause() => enabled = false;
 }
+
+

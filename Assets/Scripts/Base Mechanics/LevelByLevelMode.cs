@@ -49,8 +49,10 @@ public class LevelByLevelMode : Gamemode
         judgedFakeByPlayer = new bool[allItems.Length];
         currentlyChecking = -1;
 
-        // Reset timer
-        levelTimer.timeLimit = currentLevel.timeLimit;
+        // Reset timer and add appropriate listeners
+        levelTimer.onTimeUp.AddListener(EndGameplay);
+        levelTimer.stopWhenExpired = true;
+        levelTimer.parTime = currentLevel.timeLimit;
         levelTimer.StartTimer();
 
         base.GenerateGamemodeElements();
@@ -117,5 +119,6 @@ public class LevelByLevelMode : Gamemode
             return;
         }
         gameElements.noteCounter.text = (currentlyChecking + 1) + "/" + allItems.Length;
+        gameElements.timerDisplay.text = levelTimer.remaining.ToString(false);
     }
 }
