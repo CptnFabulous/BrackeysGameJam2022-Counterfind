@@ -6,6 +6,29 @@ using UnityEngine.Events;
 
 public class GameplayHandler : MonoBehaviour
 {
+    [Header("Controls")]
+    public ObjectViewer viewControls;
+    public Button acceptButton;
+    public Button rejectButton;
+    public ReferenceWindow referenceWindow;
+
+    [Header("Generating notes")]
+    public Banknote prefab;
+    public Transform entryPilePosition;
+    public Transform exitPilePosition;
+    public float exitTime = 0.5f;
+    public AnimationCurve exitAnimationCurve = AnimationCurve.EaseInOut(0, 0, 1, 1);
+    public UnityEvent onBringOut;
+    public UnityEvent onPutAway;
+
+    [Header("Game/menu transition")]
+    public GameStateHandler stateHandler;
+    public GameObject menuObject;
+    public UnityEvent onEnterGameplay;
+
+    [Header("HUD elements")]
+    public Text noteCounter;
+
     public Gamemode currentMode
     {
         get => mode;
@@ -16,30 +39,6 @@ public class GameplayHandler : MonoBehaviour
         }
     }
     Gamemode mode;
-    
-    [Header("Game elements")]
-    public Banknote prefab;
-    public ObjectViewer viewControls;
-    public GameStateHandler stateHandler;
-
-    [Header("HUD elements")]
-    public Text noteCounter;
-    public Button acceptButton;
-    public Button rejectButton;
-    public ReferenceWindow referenceWindow;
-
-    [Header("Transitioning to next note")]
-    public Transform entryPilePosition;
-    public Transform exitPilePosition;
-    public float exitTime = 0.5f;
-    public AnimationCurve exitAnimationCurve = AnimationCurve.EaseInOut(0, 0, 1, 1);
-    public UnityEvent onBringOut;
-    public UnityEvent onPutAway;
-
-    [Header("Transitioning from menus")]
-    public GameObject menuObject;
-    public UnityEvent onEnterGameplay;
-
 
     IEnumerator transition;
 
@@ -48,7 +47,6 @@ public class GameplayHandler : MonoBehaviour
         acceptButton.onClick.AddListener(() => JudgeItem(false));
         rejectButton.onClick.AddListener(() => JudgeItem(true));
         
-
         ExitGameplay();
     }
     
