@@ -6,15 +6,17 @@ using UnityEngine.Events;
 
 public class GameplayHandler : MonoBehaviour
 {
+    [Header("Game elements")]
+    public Banknote prefab;
     public Timer timer;
+
     [Header("Controls")]
     public ObjectViewer viewControls;
     public Button acceptButton;
     public Button rejectButton;
     public ReferenceWindow referenceWindow;
 
-    [Header("Generating notes")]
-    public Banknote prefab;
+    [Header("Showing next item")]
     public Transform entryPilePosition;
     public Transform exitPilePosition;
     public float exitTime = 0.5f;
