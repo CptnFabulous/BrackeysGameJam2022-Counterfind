@@ -253,7 +253,7 @@ GameObject:
   - component: {fileID: 6450426063002126754}
   - component: {fileID: 1429896820388453300}
   m_Layer: 5
-  m_Name: End Screen
+  m_Name: End Screen (Level Mode)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
