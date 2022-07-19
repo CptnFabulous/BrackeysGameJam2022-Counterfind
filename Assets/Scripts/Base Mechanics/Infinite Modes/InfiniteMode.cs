@@ -48,14 +48,13 @@ public class InfiniteMode : Gamemode
     }
     public override void PrepareNextItem()
     {
+        base.PrepareNextItem();
         // Regenerates the new item as real or fake
         // Uses a noise value to ensure not too many real or fake ones in a row.
         float value = Random.value;//Mathf.PerlinNoise(currentItemIndex, 0);
         Debug.Log("Index = " + currentItemIndex + ", value = " + value);
         bool isFake = value <= 0.5f;
         currentItem.GenerateNote(isFake, CurrentDefects);
-        // Increments counter
-        currentItemIndex++;
     }
     public override void OnJudgementMade(bool deemedCounterfeit)
     {
