@@ -51,7 +51,7 @@ public class InfiniteMode : Gamemode
     {
         if (noteToReuse != null)
         {
-            Destroy(noteToReuse);
+            Destroy(noteToReuse.gameObject);
         }
     }
     public override void EndGameplay()
