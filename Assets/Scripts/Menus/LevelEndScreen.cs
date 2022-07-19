@@ -44,7 +44,7 @@ public class LevelEndScreen : EndScreen
         int finalScore = 0;
         int amountThoughtReal = 0;
         int amountThoughtFake = 0;
-        for (int i = 0; i < levelData.currentlyChecking + 1; i++)
+        for (int i = 0; i < levelData.currentItemIndex + 1; i++)
         {
             if (levelData.judgedFakeByPlayer[i] == levelData.allItems[i].Counterfeit)
             {
