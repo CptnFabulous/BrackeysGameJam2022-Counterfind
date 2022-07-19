@@ -268,7 +268,7 @@ RectTransform:
   m_GameObject: {fileID: 1429896820388453295}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1429896820389723163}
   - {fileID: 1429896822053808960}
@@ -329,7 +329,7 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
-  m_PresetInfoIsWorld: 0
+  m_PresetInfoIsWorld: 1
 --- !u!114 &1429896820388453297
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -468,9 +468,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1102b5047ceccfd45b4a1057d52a8c94, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  reason: {fileID: 982436879458649400}
   retryButton: {fileID: 6382867407270155928}
   quitButton: {fileID: 6382867406968594521}
-  reason: {fileID: 982436879458649400}
+  nextLevelButton: {fileID: 6382867407214563018}
   winGraphic: {fileID: 1429896822171957639}
   failGraphic: {fileID: 1272702718092470883}
   whenAllLevelsCompleted: You completed all of the levels!
@@ -481,7 +482,6 @@ MonoBehaviour:
   thoughtWasReal: {fileID: 1429896821128500666}
   thoughtWasFake: {fileID: 1429896821270596751}
   remainingTime: {fileID: 1429896820363696131}
-  nextLevelButton: {fileID: 6382867407214563018}
   onWin:
     m_PersistentCalls:
       m_Calls:
