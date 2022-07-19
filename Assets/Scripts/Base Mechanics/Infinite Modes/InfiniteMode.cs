@@ -1,15 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Events;
 
 public class InfiniteMode : Gamemode
 {
     public Banknote.Defect defectsToInclude;
-    public UnityEvent onCorrect;
-    public UnityEvent onIncorrect;
-
-    [Header("Additional elements")]
     public LivesHandler lives;
     public ScoreHandler score;
 
@@ -52,18 +47,6 @@ public class InfiniteMode : Gamemode
         // Regenerates the new item as real or fake
         bool isFake = Random.value <= 0.5f;
         currentItem.GenerateNote(isFake, CurrentDefects);
-    }
-    public override void OnJudgementMade(bool deemedCounterfeit)
-    {
-        bool correct = currentItem.Counterfeit == deemedCounterfeit;
-        if (correct)
-        {
-            onCorrect.Invoke();
-        }
-        else
-        {
-            onIncorrect.Invoke();
-        }
     }
     public override void PurgeItems()
     {

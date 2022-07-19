@@ -1,10 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public abstract class Gamemode : MonoBehaviour
 {
     public GameplayHandler gameElements;
+    public UnityEvent onCorrect;
+    public UnityEvent onIncorrect;
 
     public abstract JudgementHandler[] modifiers { get; }
 
@@ -38,7 +41,18 @@ public abstract class Gamemode : MonoBehaviour
     /// Runs when the player judges an item as real or fake.
     /// </summary>
     /// <param name="deemedCounterfeit"></param>
-    public abstract void OnJudgementMade(bool deemedCounterfeit);
+    public virtual void OnJudgementMade(bool deemedCounterfeit)
+    {
+        bool correct = currentItem.Counterfeit == deemedCounterfeit;
+        if (correct)
+        {
+            onCorrect.Invoke();
+        }
+        else
+        {
+            onIncorrect.Invoke();
+        }
+    }
     /// <summary>
     /// Occurs after putting away the previous item and before loading the next one
     /// </summary>

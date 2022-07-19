@@ -58,6 +58,7 @@ public class LevelByLevelMode : Gamemode
     }
     public override void OnJudgementMade(bool deemedCounterfeit)
     {
+        base.OnJudgementMade(deemedCounterfeit);
         judgedFakeByPlayer[currentItemIndex] = deemedCounterfeit;
 
         if (onLastNote)
