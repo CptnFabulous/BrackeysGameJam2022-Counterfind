@@ -11,11 +11,13 @@ public class Timer : MonoBehaviour
         public int hours;
         public int minutes;
         public float seconds;
+        bool negative;
         public float inSeconds => (hours * 3600) + (minutes * 60) + seconds;
         public override string ToString() => ToString(true);
         public string ToString(bool showDecimalPlaces)
         {
             string text = "";
+            if (negative) text += "-";
 
             if (hours < 10) text += "0";
             text += hours + ":";
@@ -27,15 +29,17 @@ public class Timer : MonoBehaviour
             return text;
         }
 
-        public TimeValue(int hours, int minutes, float seconds)
+        public TimeValue(int hours, int minutes, float seconds, bool negative = false)
         {
             this.hours = hours;
             this.minutes = minutes;
             this.seconds = seconds;
+            this.negative = negative;
         }
         public TimeValue(float totalTimeInSeconds)
         {
-            float remaining = totalTimeInSeconds;
+            negative = totalTimeInSeconds < 0;
+            float remaining = Mathf.Abs(totalTimeInSeconds);
             hours = Mathf.FloorToInt(remaining / 3600);
             remaining = remaining % 3600;
             minutes = Mathf.FloorToInt(remaining / 60);
