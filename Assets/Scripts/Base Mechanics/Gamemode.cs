@@ -13,7 +13,9 @@ public abstract class Gamemode : MonoBehaviour
 
     public abstract Banknote.Defect CurrentDefects { get; }
     public abstract Banknote currentItem { get; }
+    public float accuracyRatio => numberCorrect / currentItemIndex;
     public int currentItemIndex { get; protected set; }
+    public int numberCorrect { get; protected set; }
 
     public void EnterGame()
     {
@@ -36,6 +38,7 @@ public abstract class Gamemode : MonoBehaviour
         PurgeItems();
         gameElements.timer.onTimeUp.RemoveAllListeners();
         currentItemIndex = -1;
+        numberCorrect = 0;
         enabled = true;
     }
     /// <summary>
@@ -47,6 +50,7 @@ public abstract class Gamemode : MonoBehaviour
         bool correct = currentItem.Counterfeit == deemedCounterfeit;
         if (correct)
         {
+            numberCorrect++;
             onCorrect.Invoke();
         }
         else
