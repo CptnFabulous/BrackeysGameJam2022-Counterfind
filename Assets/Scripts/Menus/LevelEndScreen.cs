@@ -38,7 +38,7 @@ public class LevelEndScreen : EndScreen
 
     public override void Generate()
     {
-        reason.text = "";
+        base.Generate();
 
         #region Calculate scores
         int finalScore = 0;

@@ -14,5 +14,9 @@ public abstract class EndScreen : MonoBehaviour
         retryButton.onClick.AddListener(LevelProgressionHandler.Current.RetryLevel);
         quitButton.onClick.AddListener(LevelProgressionHandler.Current.ReturnToMenu);
     }
-    public abstract void Generate();
+    public virtual void Generate()
+    {
+        gameObject.SetActive(true);
+        reason.text = "";
+    }
 }
