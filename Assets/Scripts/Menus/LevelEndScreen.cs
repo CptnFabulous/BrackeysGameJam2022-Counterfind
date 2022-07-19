@@ -99,7 +99,7 @@ public class LevelEndScreen : EndScreen
         successful.text = finalScore.ToString();
         thoughtWasReal.text = amountThoughtReal.ToString();
         thoughtWasFake.text = amountThoughtFake.ToString();
-        remainingTime.text = levelData.levelTimer.remaining.ToString();
+        remainingTime.text = levelData.levelTimer.remaining.ToString(false);
         #endregion
 
         nextLevelButton.interactable = levelCompleted && !LevelProgressionHandler.Current.onLastLevel;
