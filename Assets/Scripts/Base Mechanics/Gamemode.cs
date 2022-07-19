@@ -35,6 +35,7 @@ public abstract class Gamemode : MonoBehaviour
     {
         PurgeItems();
         gameElements.timer.onTimeUp.RemoveAllListeners();
+        currentItemIndex = -1;
         enabled = true;
     }
     /// <summary>

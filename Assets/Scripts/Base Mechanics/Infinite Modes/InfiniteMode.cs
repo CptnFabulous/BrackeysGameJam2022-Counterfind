@@ -36,8 +36,7 @@ public class InfiniteMode : Gamemode
         base.GenerateGamemodeElements();
 
         noteToReuse = Instantiate(gameElements.prefab);
-        currentItemIndex = 0;
-
+        
         gameElements.timer.stopWhenExpired = false;
         gameElements.timer.StartTimer();
     }

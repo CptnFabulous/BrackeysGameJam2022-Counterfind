@@ -48,7 +48,6 @@ public class LevelByLevelMode : Gamemode
         }
         allItems = newNotes.ToArray();
         judgedFakeByPlayer = new bool[allItems.Length];
-        currentItemIndex = -1;
 
         // Reset timer and add appropriate listeners
         levelTimer.onTimeUp.AddListener(EndGameplay);
