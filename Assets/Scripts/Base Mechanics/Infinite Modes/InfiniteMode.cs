@@ -7,6 +7,7 @@ public class InfiniteMode : Gamemode
     public Banknote.Defect defectsToInclude;
     public LivesHandler lives;
     public ScoreHandler score;
+    public InfiniteModeEndScreen endScreen;
 
     Banknote noteToReuse;
 
@@ -57,6 +58,8 @@ public class InfiniteMode : Gamemode
     public override void EndGameplay()
     {
         gameElements.timer.Pause();
+        endScreen.mode = this;
+        endScreen.Generate();
         base.EndGameplay();
     }
 
