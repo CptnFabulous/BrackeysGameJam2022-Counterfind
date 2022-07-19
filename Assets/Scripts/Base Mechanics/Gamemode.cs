@@ -73,8 +73,5 @@ public abstract class Gamemode : MonoBehaviour
     /// </summary>
     public abstract void PurgeItems();
 
-    public virtual void Awake()
-    {
-        enabled = false;
-    }
+    public virtual void Awake() => enabled = false;
 }
