@@ -19,8 +19,6 @@ public abstract class Gamemode : MonoBehaviour
 
     public void EnterGame()
     {
-        gameElements.currentMode = this;
-
         JudgementHandler[] m = modifiers;
         if (m != null)
         {
@@ -29,6 +27,8 @@ public abstract class Gamemode : MonoBehaviour
                 m[i].OnResetGame();
             }
         }
+
+        gameElements.GenerateGame(this);
     }
     /// <summary>
     /// Runs when the gameplay is loaded, almost like Start().

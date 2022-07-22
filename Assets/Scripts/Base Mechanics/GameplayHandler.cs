@@ -6,6 +6,8 @@ using UnityEngine.Events;
 
 public class GameplayHandler : MonoBehaviour
 {
+    public Gamemode currentMode { get; private set; }
+
     [Header("Game elements")]
     public Banknote prefab;
     public Timer timer;
@@ -33,16 +35,7 @@ public class GameplayHandler : MonoBehaviour
     public Text timerDisplay;
     public Text noteCounter;
 
-    public Gamemode currentMode
-    {
-        get => mode;
-        set
-        {
-            mode = value;
-            GenerateGame();
-        }
-    }
-    Gamemode mode;
+    
 
     IEnumerator transition;
 
@@ -54,10 +47,11 @@ public class GameplayHandler : MonoBehaviour
         ExitGameplay();
     }
     
-
     
-    void GenerateGame()
+    public void GenerateGame(Gamemode newMode)
     {
+        currentMode = newMode;
+        
         menuObject.SetActive(false);
 
         gameObject.SetActive(true);
@@ -66,11 +60,9 @@ public class GameplayHandler : MonoBehaviour
 
         viewControls.SetObject(null);
 
-        mode.GenerateGamemodeElements();
+        currentMode.GenerateGamemodeElements();
 
-        referenceWindow.Setup(mode.CurrentDefects);
-        //referenceWindow.SetWindowActiveState(false);
-
+        referenceWindow.Setup(currentMode.CurrentDefects);
 
         stateHandler.ResumeGame();
         GoToNextItem();
@@ -92,9 +84,9 @@ public class GameplayHandler : MonoBehaviour
             yield return StartCoroutine(putAway);
         }
 
-        mode.PrepareNextItem();
+        currentMode.PrepareNextItem();
 
-        Banknote newItem = mode.currentItem;
+        Banknote newItem = currentMode.currentItem;
         if (newItem != null)
         {
             IEnumerator getNew = DeployNewItem(newItem);
@@ -148,9 +140,9 @@ public class GameplayHandler : MonoBehaviour
         viewControls.enabled = false;
         stateHandler.enabled = false;
 
-        if (mode == null) return;
+        if (currentMode == null) return;
 
-        mode.PurgeItems();
+        currentMode.PurgeItems();
 
         menuObject.SetActive(true);
     }
