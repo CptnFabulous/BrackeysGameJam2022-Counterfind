@@ -70,7 +70,14 @@ public class GameplayHandler : MonoBehaviour
         onEnterGameplay.Invoke();
     }
 
+    void JudgeItem(bool counterfeit)
+    {
+        currentMode.OnJudgementMade(counterfeit);
+        //Debug.Log((currentlyChecking + 1) + ": " + allNotes[currentlyChecking].Counterfeit + ", " + counterfeit);
+        GoToNextItem();
+    }
 
+    #region Transitioning to next item
     void GoToNextItem()
     {
         transition = TransitionToNextItem();
@@ -128,7 +135,8 @@ public class GameplayHandler : MonoBehaviour
         acceptButton.interactable = true;
         rejectButton.interactable = true;
     }
-    
+    #endregion
+
     public void SuspendGameplay()
     {
         viewControls.enabled = false;
@@ -147,11 +155,6 @@ public class GameplayHandler : MonoBehaviour
         menuObject.SetActive(true);
     }
 
-    void JudgeItem(bool counterfeit)
-    {
-        mode.OnJudgementMade(counterfeit);
-        //Debug.Log((currentlyChecking + 1) + ": " + allNotes[currentlyChecking].Counterfeit + ", " + counterfeit);
-        GoToNextItem();
-    }
+    
 }
 
