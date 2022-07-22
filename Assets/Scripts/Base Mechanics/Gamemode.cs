@@ -10,9 +10,9 @@ public abstract class Gamemode : MonoBehaviour
     public UnityEvent onIncorrect;
 
     public abstract JudgementHandler[] modifiers { get; }
-
     public abstract Banknote.Defect CurrentDefects { get; }
     public abstract Banknote currentItem { get; }
+
     public float accuracyRatio => numberCorrect / currentItemIndex;
     public int currentItemIndex { get; protected set; }
     public int numberCorrect { get; protected set; }
@@ -73,5 +73,8 @@ public abstract class Gamemode : MonoBehaviour
     /// </summary>
     public abstract void PurgeItems();
 
-    public virtual void Awake() => enabled = false;
+    public virtual void Awake()
+    {
+        enabled = false;
+    }
 }
