@@ -7,7 +7,15 @@ public static class SaveHandler
 {
     public struct SaveFile
     {
+        public int numberOfGamesPlayed;
+        public int highScore;
+        public float bestAccuracyRatio;
+        public float longestGameDuration;
+        public float longestStreak;
 
+        public int completedLevelIndex;
+        public float[] bestLevelTimes;
+        public bool[] perfectScores;
     }
 
     public static SaveFile currentData;
