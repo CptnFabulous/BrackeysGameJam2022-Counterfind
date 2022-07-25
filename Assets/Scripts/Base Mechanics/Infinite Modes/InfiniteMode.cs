@@ -57,7 +57,6 @@ public class InfiniteMode : Gamemode
     }
     public override void EndGameplay()
     {
-        gameElements.timer.Pause();
         endScreen.mode = this;
         endScreen.Generate();
         base.EndGameplay();

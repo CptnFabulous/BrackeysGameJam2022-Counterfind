@@ -64,6 +64,7 @@ public abstract class Gamemode : MonoBehaviour
     public virtual void PrepareNextItem() => currentItemIndex++; // Increments counter
     public virtual void EndGameplay()
     {
+        gameElements.timer.Pause();
         enabled = false;
         gameElements.SuspendGameplay();
     }

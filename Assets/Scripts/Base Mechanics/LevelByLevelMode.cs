@@ -81,8 +81,6 @@ public class LevelByLevelMode : Gamemode
     }
     public override void EndGameplay()
     {
-        levelTimer.Pause();
-
         endScreen.levelData = this;
         endScreen.Generate();
 
