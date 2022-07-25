@@ -5,7 +5,6 @@ using UnityEngine;
 public class InfiniteMode : Gamemode
 {
     public Banknote.Defect defectsToInclude;
-    public InfiniteModeEndScreen endScreen;
 
     Banknote noteToReuse;
 
@@ -57,6 +56,7 @@ public class InfiniteMode : Gamemode
     }
     public override void EndGameplay()
     {
+        InfiniteModeEndScreen endScreen = gameElements.player.GetComponentInChildren<InfiniteModeEndScreen>(true);
         endScreen.mode = this;
         endScreen.Generate();
         base.EndGameplay();

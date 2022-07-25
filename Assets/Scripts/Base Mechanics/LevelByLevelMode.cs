@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class LevelByLevelMode : Gamemode
 {
-    public LevelEndScreen endScreen;
-
     #region Level progression variables
     public Level currentLevel { get; private set; }
     public Banknote[] allItems { get; set; }
@@ -81,6 +79,7 @@ public class LevelByLevelMode : Gamemode
     }
     public override void EndGameplay()
     {
+        LevelEndScreen endScreen = gameElements.player.GetComponentInChildren<LevelEndScreen>(true);
         endScreen.levelData = this;
         endScreen.Generate();
 
