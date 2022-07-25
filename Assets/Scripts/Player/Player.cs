@@ -17,4 +17,8 @@ public class Player : MonoBehaviour
     [Header("Game HUD")]
     public Text timerDisplay;
     public Text noteCounter;
+
+    [Header("Data")]
+    public LivesHandler lives;
+    public ScoreHandler score;
 }

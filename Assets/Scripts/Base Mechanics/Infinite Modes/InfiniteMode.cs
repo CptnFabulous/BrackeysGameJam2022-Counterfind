@@ -5,12 +5,12 @@ using UnityEngine;
 public class InfiniteMode : Gamemode
 {
     public Banknote.Defect defectsToInclude;
-    public LivesHandler lives;
-    public ScoreHandler score;
     public InfiniteModeEndScreen endScreen;
 
     Banknote noteToReuse;
 
+    public LivesHandler lives => gameElements.player.lives;
+    public ScoreHandler score => gameElements.player.score;
 
 
     /*
