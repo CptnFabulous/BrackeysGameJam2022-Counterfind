@@ -6,18 +6,19 @@ using UnityEngine.Events;
 
 public class GameplayHandler : MonoBehaviour
 {
+    public Player player;
     public Gamemode currentMode { get; private set; }
 
     [Header("Game elements")]
     public Banknote prefab;
     public Timer timer;
-
+    /*
     [Header("Controls")]
     public ObjectViewer viewControls;
     public Button acceptButton;
     public Button rejectButton;
     public ReferenceWindow referenceWindow;
-
+    */
     [Header("Showing next item")]
     public Transform entryPilePosition;
     public Transform exitPilePosition;
@@ -27,16 +28,18 @@ public class GameplayHandler : MonoBehaviour
     public UnityEvent onPutAway;
 
     [Header("Game/menu transition")]
-    public GameStateHandler stateHandler;
     public GameObject menuObject;
     public UnityEvent onEnterGameplay;
 
-    [Header("HUD elements")]
-    public Text timerDisplay;
-    public Text noteCounter;
-
+    //[Header("HUD elements")]
+    public ObjectViewer viewControls => player.objectViewer;
+    public Button acceptButton => player.judgeReal;
+    public Button rejectButton => player.judgeFake;
+    public ReferenceWindow referenceWindow => player.referenceWindow;
+    public GameStateHandler stateHandler => player.stateHandler;
+    public Text timerDisplay => player.timerDisplay;
+    public Text noteCounter => player.noteCounter;
     
-
     IEnumerator transition;
 
     private void Awake()
